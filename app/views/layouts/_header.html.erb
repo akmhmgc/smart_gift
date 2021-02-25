@@ -1,4 +1,35 @@
 <header class="bg-white py-3 shadow-lg">
+    <% if store_signed_in? %>
+    <div id="navArea">
+        <nav>
+            <div class="inner">
+                <ul>
+                    <li><a href="#">ログインしてっから！</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="mask"></div>
+    </div>
+    <div class="w-4/5 mx-auto flex items-center justify-between">
+        <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),root_path, class: "inline-block"%>
+        <%# object-cover h-24 w-48  %>
+        <ul class="flex text-gray-500">
+            <li class="mr-6 hidden md:inline-block">
+                <%= link_to "ログインしてます", "#" ,class: "inline-block hover:text-gray-800"%>
+            </li>
+            <li class="mr-12 hidden md:inline-block">
+                <%= link_to 'ログアウト', destroy_store_session_path, method: :delete ,class: "inline-block hover:text-gray-800"%>
+            </li>
+            <li>
+                <div class="tham tham-e-squeeze tham-w-6 inline-block">
+                    <div class="tham-box">
+                        <div class="tham-inner bg-gray-500" />
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <% else %>
     <div id="navArea">
         <nav>
             <div class="inner">
@@ -19,10 +50,10 @@
         <%# object-cover h-24 w-48  %>
         <ul class="flex text-gray-500">
             <li class="mr-6 hidden md:inline-block">
-                <%= link_to "新規会員登録", "#" ,class: "inline-block hover:text-gray-800"%>
+                <%= link_to "新規会員登録", new_store_registration_path ,class: "inline-block hover:text-gray-800"%>
             </li>
             <li class="mr-12 hidden md:inline-block">
-                <%= link_to "ログイン", "#", class: "inline-block hover:text-gray-800"%>
+                <%= link_to "ログイン", new_store_session_path, class: "inline-block hover:text-gray-800"%>
             </li>
             <li class="mr-6 hidden md:inline-block">
                 <%= link_to "簡単ログイン(ユーザー)", "#", class: "inline-block hover:text-gray-800"%>
@@ -39,4 +70,6 @@
             </li>
         </ul>
     </div>
+
+    <% end %>
 </header>
