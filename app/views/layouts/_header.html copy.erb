@@ -1,22 +1,10 @@
 <header class="bg-white py-3 shadow-lg">
+    <% if store_signed_in? %>
     <div id="navArea">
         <nav>
             <div class="inner">
                 <ul>
-                    <% if store_signed_in? %>
-                    <li><a href="#">売り上げレポート</a></li>
-                    <li><a href="#">販売履歴</a></li>
-                    <li><a href="#">商品一覧</a></li>
-                    <li><a href="#">店舗情報</a></li>
-                    <li><%= link_to 'ログアウト', destroy_store_session_path, method: :delete %></li>
-                    <% else %>
-                    <li><a href="#">ログイン</a></li>
-                    <li><a href="#">新規会員登録</a></li>
-                    <li><a href="#">ギフト一覧</a></li>
-                    <li><a href="#">加盟店としてログイン</a></li>
-                    <li><a href="#">加盟店として新規登録</a></li>
-                    <li><a href="#">加盟店として簡単ログイン</a></li>
-                    <% end %>
+                    <li><a href="#">ログインしてっから！</a></li>
                 </ul>
             </div>
         </nav>
@@ -26,14 +14,41 @@
         <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),root_path, class: "inline-block"%>
         <%# object-cover h-24 w-48  %>
         <ul class="flex text-gray-500">
-            <% if store_signed_in? %>
             <li class="mr-6 hidden md:inline-block">
-                <%= link_to current_store.email, "#" ,class: "inline-block hover:text-gray-800"%>
+                <%= link_to "ログインしてます", "#" ,class: "inline-block hover:text-gray-800"%>
             </li>
-            <li class="mr-6">
-                <a href="#"><i class="fas fa-bell fa-lg"></i></a>
+            <li class="mr-12 hidden md:inline-block">
+                <%= link_to 'ログアウト', destroy_store_session_path, method: :delete ,class: "inline-block hover:text-gray-800"%>
             </li>
-            <% else %>
+            <li>
+                <div class="tham tham-e-squeeze tham-w-6 inline-block">
+                    <div class="tham-box">
+                        <div class="tham-inner bg-gray-500" />
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <% else %>
+    <div id="navArea">
+        <nav>
+            <div class="inner">
+                <ul>
+                    <li><a href="#">ログイン</a></li>
+                    <li><a href="#">新規会員登録</a></li>
+                    <li><a href="#">ギフト一覧</a></li>
+                    <li><a href="#">加盟店としてログイン</a></li>
+                    <li><a href="#">加盟店として新規登録</a></li>
+                    <li><a href="#">加盟店として簡単ログイン</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="mask"></div>
+    </div>
+    <div class="w-4/5 mx-auto flex items-center justify-between">
+        <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),root_path, class: "inline-block"%>
+        <%# object-cover h-24 w-48  %>
+        <ul class="flex text-gray-500">
             <li class="mr-6 hidden md:inline-block">
                 <%= link_to "新規会員登録", new_store_registration_path ,class: "inline-block hover:text-gray-800"%>
             </li>
@@ -46,7 +61,6 @@
             <li class="mr-6 hidden md:inline-block">
                 <%= link_to "簡単ログイン(加盟店)", "#", class: "inline-block hover:text-gray-800"%>
             </li>
-            <% end %>
             <li>
                 <div class="tham tham-e-squeeze tham-w-6 inline-block">
                     <div class="tham-box">
@@ -56,4 +70,6 @@
             </li>
         </ul>
     </div>
+
+    <% end %>
 </header>
