@@ -6,8 +6,8 @@
                     <% if store_signed_in? %>
                     <li><a href="#">売り上げレポート</a></li>
                     <li><a href="#">販売履歴</a></li>
-                    <li><a href="#">商品一覧</a></li>
-                    <li><a href="#">店舗情報</a></li>
+                    <li><a href="#">販売アイテム一覧</a></li>
+                    <li><%= link_to '店舗情報', stores_show_path%></li>
                     <li><%= link_to 'ログアウト', destroy_store_session_path, method: :delete %></li>
                     <% else %>
                     <li><a href="#">ログイン</a></li>
@@ -28,7 +28,7 @@
         <ul class="flex text-gray-500">
             <% if store_signed_in? %>
             <li class="mr-6 hidden md:inline-block">
-                <%= link_to current_store.email, "#" ,class: "inline-block hover:text-gray-800"%>
+                <%= link_to current_store.email, stores_show_path ,class: "inline-block hover:text-gray-800"%>
             </li>
             <li class="mr-6">
                 <a href="#"><i class="fas fa-bell fa-lg"></i></a>
@@ -42,9 +42,6 @@
             </li>
             <li class="mr-6 hidden md:inline-block">
                 <%= link_to "簡単ログイン(ユーザー)", "#", class: "inline-block hover:text-gray-800"%>
-            </li>
-            <li class="mr-6 hidden md:inline-block">
-                <%= link_to "簡単ログイン(加盟店)", "#", class: "inline-block hover:text-gray-800"%>
             </li>
             <% end %>
             <li>
