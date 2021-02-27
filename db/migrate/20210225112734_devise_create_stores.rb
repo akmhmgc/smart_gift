@@ -35,9 +35,14 @@ class DeviseCreateStores < ActiveRecord::Migration[6.0]
       t.timestamps null: false
     end
 
-    add_index :stores, :email,                unique: true
-    add_index :stores, :reset_password_token, unique: true
+    # add_index :stores, :email,                unique: true
+    # add_index :stores, :reset_password_token, unique: true
     # add_index :stores, :confirmation_token,   unique: true
     # add_index :stores, :unlock_token,         unique: true
+
+    change_table :stores, bulk: true do |t|
+      t.index :email,                unique: true
+      t.index :reset_password_token, unique: true
+    end
   end
 end
