@@ -37,7 +37,7 @@
 
 
 //   nav-bar
-nav {
+.sidebar {
     display: block;
     position: fixed;
     top: 0;
@@ -52,24 +52,24 @@ nav {
     z-index: 3;
     opacity: 0;
   }
-  .open nav {
+  .open .sidebar {
     left: 0;
     opacity: 1;
   }
-  nav .inner {
+  .sidebar .inner {
     padding: 25px;
   }
-  nav .inner ul {
+  .sidebar .inner ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  nav .inner ul li {
+  .sidebar .inner ul li {
     position: relative;
     margin: 0;
     border-bottom: 1px solid #333;
   }
-  nav .inner ul li a {
+  .sidebar .inner ul li a {
     display: block;
     color: #333;
     font-size: 14px;
@@ -77,7 +77,7 @@ nav {
     text-decoration: none;
     transition-duration: 0.2s;
   }
-  nav .inner ul li a:hover {
+  .sidebar .inner ul li a:hover {
     background: #e4e4e4;
   }
 

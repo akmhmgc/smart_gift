@@ -28,9 +28,8 @@ gem 'devise'
 gem 'active_storage_validations', '0.8.2'
 gem 'image_processing',           '1.9.3'
 gem 'mini_magick',                '4.9.5'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'kaminari'
+gem 'ransack'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
