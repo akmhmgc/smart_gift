@@ -27,8 +27,8 @@ gem 'devise'
 
 gem 'active_storage_validations', '0.8.2'
 gem 'image_processing',           '1.9.3'
-gem 'mini_magick',                '4.9.5'
 gem 'kaminari'
+gem 'mini_magick', '4.9.5'
 gem 'ransack'
 
 # Reduces boot times through caching; required in config/boot.rb
