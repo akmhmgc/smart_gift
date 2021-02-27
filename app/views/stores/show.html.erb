@@ -1,5 +1,5 @@
 <h1 class="text-3xl">店舗プロフィール</h1>
-<p><%= current_store.storename %></p>
-<p><%= current_store.email %></p>
-<%= image_tag(current_store.display_image, class: "my-0 mx-auto rounded-full") if current_store.image.attached?%>
-<%= link_to '編集', edit_store_registration_path%>
+<p><%= @store.storename %></p>
+<p><%= @store.email %></p>
+<%= image_tag(@store.display_image, class: "my-0 mx-auto rounded-full") if @store.image.attached?%>
+<%= link_to '編集', edit_store_registration_path if store_signed_in? && current_store == @store %>
