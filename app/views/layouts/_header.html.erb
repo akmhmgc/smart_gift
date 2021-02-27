@@ -5,7 +5,6 @@
                 <ul>
                     <% if store_signed_in? %>
                     <li><a href="#">売り上げレポート</a></li>
-                    <li><a href="#">売り上げレポート2</a></li>
                     <li><a href="#">販売履歴</a></li>
                     <li><%= link_to '店舗情報', stores_show_path%></li>
                     <li><%= link_to 'ログアウト', destroy_store_session_path, method: :delete %></li>
