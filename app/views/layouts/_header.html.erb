@@ -3,18 +3,12 @@
         <nav class="sidebar">
             <div class="inner">
                 <ul>
-                    <% if store_signed_in? %>
-                    <li><a href="#">売り上げレポート</a></li>
-                    <li><a href="#">販売履歴</a></li>
-                    <li><%= link_to '店舗情報', current_store%></li>
-                    <li><%= link_to 'ログアウト', destroy_store_session_path, method: :delete %></li>
+                    <% if store_signed_in? && !user_signed_in?%>
+                    <%= render 'layouts/shared/store_logged_in/sidebar' %>
+                    <% elsif user_signed_in? && !store_signed_in?%>
+                    <%= render 'layouts/shared/user_logged_in/sidebar' %>
                     <% else %>
-                    <li><a href="#">ログイン</a></li>
-                    <li><a href="#">新規会員登録</a></li>
-                    <li><a href="#">ギフト一覧</a></li>
-                    <li><a href="#">加盟店としてログイン</a></li>
-                    <li><a href="#">加盟店として新規登録</a></li>
-                    <li><a href="#">加盟店として簡単ログイン</a></li>
+                    <%= render 'layouts/shared/logged_out/sidebar' %>
                     <% end %>
                 </ul>
             </div>
@@ -34,10 +28,10 @@
             </li>
             <% else %>
             <li class="mr-6 hidden md:inline-block">
-                <%= link_to "新規会員登録", new_store_registration_path ,class: "inline-block hover:text-gray-800"%>
+                <%= link_to "ログイン", new_user_session_path, class: "inline-block hover:text-gray-800"%>
             </li>
-            <li class="mr-12 hidden md:inline-block">
-                <%= link_to "ログイン", new_store_session_path, class: "inline-block hover:text-gray-800"%>
+            <li class="mr-6 hidden md:inline-block">
+                <%= link_to "新規会員登録", new_user_registration_path ,class: "inline-block hover:text-gray-800"%>
             </li>
             <li class="mr-6 hidden md:inline-block">
                 <%= link_to "簡単ログイン(ユーザー)", "#", class: "inline-block hover:text-gray-800"%>
