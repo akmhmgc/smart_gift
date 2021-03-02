@@ -19,23 +19,12 @@
         <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),root_path, class: "inline-block"%>
         <%# object-cover h-24 w-48  %>
         <ul class="flex text-gray-500">
-            <% if store_signed_in? %>
-            <li class="mr-6 hidden md:inline-block">
-                <%= link_to current_store.storename, current_store ,class: "inline-block hover:text-gray-800"%>
-            </li>
-            <li class="mr-6">
-                <a href="#"><i class="fas fa-bell fa-lg"></i></a>
-            </li>
+            <% if store_signed_in? && !user_signed_in?%>
+            <%= render 'layouts/shared/store_logged_in/header_nav' %>
+            <% elsif user_signed_in? && !store_signed_in?%>
+            <%= render 'layouts/shared/user_logged_in/header_nav' %>
             <% else %>
-            <li class="mr-6 hidden md:inline-block">
-                <%= link_to "ログイン", new_user_session_path, class: "inline-block hover:text-gray-800"%>
-            </li>
-            <li class="mr-6 hidden md:inline-block">
-                <%= link_to "新規会員登録", new_user_registration_path ,class: "inline-block hover:text-gray-800"%>
-            </li>
-            <li class="mr-6 hidden md:inline-block">
-                <%= link_to "簡単ログイン(ユーザー)", "#", class: "inline-block hover:text-gray-800"%>
-            </li>
+            <%= render 'layouts/shared/logged_out/header_nav' %>
             <% end %>
             <li>
                 <div class="tham tham-e-squeeze tham-w-6 inline-block">

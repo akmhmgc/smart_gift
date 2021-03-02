@@ -1,0 +1,4 @@
+<h1 class="text-3xl">プロフィール</h1>
+<p><%= @profile.name %></p>
+<%= image_tag(@profile.display_image, class: "my-0 mx-auto rounded-full") if @profile.image.attached?%>
+<%= link_to '編集', edit_profile_path(@profile) if user_signed_in? && current_user == @profile.user %>

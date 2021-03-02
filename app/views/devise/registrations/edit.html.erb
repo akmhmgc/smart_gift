@@ -15,7 +15,7 @@
 
 <span class="image">
   <%= f.label :image %><br />
-  <%= f.file_field :image, autofocus: true, autocomplete: "email" %>
+  <%= f.file_field :image, autofocus: true%>
 </span>
 
 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

@@ -23,3 +23,9 @@ end
                                    category_id: pudding.id)
   product.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
 end
+
+User.create!(
+  email: 'test@test.com',
+  password: 'foobar',
+  confirmed_at: Time.zone.now
+)
