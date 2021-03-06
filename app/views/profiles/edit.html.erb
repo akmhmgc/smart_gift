@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <%= form_with(model: @profile, local: true) do |f| %>
+        <%= form_with(url: profiles_url(current_user), method: :put,local: true) do |f| %>
         <%= render "devise/shared/error_messages", resource: @profile %>
 
         <%= f.label :name %>

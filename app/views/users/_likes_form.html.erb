@@ -1,0 +1,7 @@
+<div id="like_form-<%= product.id %>">
+    <% if current_user.like?(product) %>
+    <%= render 'users/unlike', product: product %>
+    <% else %>
+    <%= render 'users/like' , product: product %>
+    <% end %>
+</div>

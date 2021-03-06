@@ -1,0 +1,1 @@
+document.querySelector("#like_form-<%=@product.id%>").innerHTML = "<%= escape_javascript(render partial: 'users/like', locals: {product: @product} )%>";

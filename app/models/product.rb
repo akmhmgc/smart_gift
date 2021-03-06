@@ -5,6 +5,9 @@ class Product < ApplicationRecord
 
   belongs_to :category
 
+  # like
+  has_many :likes, dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 20 }
   # image validation
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png],

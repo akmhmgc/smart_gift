@@ -1,0 +1,6 @@
+ <%= form_with(model: current_user.likes.find_by(product_id: product.id),html: { method: :delete }, remote: true) do |f| %>
+ <%= f.button :type => "submit" do %>
+ <i class='fas fa-heart'></i>
+ <% end %>
+ <%= product.likes.count %>
+ <% end %>

@@ -11,5 +11,7 @@ class ProductsController < ApplicationController
     @products = @q.result.page(params[:page])
   end
 
-  def show; end
+  def show
+    @product = Product.find_by(id: params[:id])
+  end
 end
