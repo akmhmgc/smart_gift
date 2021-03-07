@@ -31,6 +31,8 @@ gem 'image_processing', '1.9.3'
 gem 'kaminari'
 gem 'mini_magick', '4.9.5'
 gem 'ransack'
+gem 'faker'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

@@ -1,0 +1,17 @@
+<% @user = review.user %>
+<% @profile = @user.profile %>
+<div class="text-left mb-5 text-sm">
+    <div>
+        <%= image_tag(@profile.image.variant(resize_to_fill: [32, 32]), class: "inline-block rounded-full bg-gray-300")%>
+        <span><%= @profile.name %></span>
+    </div>
+    <div>
+        <p class="font-bold"><%= review.title %></p>
+        <p class="text-gray-500"><%= review.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+        <p><%= review.body %></p>
+    </div>
+    <% if current_user == review.user %>
+        <%= link_to "delete", review, method: :delete,
+                                       data: { confirm: "レビューを削除しますか？" } %>
+        <% end %>
+</div>

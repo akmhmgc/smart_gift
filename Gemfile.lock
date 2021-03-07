@@ -87,6 +87,8 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.10.0)
+    faker (2.16.0)
+      i18n (>= 1.6, < 2)
     ffi (1.14.2)
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
@@ -272,6 +274,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
+  faker
   font-awesome-sass
   image_processing (= 1.9.3)
   jbuilder (~> 2.7)

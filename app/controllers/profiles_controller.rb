@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      flash[:notice] = 'Profile updated!!!'
+      flash[:notice] = 'プロフィールが変更されました'
       redirect_to profiles_url(current_user)
     else
       render 'edit'

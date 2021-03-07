@@ -1,10 +1,13 @@
 class User < ApplicationRecord
   # プロフィールも作成
-  after_create { self.build_profile }
+  after_create :profile_setup
 
   # like
   has_many :likes, dependent: :destroy
   has_many :products, through: :likes
+
+  # review
+  has_many :reviews, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -25,5 +28,13 @@ class User < ApplicationRecord
   # 現在のユーザーがフォローしてたらtrueを返す
   def like?(product)
     products.include?(product)
+  end
+
+  private
+
+  def profile_setup
+    build_profile
+    profile.update(name: 'ユーザー')
+    profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
   end
 end

@@ -1,3 +1,15 @@
 <h1>Products#show</h1>
 <p><%= @product.name %></p>
-<p><%= "#{@product.price} 円" %></p>
+<p><%= "#{@product.price} 円" %>
+</p>
+<h2>formです</h2>
+
+
+<section class="review_form">
+<%= render 'shared/review_form' %>
+</section>
+<section class="reviews">
+<%= render @reviews %>
+<%= paginate @reviews %>
+</section>
+

@@ -1,3 +1,5 @@
+Faker::Config.locale = :ja
+
 store = Store.create!(storename: '山田商店',
                       email: 'test@test.com',
                       password: 'foobar')
@@ -24,8 +26,18 @@ end
   product.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
 end
 
-User.create!(
+user = User.create!(
   email: 'test@test.com',
   password: 'foobar',
   confirmed_at: Time.zone.now
 )
+
+
+# レビューの投稿
+20.times do |_i|
+  title = Faker::Lorem.sentence
+  body = Faker::Lorem.sentence
+  user.reviews.create!(title: title,
+                       body: body,
+                       product_id: 1)
+end
