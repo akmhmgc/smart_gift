@@ -3,6 +3,6 @@ class UsersController < ApplicationController
   def show; end
 
   def likes
-    @products = User.find_by(params[:id]).products
+    @products = User.find_by(params[:id]).products.with_attached_image.includes(:store)
   end
 end
