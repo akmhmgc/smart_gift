@@ -1,0 +1,4 @@
+<% if @notifications.exists? %>
+  <%= render @notifications %>
+  <%= paginate @notifications %>
+<% end %>

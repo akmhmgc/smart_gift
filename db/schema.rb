@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_061242) do
+ActiveRecord::Schema.define(version: 2021_03_08_013547) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,20 @@ ActiveRecord::Schema.define(version: 2021_03_06_061242) do
     t.index ["product_id"], name: "index_likes_on_product_id"
     t.index ["user_id", "product_id"], name: "index_likes_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "store_id", null: false
+    t.integer "product_id", null: false
+    t.integer "review_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_notifications_on_product_id"
+    t.index ["review_id"], name: "index_notifications_on_review_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

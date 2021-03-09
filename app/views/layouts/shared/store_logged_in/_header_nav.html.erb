@@ -1,6 +1,17 @@
-<li class="mr-6 hidden md:inline-block">
+<li class="mr-6 hidden md:inline-block pt-1">
     <%= link_to current_store.storename, current_store ,class: "inline-block hover:text-gray-800"%>
 </li>
 <li class="mr-6">
-    <a href="#"><i class="fas fa-bell fa-lg"></i></a>
+    <%= link_to notifications_path do%>
+    <% if unchecked_notifications.any? %>
+    <span class="fa-stack">
+        <i class="fas fa-bell fa-lg fa-stack-2x text-xs"></i>
+        <i class="fas fa-circle fa-stack-1x text-red-300 absolute pt-0 pl-2 ml-4"></i>
+    </span>
+    <% else %>
+    <span class="fa-stack">
+        <i class="fas fa-bell fa-lg fa-stack-2x text-xs"></i>
+    </span>
+    <% end %>
+    <% end %>
 </li>

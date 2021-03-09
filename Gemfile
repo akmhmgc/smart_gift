@@ -27,12 +27,11 @@ gem 'devise'
 
 gem 'active_storage_validations', '0.8.2'
 gem 'ancestry'
+gem 'faker'
 gem 'image_processing', '1.9.3'
 gem 'kaminari'
 gem 'mini_magick', '4.9.5'
 gem 'ransack'
-gem 'faker'
-
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

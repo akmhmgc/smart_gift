@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   def index
-    # @products = Product.all.page(params[:page])
     @q = Product.ransack(params[:q])
     @categories = Category.all
     # 子カテゴリにはスペースを挿入

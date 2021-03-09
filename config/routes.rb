@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :products, only: %i[show index]
   resources :reviews, only: %i[create destroy]
 
+  resources :notifications, only: :index
+
   # パス名の変更
   # resources :profiles, path: '/', only: %i[show edit update] do
   #   member do

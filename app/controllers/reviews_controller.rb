@@ -1,9 +1,14 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user,   only: :destroy
+  before_action :correct_user, only: :destroy
   def create
-    @review = current_user.reviews.build(review_params)
-    flash[:notice] = 'レビューが投稿されました' if @review.save
+    @review = current_user.reviews.create!(review_params)
+    flash[:notice] = 'レビューが投稿されました'
+
+    # notification
+    product = Product.find(params[:review][:product_id])
+    product.create_notification_review!(current_user, @review.id)
+
     redirect_to @review.product
   end
 

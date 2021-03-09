@@ -8,6 +8,9 @@ class Store < ApplicationRecord
   has_one_attached :image
   has_many :products, dependent: :destroy
 
+  #   notification
+  has_many :notifications, dependent: :destroy
+
   validates :storename, length: { maximum: 20 }
   # image validation
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png],

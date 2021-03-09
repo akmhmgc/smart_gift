@@ -1,0 +1,16 @@
+<% user = notification.user %>
+<% profile = notification.user.profile %>
+<% product = notification.product %>
+<% product_link = link_to(product.name, product) %>
+<% user_link = link_to(profile.name, profiles_url(user)) %>
+<% action = notification.action%>
+
+<div>
+<%= user_link %>さんが<%= product_link  %>に
+<% if action == "like" %>
+いいねしました
+<% elsif action == "review" %>
+レビューを投稿しました
+<%= notification.review.title %>
+<% end %>
+</div>

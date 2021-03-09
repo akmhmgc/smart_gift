@@ -32,7 +32,6 @@ user = User.create!(
   confirmed_at: Time.zone.now
 )
 
-
 # レビューの投稿
 20.times do |_i|
   title = Faker::Lorem.sentence
@@ -41,3 +40,7 @@ user = User.create!(
                        body: body,
                        product_id: 1)
 end
+
+# いいね
+user.like(Product.first)
+Product.first.create_notification_like!(user)

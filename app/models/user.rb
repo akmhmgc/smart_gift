@@ -9,6 +9,9 @@ class User < ApplicationRecord
   # review
   has_many :reviews, dependent: :destroy
 
+  # notification
+  has_many :notifications, dependent: :destroy
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
