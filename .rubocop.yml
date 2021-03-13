@@ -72,3 +72,6 @@ Metrics/MethodLength:
 # モジュール名::クラス名の定義を許可
 ClassAndModuleChildren:
   Enabled: false
+
+Layout/ExtraSpacing:
+  Enabled: false

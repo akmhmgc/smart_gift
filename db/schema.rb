@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_013547) do
+ActiveRecord::Schema.define(version: 2021_03_12_112435) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_03_08_013547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_categories_on_ancestry"
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -71,8 +72,9 @@ ActiveRecord::Schema.define(version: 2021_03_08_013547) do
     t.bigint "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "category_id"
+    t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["name", "store_id"], name: "index_products_on_name_and_store_id", unique: true
     t.index ["name"], name: "index_products_on_name"
     t.index ["price"], name: "index_products_on_price"
     t.index ["store_id"], name: "index_products_on_store_id"

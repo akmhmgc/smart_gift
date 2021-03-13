@@ -14,8 +14,9 @@ class Product < ApplicationRecord
   # notification
   has_many :notifications, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 20 }
-  # image validation
+  # バリデーション
+  validates :name, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: true, scope: :store }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 999_999 }
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
                                     message: 'must be a valid image format' },
                     size: { less_than: 5.megabytes,

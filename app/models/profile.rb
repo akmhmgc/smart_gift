@@ -5,7 +5,7 @@ class Profile < ApplicationRecord
   validates :name, length: { maximum: 20 }
   # image validation
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
-                                    message: 'must be a valid image format' },
+                                    message: '正しいファイル形式を選択して下さい。' },
                     size: { less_than: 5.megabytes,
-                            message: 'should be less than 5MB' }
+                            message: 'ファイルは最大5MBです。' }
 end

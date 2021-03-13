@@ -24,10 +24,11 @@ gem 'jbuilder', '~> 2.7'
 gem 'font-awesome-sass'
 
 gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 gem 'active_storage_validations', '0.8.2'
 gem 'ancestry'
-gem 'faker'
 gem 'image_processing', '1.9.3'
 gem 'kaminari'
 gem 'mini_magick', '4.9.5'
@@ -40,8 +41,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -58,10 +60,11 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'rubocop-rspec'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'database_cleaner-active_record'
   gem 'webdrivers'
-  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
