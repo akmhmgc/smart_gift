@@ -1,22 +1,14 @@
 class User < ApplicationRecord
-  # プロフィールも作成
-  after_create :profile_setup
-
-  # like
   has_many :likes, dependent: :destroy
   has_many :products, through: :likes
-
-  # review
   has_many :reviews, dependent: :destroy
-
-  # notification
   has_many :notifications, dependent: :destroy
+  has_one :profile, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-  has_one :profile, dependent: :destroy
 
   # 商品をお気に入りに入れる
   def like(product)
@@ -33,11 +25,11 @@ class User < ApplicationRecord
     products.include?(product)
   end
 
-  private
+  # private
 
-  def profile_setup
-    build_profile
-    profile.update(name: 'ユーザー')
-    profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
-  end
+  # def profile_setup
+  #   build_profile
+  #   profile.update(name: 'ユーザー')
+  #   profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
+  # end
 end

@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   get 'reviews/create'
   get 'reviews/destroy'
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+
+  devise_scope :user do
+    get 'sign_in', to: 'users/sessions#new'
+    get 'sign_out', to: 'users/sessions#destroy'
+  end
+
   devise_for :stores
   root 'static_pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -26,7 +32,7 @@ Rails.application.routes.draw do
   # end
   resources :users, path: '/', only: %i[show likes] do
     member do
-      resource :profiles, only: %i[show edit update destroy]
+      resource :profiles, only: %i[show update edit]
       get :likes
     end
   end

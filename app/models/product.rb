@@ -2,18 +2,11 @@ class Product < ApplicationRecord
   include CommonModule
   belongs_to :store
   has_one_attached :image
-
   belongs_to :category
-
-  # like
   has_many :likes, dependent: :destroy
-
-  # review
   has_many :reviews, dependent: :destroy
-
-  # notification
   has_many :notifications, dependent: :destroy
-
+  
   # バリデーション
   validates :name, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: true, scope: :store }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 999_999 }

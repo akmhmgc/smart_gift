@@ -3,7 +3,7 @@ class Review < ApplicationRecord
   belongs_to :product
 
   # notification
-  has_one :notifications, dependent: :destroy
+  has_one :notification, dependent: :destroy
 
   default_scope -> { order(created_at: :desc) }
 

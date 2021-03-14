@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   before_action :profile_setup, only: %i[show edit update]
   before_action :authenticate_user!, only: %i[edit update]
   before_action :correct_user, only: %i[edit update]
+
   def show; end
 
   # ログインしているユーザーが編集対象のユーザーかどうか

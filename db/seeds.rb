@@ -32,6 +32,9 @@ user = User.create!(
   confirmed_at: Time.zone.now
 )
 
+user.create_profile(name: 'テストユーザー')
+user.profile.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
+
 # レビューの投稿
 20.times do |_i|
   title = Faker::Lorem.sentence

@@ -24,4 +24,28 @@ RSpec.describe Category, type: :model do
     category_2.valid?
     expect(category_2.errors.of_kind?(:name, :taken)).to be_truthy
   end
+
+  describe '各モデルとのアソシエーション' do
+    before do
+      @category = FactoryBot.create(:category)
+      FactoryBot.create(:product, category_id: @category.id)
+      sleep 0.1
+    end
+
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context 'Productモデルとのアソシエーション' do
+      let(:target) { :products }
+
+      it 'Profileとの関連付けはhas_oneであること' do
+        expect(association.macro).to eq :has_many
+      end
+
+      it 'Categoryが削除されるとPrductは削除されること' do
+        expect { @category.destroy }.to change(Product, :count).by(-1)
+      end
+    end
+  end
 end

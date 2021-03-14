@@ -60,4 +60,58 @@ RSpec.describe Product, type: :model do
     product.valid?
     expect(product.errors.of_kind?(:price, :not_an_integer)).to be_truthy
   end
+
+  describe '各モデルとのアソシエーション' do
+    before do
+      @product = FactoryBot.create(:product)
+      user = FactoryBot.create(:user)
+      Like.create(user_id: user.id, product_id: @product.id)
+      Review.create(user_id: user.id, product_id: @product.id, title: 'title', body: 'body')
+      sleep 0.1
+    end
+
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context 'Storeモデルとのアソシエーション' do
+      let(:target) { :store }
+
+      it 'Storeとの関連付けはbelongs_toであること' do
+        expect(association.macro).to eq :belongs_to
+      end
+    end
+
+    context 'Categoryモデルとのアソシエーション' do
+      let(:target) { :category }
+
+      it 'Categoryとの関連付けはbelongs_toであること' do
+        expect(association.macro).to eq :belongs_to
+      end
+    end
+
+    context "Likeモデルとのアソシエーション" do
+      let(:target) { :likes }
+
+      it "Likeとの関連付けはhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+
+      it "Productが削除されたらLikeも削除されること" do
+        expect { @product.destroy }.to change(Like, :count).by(-1)
+      end
+    end
+
+    context 'Reviewモデルとのアソシエーション' do
+      let(:target) { :reviews }
+      it 'Reviewとの関連付けはhas_manyであること' do
+        expect(association.macro).to eq :has_many
+      end
+
+      it 'Productが削除されたらreviewも削除されること' do
+        expect { @product.destroy }.to change(Review, :count).by(-1)
+      end
+    end
+  end
+  
 end
