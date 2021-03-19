@@ -1,0 +1,15 @@
+<div class="my-1 px-1 w-full">
+
+    <article class="overflow-hidden rounded-lg shadow-lg">
+        <%= link_to image_tag(product.display_image, class: "block h-auto w-12 m-3"), product if product.image.attached?%>
+
+        <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+            <h1 class="text-base">
+                <%= link_to product.name, product, class: "no-underline hover:underline text-black"%>
+            </h1>
+            <h1 class="text-sm">
+                <%= "#{product.price.to_s} 円" %>
+            </h1>
+        </header>
+    </article>
+</div>

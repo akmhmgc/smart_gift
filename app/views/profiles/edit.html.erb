@@ -3,13 +3,13 @@
         <%= form_with(url: profiles_url(current_user), method: :put,local: true) do |f| %>
         <%= render "devise/shared/error_messages", resource: @profile %>
 
-        <%= f.label :name %>
+        <%= f.label :ユーザー名（ニックネーム） %>
         <%= f.text_field :name, class: 'form-control' %>
 
-        <%= f.label :image %><br />
+        <%= f.label :プロフィール画像 %><br />
         <%= f.file_field :image, autofocus: true%>
 
-        <%= f.submit "Save changes", class: "btn btn-primary" %>
+        <%= f.submit "更新", class: "btn btn-primary" %>
         <% end %>
     </div>
 </div>

@@ -24,6 +24,12 @@ RSpec.describe User, type: :model do
     expect(user.errors.of_kind?(:password, :blank)).to be_truthy
   end
 
+  it 'ニックネームがない場合、無効である' do
+    user = FactoryBot.build(:user, username: '')
+    user.valid?
+    expect(user.errors.of_kind?(:username, :blank)).to be_truthy
+  end
+
   it 'パスワードが短すぎ場合、無効である' do
     user = FactoryBot.build(:user, password: 'a')
     user.valid?
@@ -41,7 +47,8 @@ RSpec.describe User, type: :model do
   describe '各モデルとのアソシエーション' do
     before do
       @user = FactoryBot.create(:user)
-      @user.create_profile!
+      FactoryBot.create(:profile, user_id:@user.id)
+      @user.create_profile!(name: @user.username)
       product = FactoryBot.create(:product)
       Like.create(user_id: @user.id, product_id: product.id)
       Review.create(user_id: @user.id, product_id: product.id, title: 'title', body: 'body')

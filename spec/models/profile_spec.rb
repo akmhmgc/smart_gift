@@ -18,6 +18,12 @@ RSpec.describe Profile, type: :model do
       expect(profile).to be_valid
     end
 
+    it '名前が存在しない場合、無効である' do
+      profile = FactoryBot.build(:profile, name: '')
+      profile.valid?
+      expect(profile.errors.of_kind?(:name, :blank)).to be_truthy
+    end
+
     it '名前が20文字より多い場合、無効である' do
       profile = FactoryBot.build(:profile, name: 'a' * 21)
       profile.valid?
@@ -27,7 +33,7 @@ RSpec.describe Profile, type: :model do
 
   it 'userを削除すると、userと紐づくprofileも削除される' do
     user = FactoryBot.create(:user)
-    user.create_profile
+    FactoryBot.create(:profile, user_id: user.id)
     expect { user.destroy }.to change { Profile.count }.by(-1)
   end
 

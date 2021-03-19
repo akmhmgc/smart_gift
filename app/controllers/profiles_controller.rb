@@ -24,12 +24,15 @@ class ProfilesController < ApplicationController
   private
 
   def profile_setup
-    @profile = User.find_by(params[:id]).profile
+    @profile = User.find(params[:id]).profile
   end
 
   # 正しいユーザーかどうか確認
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless @user == current_user
+    return unless @user != current_user
+
+    flash[:alert] = '無効なURLです'
+    redirect_back(fallback_location: profiles_path(@user))
   end
 end

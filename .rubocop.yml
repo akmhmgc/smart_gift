@@ -69,6 +69,10 @@ Metrics/MethodLength:
   Exclude:
     - "db/migrate/*.rb"
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
 # モジュール名::クラス名の定義を許可
 ClassAndModuleChildren:
   Enabled: false

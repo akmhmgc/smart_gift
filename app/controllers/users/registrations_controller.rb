@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  include Accessible
+  skip_before_action :check_user, except: %i[new create]
+  before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -13,8 +15,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # ユーザー登録時にprofileを作成する
   def create
     super
-    if resource
-      profile = resource.create_profile!(name: 'ユーザー')
+    if resource.save
+      profile = resource.create_profile!(name: resource.username)
       profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
     end
   end
@@ -43,12 +45,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

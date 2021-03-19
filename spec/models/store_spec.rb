@@ -24,6 +24,12 @@ RSpec.describe Store, type: :model do
     expect(store.errors.of_kind?(:password, :blank)).to be_truthy
   end
 
+  it 'storenameがない場合、無効である' do
+    store = FactoryBot.build(:store, storename: '')
+    store.valid?
+    expect(store.errors.of_kind?(:storename, :blank)).to be_truthy
+  end
+
   it 'パスワードが短すぎ場合、無効である' do
     store = FactoryBot.build(:user, password: 'a')
     store.valid?

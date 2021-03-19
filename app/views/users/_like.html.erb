@@ -1,6 +1,6 @@
  <%= form_with(model: current_user.likes.build, remote: true) do |f| %>
  <div><%= hidden_field_tag :product_id, product.id %></div>
  <%= f.button :type => "submit" do %>
- <i class='far fa-heart'></i>
+ <i class='far fa-heart' id= "like_heart"></i>
  <% end %>
  <% end %>

@@ -4,14 +4,14 @@ class Store < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
   has_one_attached :image
   has_many :products, dependent: :destroy
 
   #   notification
   has_many :notifications, dependent: :destroy
 
-  validates :storename, length: { maximum: 20 }
+  validates :storename, length: { maximum: 20 }, presence: true
   # image validation
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
                                     message: 'must be a valid image format' },
