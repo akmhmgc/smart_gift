@@ -1,22 +1,27 @@
 class ReviewsController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
-  # before_action :correct_user, only: :destroy
+
   def create
-    @review = current_user.reviews.create!(review_params)
-    flash[:notice] = 'レビューが投稿されました'
+    if @review.save
+      flash[:notice] = 'レビューが投稿されました'
 
-    # notification
-    product = Product.find(params[:review][:product_id])
-    check_product_published(@product)
-    product.create_notification_review!(current_user, @review.id)
-
-    redirect_to @review.product
+      # notification
+      product = Product.find(params[:review][:product_id])
+      product.create_notification_review!(current_user, @review.id)
+    else
+      flash[:alert] = 'レビューの投稿に失敗しました。'
+    end
+    redirect_back(fallback_location: root_url)
   end
-
+  
   def destroy
-    @review.destroy
-    flash[:notice] = 'レビューが削除されました'
-    redirect_to request.referer || root_url
+    if @review.destroy
+      redirect_to root_path, notice: '削除に成功しました'
+    else
+      flash[:alert] = '削除に失敗しました。'
+      redirect_to restaurant_review_path(id: @review.id)
+    end
   end
 
   private
@@ -24,9 +29,4 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:product_id, :title, :body)
   end
-
-  # def correct_user
-  #   @review = current_user.reviews.find_by(id: params[:id])
-  #   redirect_to root_url if @review.nil?
-  # end
 end

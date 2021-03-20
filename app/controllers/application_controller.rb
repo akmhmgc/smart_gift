@@ -1,12 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  private
-
-  def check_product_published(product)
-    return if product.publish?
-
-    flash[:alert] = '存在しないURLです'
-    redirect_to root_path
+  def current_ability
+    @current_ability ||= if user_signed_in?
+                           ::UserAbility.new(current_user)
+                         elsif store_signed_in?
+                           ::StoreAbility.new(current_store)
+                         else
+                           ::Ability.new(nil)
+                         end
   end
 end

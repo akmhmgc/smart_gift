@@ -3,7 +3,6 @@ class LikesController < ApplicationController
 
   def create
     @product = Product.find(params[:product_id])
-    check_product_published(@product)
     current_user.like(@product)
 
     # norification
@@ -16,7 +15,6 @@ class LikesController < ApplicationController
 
   def destroy
     @product = Like.find(params[:id]).product
-    check_product_published(@product)
     current_user.unlike(@product)
     respond_to do |format|
       format.html { redirect_to current_user }

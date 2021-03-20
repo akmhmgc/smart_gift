@@ -1,6 +1,7 @@
 class StoresController < ApplicationController
   def show
     @store = Store.find(params[:id])
+    # showでアイテム表示
   end
 
   def items
