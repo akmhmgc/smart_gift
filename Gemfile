@@ -27,6 +27,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
+gem 'activeadmin'
 gem 'active_storage_validations', '0.8.2'
 gem 'ancestry'
 gem 'cancancan'
