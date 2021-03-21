@@ -7,7 +7,6 @@ class ReviewsController < ApplicationController
 
     # notification
     product = Product.find(params[:review][:product_id])
-    check_product_published(@product)
     product.create_notification_review!(current_user, @review.id)
 
     redirect_to @review.product

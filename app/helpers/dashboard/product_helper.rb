@@ -1,0 +1,2 @@
+module Dashboard::ProductHelper
+end

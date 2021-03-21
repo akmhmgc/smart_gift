@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   end
 
   resources :likes, only: %i[create destroy]
+
+  namespace :dashboard do
+    resources :products
+  end
 end
