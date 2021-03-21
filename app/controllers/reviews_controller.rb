@@ -2,9 +2,15 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
 
+<<<<<<< HEAD
   def create
     if @review.save
       flash[:notice] = 'レビューが投稿されました'
+=======
+    # notification
+    product = Product.find(params[:review][:product_id])
+    product.create_notification_review!(current_user, @review.id)
+>>>>>>> system-tests
 
       # notification
       product = Product.find(params[:review][:product_id])

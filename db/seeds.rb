@@ -22,8 +22,8 @@ pudding = sweets.children.create!({ name: 'プリン' })
   product = store.products.create!(name: "テストケーキ_#{i}",
                                    price: 100 * (i + 1),
                                    category_id: cake.id,
-                                   description: '最高のケーキです',
-                                   stock: i)
+                                   description: "最高のケーキです",
+)
   product.image.attach(io: File.open('./app/assets/images/cake.jpg'), filename: 'cake.jpg')
 end
 
@@ -31,21 +31,10 @@ end
   product = store.products.create!(name: "テストプリン_#{i}",
                                    price: 300 * (i + 1),
                                    category_id: pudding.id,
-                                   description: '最高のプリンです',
-                                   stock: i)
+                                   description: "最高のプリンです",)
   product.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
 end
 
-# 非公開商品の作成
-5.times do |i|
-  product = store.products.create!(name: "非公開プリン_#{i}",
-                                   price: 300 * (i + 1),
-                                   category_id: pudding.id,
-                                   description: '非公開のプリンです',
-                                   stock: i,
-                                   publish: false)
-  product.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
-end
 
 user = User.create!(
   username: 'テスト太郎',
