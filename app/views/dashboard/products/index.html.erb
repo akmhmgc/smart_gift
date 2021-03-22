@@ -1,0 +1,8 @@
+<h1>アイテム</h1>
+<div class="container my-12 mx-auto px-4 md:px-12">
+    <%= render 'layouts/search_form', url: dashboard_products_path, q: @q %>
+
+    <%= render partial: "products/dashboard_product_grid", collection: @products, as: "product"%>
+
+    <%= paginate @products %>
+</div>

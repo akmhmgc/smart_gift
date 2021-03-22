@@ -9,12 +9,16 @@
     <%= f.label :price_lteq, " ~ " %>
     <%= f.number_field :price_lteq %>
 
+    <%= f.select( :sorts, { '並び替え': 'id desc', '価格の安い順': 'price asc', '価格の高い順': 'price desc', }  )%>
+
     <%# 価格の並び替え %>
     <div class="input-group-append">
         <%= f.submit "検索", class: "btn btn-primary" %>
     </div>
+
+    
     <% if params[:q].present? %>
-     <%= f.select( :sorts, { '並び替え': 'id desc', '価格の安い順': 'price asc', '価格の高い順': 'price desc', } , { selected: params[:q][:sorts] }, { onchange: 'this.form.submit()'} )%>
+     <#%= f.select( :sorts, { '並び替え': 'id desc', '価格の安い順': 'price asc', '価格の高い順': 'price desc', } , { selected: params[:q][:sorts] }, { onchange: 'this.form.submit()'} )%>
     <% end %>
 </div>
 <% end %>

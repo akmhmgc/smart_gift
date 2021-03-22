@@ -6,14 +6,14 @@ class Product < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  
+
   # バリデーション
   validates :name, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: true, scope: :store }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 999_999 }
-  validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
-                                    message: 'must be a valid image format' },
+  validates :image, presence: true, content_type: { in: %w[image/jpeg image/gif image/png],
+                                                    message: '有効な形式の画像をアップロードしてください。' },
                     size: { less_than: 5.megabytes,
-                            message: 'should be less than 5MB' }
+                            message: 'アップロード可能な画像は5MB以下となります' }
 
   # 商品にいいねされた時の通知メソッド
   def create_notification_like!(current_user)
@@ -39,4 +39,8 @@ class Product < ApplicationRecord
       action: 'review'
     )
   end
+
+  # def image_attachment_path
+  #   image.attached? ? image : 'cake.jpg'
+  # end
 end

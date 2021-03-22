@@ -33,6 +33,7 @@ ja:
         profile: "名前"
     models:
       user: "ユーザ"
+      product: "商品"
       store: "店舗"
   devise:
     confirmations:

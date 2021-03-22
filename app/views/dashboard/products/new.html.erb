@@ -1,0 +1,23 @@
+<h2>商品の追加</h2>
+<%= form_with(model: [:dashboard, @product], local: true) do |f| %>
+<%= render 'shared/error_messages' , resource: @product %>
+
+<div class="">
+    <%= f.label :image %>
+    <%= f.file_field :image%>
+
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, @categories, :id, :name,
+                                                            :include_blank => "カテゴリを選択してください" %>
+
+    <%= f.label :name %><br />
+    <%= f.text_field :name, placeholder: "商品名" %>
+
+    <%= f.label :price %><br />
+    <%= f.number_field :price %>
+
+    <%= f.label :description %><br />
+    <%= f.text_area :description, placeholder: "説明を入力してください" %>
+</div>
+<%= f.submit "Post", class: "" %>
+<% end %>

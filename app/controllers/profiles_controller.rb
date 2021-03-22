@@ -17,11 +17,11 @@ class ProfilesController < ApplicationController
     end
   end
 
+  private
+
   def profile_params
     params.permit(:name, :image)
   end
-
-  private
 
   def profile_setup
     @profile = User.find(params[:id]).profile

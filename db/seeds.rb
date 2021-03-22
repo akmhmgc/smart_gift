@@ -6,9 +6,9 @@ store = Store.create!(storename: '山田商店',
                       confirmed_at: Time.zone.now)
 
 store2 = Store.create!(storename: '田中商店',
-                      email: 'test2@test.com',
-                      password: 'foobar',
-                      confirmed_at: Time.zone.now)
+                       email: 'test2@test.com',
+                       password: 'foobar',
+                       confirmed_at: Time.zone.now)
 # active
 store.image.attach(io: File.open('./app/assets/images/minion.jpg'), filename: 'minion.jpg')
 
@@ -22,8 +22,7 @@ pudding = sweets.children.create!({ name: 'プリン' })
   product = store.products.create!(name: "テストケーキ_#{i}",
                                    price: 100 * (i + 1),
                                    category_id: cake.id,
-                                   description: "最高のケーキです",
-)
+                                   description: '最高のケーキです')
   product.image.attach(io: File.open('./app/assets/images/cake.jpg'), filename: 'cake.jpg')
 end
 
@@ -31,10 +30,9 @@ end
   product = store.products.create!(name: "テストプリン_#{i}",
                                    price: 300 * (i + 1),
                                    category_id: pudding.id,
-                                   description: "最高のプリンです",)
+                                   description: '最高のプリンです')
   product.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
 end
-
 
 user = User.create!(
   username: 'テスト太郎',
