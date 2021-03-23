@@ -19,7 +19,7 @@
     <%= f.text_area :description, placeholder: "説明を入力してください" %>
 
 </div>
-<%= f.submit "Post", class: "" %>
-<%= link_to "delete", [:dashboard, @product], method: :delete,
+<%= f.submit "更新する", class: "" %>
+<%= link_to "削除する", [:dashboard, @product], method: :delete,
                                        data: { confirm: "商品を削除しますか？" } %>
 <% end %>

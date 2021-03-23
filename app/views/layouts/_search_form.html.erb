@@ -1,6 +1,6 @@
 <%= search_form_for q, url: url do |f| %>
 <div class="input-group mb-3">
-    <%= f.search_field :name_or_store_storename_cont, class: "form-control", placeholder: '検索ワード' %>
+    <%= f.search_field :name_or_store_storename_cont, id: "search", placeholder: '検索ワード' %>
     <%= f.collection_select :category_id_or_category_ancestry_eq, @categories, :id, :name, include_blank: '指定なし' %>
 
     <%# 価格範囲検索 %>

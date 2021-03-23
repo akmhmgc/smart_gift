@@ -85,6 +85,7 @@ RSpec.configure do |config|
   end
   
   config.include LoginTestUser, type: :system
+  config.include LoginTestStore, type: :system
 
   config.before(:each) do |example|
     if example.metadata[:type] == :system

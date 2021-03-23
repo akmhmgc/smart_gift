@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   
   def index
-    @q = Product.with_attached_image.includes(:store).ransack(params[:q])
+    @q = Product.with_attached_image.includes(store: { image_attachment: :blob }).ransack(params[:q])
     @categories = Category.all
     # 子カテゴリにはスペースを挿入
     @categories.each do |cat|

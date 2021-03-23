@@ -3,10 +3,10 @@
     <div class="w-24">
     <%= image_tag(product.display_image, class: "block h-auto w-12 m-3") if product.image.attached?%>
     </div>
-    <div class="flex-grow">
+    <p class="flex-grow">
     <%= product.name %>
-    </div>
-    <div class="w-24">
+    </p>
+    <p class="w-24">
         <%= "#{product.price.to_s} 円" %>
-    </div>
+    </p>
 </div>
