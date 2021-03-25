@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
-  
   def index
-    @q = Product.with_attached_image.includes(store: { image_attachment: :blob }).ransack(params[:q])
+    @q = Product.with_attached_image.includes([:reviews]).includes(store: { image_attachment: :blob }).ransack(params[:q])
     @categories = Category.all
     # 子カテゴリにはスペースを挿入
     @categories.each do |cat|
@@ -16,5 +15,4 @@ class ProductsController < ApplicationController
     @reviews = @product.reviews.includes(:user).page(params[:page]).per(5)
     @review = current_user.reviews.build if user_signed_in?
   end
-
 end

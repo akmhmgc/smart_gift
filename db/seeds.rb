@@ -19,19 +19,21 @@ pudding = sweets.children.create!({ name: 'プリン' })
 
 # 商品の登録
 20.times do |i|
-  product = store.products.create!(name: "テストケーキ_#{i}",
-                                   price: 100 * (i + 1),
-                                   category_id: cake.id,
-                                   description: '最高のケーキです')
+  product = store.products.build(name: "テストケーキ_#{i}",
+                                 price: 100 * (i + 1),
+                                 category_id: cake.id,
+                                 description: '最高のケーキです')
   product.image.attach(io: File.open('./app/assets/images/cake.jpg'), filename: 'cake.jpg')
+  product.save
 end
 
 20.times do |i|
-  product = store.products.create!(name: "テストプリン_#{i}",
-                                   price: 300 * (i + 1),
-                                   category_id: pudding.id,
-                                   description: '最高のプリンです')
+  product = store.products.build(name: "テストプリン_#{i}",
+                                 price: 300 * (i + 1),
+                                 category_id: pudding.id,
+                                 description: '最高のプリンです')
   product.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
+  product.save
 end
 
 user = User.create!(
@@ -55,12 +57,18 @@ user2.create_profile(name: user.username)
 user2.profile.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
 
 # レビューの投稿
-20.times do |_i|
+10.times do |_i|
   title = Faker::Lorem.sentence
   body = Faker::Lorem.sentence
   user.reviews.create!(title: title,
                        body: body,
+                       stars: rand(1..5),
                        product_id: 1)
+
+  user.reviews.create!(title: title,
+                       body: body,
+                       stars: rand(1..5),
+                       product_id: 2)
 end
 
 # いいね

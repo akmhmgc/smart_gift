@@ -8,13 +8,17 @@
                 <%= link_to image_tag(product.display_image, class: "block h-auto w-full"), product if product.image.attached?%>
 
 
-                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                <header class="text-left leading-tight p-2 md:p-4">
                     <h1 class="text-base">
                         <%= link_to product.name, product, class: "no-underline hover:underline text-black"%>
                     </h1>
                     <h1 class="text-sm">
                         <%= "#{product.price.to_s} 円" %>
                     </h1>
+                    <% if product.reviews.present? %>
+                    <div class="Stars" style="--rating: <%= product.reviews.average(:stars) %>;" aria-label="Rating of this product is <%= product.reviews.average(:stars) %> out of 5."></div>
+                    <span><%= "(#{product.reviews.length})" %></span>
+                    <% end %>
                 </header>
 
                 <footer class="flex items-center justify-between leading-none p-2 md:p-4">

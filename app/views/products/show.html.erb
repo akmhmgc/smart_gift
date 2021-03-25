@@ -1,17 +1,20 @@
 <h1>Products#show</h1>
 <p><%= @product.name %></p>
-<p><%= "#{@product.price} 円" %>
-</p>
-<p><%= "#{@product.stock} 個です" %>
-</p>
-<h2>formです</h2>
+<p><%= "#{@product.price} 円" %></p>
+<div class="Stars" style="--rating: <%= @product.reviews.average(:stars) %>;" aria-label="Rating of this product is <%= @product.reviews.average(:stars) %> out of 5."></div>
+<span><%= "(#{@product.reviews.size})" %></span>
 
+<section id="reviews">
+    <%= render @reviews %>
+    <%= paginate @reviews %>
+</section>
 
+<% if @review %>
 <section class="review_form">
-<%= render 'shared/review_form' %>
+    <h2>レビュー投稿</h2>
+    <%= render 'shared/error_messages' , resource: @review %>
+    <%= render 'shared/review_form' %>
 </section>
-<section class="reviews">
-<%= render @reviews %>
-<%= paginate @reviews %>
-</section>
-
+<% else %>
+<p>レビューを投稿するには、ユーザーとしてログインまたは会員登録してください。</p>
+<% end %>

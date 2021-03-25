@@ -12,3 +12,8 @@ ja:
         price: 商品価格
         description: 商品説明
         category: カテゴリー
+      review:
+        title: タイトル
+        body: レビュー本文
+    models:
+      review: レビュー

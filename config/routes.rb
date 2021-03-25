@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :products
-  resources :reviews, only: %i[create destroy]
+  resources :reviews, only: %i[create destroy edit update]
   resources :notifications, only: :index
 
   resources :users, path: '/', only: %i[show likes] do

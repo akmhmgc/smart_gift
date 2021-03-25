@@ -13,6 +13,7 @@ class ProfilesController < ApplicationController
       flash[:notice] = 'プロフィールが変更されました'
       redirect_to profiles_url(current_user)
     else
+      flash.now[:alert] = 'プロフィールの更新に失敗しました。詳細はエラーメッセージをご確認ください。'
       render 'edit'
     end
   end
