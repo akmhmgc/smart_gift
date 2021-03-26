@@ -15,9 +15,9 @@
                     <h1 class="text-sm">
                         <%= "#{product.price.to_s} 円" %>
                     </h1>
-                    <% if product.reviews.present? %>
-                    <div class="Stars" style="--rating: <%= product.reviews.average(:stars) %>;" aria-label="Rating of this product is <%= product.reviews.average(:stars) %> out of 5."></div>
-                    <span><%= "(#{product.reviews.length})" %></span>
+                    <% if product.reviews_count > 0 %>
+                    <div class="Stars" style="--rating: <%= product.stars_average %>;" aria-label="Rating of this product is <%= product.stars_average %> out of 5."></div>
+                    <span><%= "(#{product.reviews_count})" %></span>
                     <% end %>
                 </header>
 

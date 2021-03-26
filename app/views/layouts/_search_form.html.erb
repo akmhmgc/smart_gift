@@ -9,7 +9,7 @@
     <%= f.label :price_lteq, " ~ " %>
     <%= f.number_field :price_lteq %>
 
-    <%= f.select( :sorts, { '並び替え': 'id desc', '価格の安い順': 'price asc', '価格の高い順': 'price desc' }  )%>
+    <%= f.select( :sorts, { '並び替え': 'id desc', '価格の安い順': 'price asc', '価格の高い順': 'price desc','レビューの多い順': 'reviews_count desc','星の多い順': 'stars_average desc' }  )%>
 
     <%# 価格の並び替え %>
     <div class="input-group-append">

@@ -43,4 +43,9 @@ class Product < ApplicationRecord
   # def image_attachment_path
   #   image.attached? ? image : 'cake.jpg'
   # end
+
+  def update_stars_avarage
+    stars_average = reviews.average(:stars)
+    update(stars_average: stars_average)
+  end
 end

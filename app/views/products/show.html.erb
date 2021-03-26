@@ -1,8 +1,8 @@
 <h1>Products#show</h1>
 <p><%= @product.name %></p>
 <p><%= "#{@product.price} 円" %></p>
-<div class="Stars" style="--rating: <%= @product.reviews.average(:stars) %>;" aria-label="Rating of this product is <%= @product.reviews.average(:stars) %> out of 5."></div>
-<span><%= "(#{@product.reviews.size})" %></span>
+<div class="Stars" style="--rating: <%= @product.stars_average %>;" aria-label="Rating of this product is <%= @product.stars_average %> out of 5."></div>
+<span><%= "(#{@product.reviews_count})" %></span>
 
 <section id="reviews">
     <%= render @reviews %>

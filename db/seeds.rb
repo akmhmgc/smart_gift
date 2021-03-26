@@ -57,14 +57,18 @@ user2.create_profile(name: user.username)
 user2.profile.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
 
 # レビューの投稿
-10.times do |_i|
+5.times do |_i|
   title = Faker::Lorem.sentence
   body = Faker::Lorem.sentence
   user.reviews.create!(title: title,
                        body: body,
                        stars: rand(1..5),
                        product_id: 1)
+end
 
+10.times do |_i|
+  title = Faker::Lorem.sentence
+  body = Faker::Lorem.sentence
   user.reviews.create!(title: title,
                        body: body,
                        stars: rand(1..5),
