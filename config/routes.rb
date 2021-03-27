@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get :items
   end
 
-  resources :products
+  resources :products , only: %i[index show] 
   resources :reviews, only: %i[create destroy edit update]
   resources :notifications, only: :index
 

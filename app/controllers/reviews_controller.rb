@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      flash[:notice] = 'レビューが変更されました'
+      flash[:notice] = 'レビューが更新されました'
       redirect_to @review.product
     else
       flash.now[:alert] = 'レビューの更新に失敗しました。詳細はメッセージをご確認ください。'

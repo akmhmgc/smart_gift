@@ -6,11 +6,12 @@
 <% action = notification.action%>
 
 <div>
-<%= user_link %>さんが<%= product_link  %>に
+<%= user_link %>さんが<%= product_link %>に
 <% if action == "like" %>
 いいねしました
 <% elsif action == "review" %>
 レビューを投稿しました
 <%= notification.review.title %>
+<%= notification.review.body %>
 <% end %>
 </div>

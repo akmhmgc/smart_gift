@@ -4,7 +4,7 @@
 <li class="mr-6">
     <%= link_to notifications_path do%>
     <% if unchecked_notifications.any? %>
-    <span class="fa-stack">
+    <span class="fa-stack" id="notification_mark">
         <i class="fas fa-bell fa-lg fa-stack-2x text-xs"></i>
         <i class="fas fa-circle fa-stack-1x text-red-300 absolute pt-0 pl-2 ml-4"></i>
     </span>

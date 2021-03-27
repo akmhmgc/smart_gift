@@ -75,14 +75,14 @@ RSpec.configure do |config|
     DatabaseCleaner.start
   end
 
-  config.after(:each) do
+  config.after(:each) do 
     DatabaseCleaner.clean
   end
 
-  config.after(:all) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
+  # config.after(:all) do
+  #   DatabaseCleaner.strategy = :transaction
+  #   DatabaseCleaner.clean_with(:truncation)
+  # end
   
   config.include LoginTestUser, type: :system
   config.include LoginTestStore, type: :system
