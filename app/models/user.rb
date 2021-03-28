@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   # 現在のユーザーがフォローしてたらtrueを返す
   def like?(product)
-    products.likes.exists?(product_id: product.id)
+    likes.exists?(product_id: product.id)
   end
 
   # private
