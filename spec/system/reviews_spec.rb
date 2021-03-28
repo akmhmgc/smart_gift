@@ -23,7 +23,7 @@ RSpec.describe 'Reviews', type: :system do
       it 'レビューを投稿できること' do
         fill_in 'review_title', with: 'review_title'
         fill_in 'review_body', with: 'review_body'
-        find('option[value=5]').select_option
+        select '★★★★★', from: 'review[stars]'
         click_button '投稿'
 
         expect(page).to have_content 'レビューが投稿されました'

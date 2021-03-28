@@ -2,5 +2,7 @@
 <%= link_to current_user.profile.name, profiles_path(current_user) ,class: "inline-block hover:text-gray-800"%>
 </li>
 <li class="mr-6">
-    <a href="#"><i class="fas fa-bell fa-lg"></i></a>
+<%= link_to current_cart do%>
+<i class="fas fa-shopping-cart fa-lg"></i>
+<% end %>
 </li>

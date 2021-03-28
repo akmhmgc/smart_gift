@@ -1,9 +1,19 @@
 <h1>Products#show</h1>
 <p><%= @product.name %></p>
 <p><%= "#{@product.price} 円" %></p>
-<div class="Stars" style="--rating: <%= @product.stars_average %>;" aria-label="Rating of this product is <%= @product.stars_average %> out of 5."></div>
+<% if @product.reviews.present? %>
+<div class="Stars" style="--rating: <%= @product.stars_average %>;"
+    aria-label="Rating of this product is <%= @product.stars_average %> out of 5."></div>
 <span><%= "(#{@product.reviews_count})" %></span>
+<% end %>
 
+<%= form_with(url: add_item_url, method: :post,local: true) do |f| %>
+<div class="add_item">
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.select :quantity, "5": 5,"4": 4,"3": 3,"2": 2,"1": 1 %>
+</div>
+<%= f.submit "カートに入れる", class: "" %>
+<% end %>
 
 <section id="reviews">
     <%= render @reviews %>

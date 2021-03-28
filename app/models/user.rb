@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_one :cart, dependent: :destroy
 
   validates :username, presence: true, length: { maximum: 20 }
 
@@ -24,7 +25,7 @@ class User < ApplicationRecord
 
   # 現在のユーザーがフォローしてたらtrueを返す
   def like?(product)
-    products.include?(product)
+    products.likes.exists?(product_id: product.id)
   end
 
   # private

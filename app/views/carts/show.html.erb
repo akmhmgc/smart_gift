@@ -1,0 +1,3 @@
+<h2>カート内アイテム</h2>
+<%= render partial: "carts/cart_item", collection: @cart_items, as: "cart_item"%>
+<h2><%= "合計：#{@total}円" %></h2>
