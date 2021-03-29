@@ -48,6 +48,7 @@ RSpec.describe User, type: :model do
     before do
       @user = FactoryBot.create(:user)
       FactoryBot.create(:profile, user_id:@user.id)
+      FactoryBot.create(:cart, user_id:@user.id)
       @user.create_profile!(name: @user.username)
       product = FactoryBot.create(:product)
       Like.create(user_id: @user.id, product_id: product.id)
@@ -91,6 +92,17 @@ RSpec.describe User, type: :model do
 
       it 'Userが削除されたらLikeも削除されること' do
         expect { @user.destroy }.to change(Like, :count).by(-1)
+      end
+    end
+
+    context 'Cartモデルとのアソシエーション' do
+      let(:target) { :cart }
+      it 'Cartとの関連付けはhas_manyであること' do
+        expect(association.macro).to eq :has_one
+      end
+
+      it 'Userが削除されたらLikeも削除されること' do
+        expect { @user.destroy }.to change(Cart, :count).by(-1)
       end
     end
   end
