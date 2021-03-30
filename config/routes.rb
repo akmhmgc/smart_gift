@@ -25,8 +25,13 @@ Rails.application.routes.draw do
     resources :products
   end
 
-  get '/my_cart' => 'carts#my_cart'
-  post '/add_item' => 'carts#add_item'
-  post '/update_item' => 'carts#update_item'
-  delete '/delete_item' => 'carts#delete_item'
+  # get '/my_cart' => 'carts#my_cart'
+  # post '/add_item' => 'carts#add_item'
+  # post '/update_item' => 'carts#update_item'
+  # delete '/delete_item' => 'carts#delete_item'
+
+  get '/my_cart' => 'orders#my_cart'
+  post '/add_item' => 'orders#add_item'
+  post '/update_item' => 'orders#update_item'
+  delete '/delete_item' => 'orders#delete_item'
 end

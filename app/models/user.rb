@@ -4,7 +4,9 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_one :profile, dependent: :destroy
-  has_one :cart, dependent: :destroy
+
+  has_one :cart,  -> { where recieved: false }, class_name: 'Order', inverse_of: :user
+  has_many :orders,  -> { where recieved: true }, class_name: 'Order', inverse_of: :user
 
   validates :username, presence: true, length: { maximum: 20 }
 
