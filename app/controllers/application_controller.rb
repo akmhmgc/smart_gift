@@ -2,11 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_cart
-  
+
   def current_cart
     if current_user
       # ユーザーとカートの紐付け
-      current_cart = current_user.cart || current_user.create_cart!
+      current_cart = current_user.cart || Cart.find_by(id: session[:cart_id])&.update(user_id: current_user.id) && current_user.cart || current_user.create_cart!
     else
       # セッションとカートの紐付け
       current_cart = Cart.find_by(id: session[:cart_id]) || Cart.create

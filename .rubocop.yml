@@ -57,6 +57,9 @@ Metrics/AbcSize:
 Metrics/CyclomaticComplexity:
   Max: 10
 
+Metrics/PerceivedComplexity:
+  Max: 9
+
 # 1行の文字数
 Metrics/LineLength:
   Max: 160
@@ -68,10 +71,12 @@ Metrics/MethodLength:
   Max: 20
   Exclude:
     - "db/migrate/*.rb"
+    - "spec/**/*.rb"
 
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
+    - "spec/system/*.rb"
 
 # モジュール名::クラス名の定義を許可
 ClassAndModuleChildren:
