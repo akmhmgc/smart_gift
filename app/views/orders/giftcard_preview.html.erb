@@ -1,0 +1,9 @@
+<h2>プレビュー</h2>
+<%= current_cart.message %>
+<%= current_cart.sender_name %>
+<% current_cart.order_items.each do |item| %>
+<%= item.product.name %>
+<%= item.price %>
+<%= item.quantity %>
+<% end %>
+<%= button_to '決済する', {controller: 'orders', action: 'payment'}, {method: :get }%>

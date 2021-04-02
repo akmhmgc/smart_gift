@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :users, path: '/', only: %i[show likes] , constraints: { id: /\d+/ } do
     member do
       resource :profiles, only: %i[show update edit]
+      get 'add_money' => 'profiles#add_money'
       get :favorites
     end
   end
@@ -30,8 +31,11 @@ Rails.application.routes.draw do
   # post '/update_item' => 'carts#update_item'
   # delete '/delete_item' => 'carts#delete_item'
 
-  get '/my_cart' => 'orders#my_cart'
+  resource :order, only: %i[create]
+  get 'giftcard/edit' => 'orders#giftcard_edit'
   post '/add_item' => 'orders#add_item'
+  get 'giftcard/preview' => 'orders#giftcard_preview'
+  get 'payment' => 'orders#payment'
   post '/update_item' => 'orders#update_item'
   delete '/delete_item' => 'orders#delete_item'
 end

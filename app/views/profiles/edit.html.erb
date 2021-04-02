@@ -1,8 +1,7 @@
  <%= render 'shared/error_messages' , resource: @profile %>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <%= form_with(model: @profile, method: :put,local: true) do |f| %>
-        <%= render "devise/shared/error_messages", resource: @profile %>
+        <%= form_with(url: profiles_path(current_user), method: :put,local: true) do |f| %>
 
         <%= f.label :ユーザー名（ニックネーム） %>
         <%= f.text_field :name, class: 'form-control' %>

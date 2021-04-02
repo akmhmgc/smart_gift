@@ -1,12 +1,22 @@
 class ProfilesController < ApplicationController
-  before_action :profile_setup, only: %i[show edit update]
-  before_action :authenticate_user!, only: %i[edit update]
+  before_action :profile_setup, only: %i[show edit update add_money]
+  before_action :authenticate_user!, only: %i[edit update add_money]
   before_action :correct_user, only: %i[edit update]
 
   def show; end
 
   # ログインしているユーザーが編集対象のユーザーかどうか
   def edit; end
+
+  def add_money
+    @profile.money += 10_000
+    if @profile.save
+      flash[:notice] = '10000円がチャージされました'
+    else
+      flash[:alert] = 'チャージに失敗しました'
+    end
+    redirect_to profiles_url(current_user)
+  end
 
   def update
     if @profile.update(profile_params)

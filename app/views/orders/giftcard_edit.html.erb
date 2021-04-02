@@ -1,0 +1,11 @@
+<h2>ギフトの作成</h2>
+<%= render 'shared/error_messages' , resource: current_cart%>
+<%= render partial: "orders/order_item", collection: current_cart.order_items, as: "cart_item"%>
+<p id="sum"></p>
+<%= form_with(url: order_url, method: :post,local: true) do |f| %>
+<%= f.text_area :message, value:  current_cart.message%>
+<%= f.text_field :sender_name, value: current_cart.sender_name %>
+<%= f.submit "ギフトカードの作成"%>
+<% end %>
+
+<%= javascript_pack_tag 'orders/calc_orders' %>

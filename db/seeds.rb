@@ -53,7 +53,7 @@ user2 = User.create!(
   confirmed_at: Time.zone.now
 )
 
-user2.create_profile(name: user.username)
+user2.create_profile(name: user2.username)
 user2.profile.image.attach(io: File.open('./app/assets/images/pudding.jpg'), filename: 'cake.jpg')
 
 # レビューの投稿

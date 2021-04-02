@@ -2,12 +2,21 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :setup_cart_item!, only: %i[add_item update_item delete_item]
 
-  def preview; end
+  def giftcard_preview; end
 
-  # カート内アイテムの表示
-  def my_cart
-    @cart_items = current_cart.order_items.includes([:product])
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+  def giftcard_edit; end
+
+  def payment
+  end
+
+  def create
+    if current_cart.update(message: params[:message], sender_name: params[:sender_name])
+      flash[:notice] = 'ギフトカードが完成しました。'
+      redirect_to giftcard_preview_path
+    else
+      flash.now[:alert] = 'ギフトカードの作成に失敗しました。'
+      render 'giftcard_edit'
+    end
   end
 
   # アイテムの追加
@@ -21,7 +30,7 @@ class OrdersController < ApplicationController
     @cart_item.quantity += params[:quantity].to_i
     if  @cart_item.save
       flash[:notice] = '商品が追加されました。'
-      redirect_to my_cart_path
+      redirect_to giftcard_edit_path
     else
       flash[:alert] = '商品の追加に失敗しました。'
       redirect_to product_url(params[:product_id])
@@ -35,7 +44,7 @@ class OrdersController < ApplicationController
     else
       flash[:alert] = 'カート内のギフトの更新に失敗しました'
     end
-    redirect_to my_cart_path
+    redirect_to giftcard_edit_path
   end
 
   # アイテムの削除
@@ -45,15 +54,10 @@ class OrdersController < ApplicationController
     else
       flash[:alert] = '削除に失敗しました'
     end
-    redirect_to my_cart_path
+    redirect_to giftcard_edit_path
   end
 
   private
-
-  def current_cart
-    # カートの作成時はvalidationを通さない
-    current_user.cart || current_user.create_cart!
-  end
 
   def setup_cart_item!
     @cart_item = current_cart.order_items.find_by(product_id: params[:product_id])
