@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
   def edit; end
 
   def add_money
-    @profile.money += 10_000
+    @profile.increment(:money, 10_000)
     if @profile.save
       flash[:notice] = '10000円がチャージされました'
     else

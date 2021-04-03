@@ -7,6 +7,18 @@ class OrdersController < ApplicationController
   def giftcard_edit; end
 
   def payment
+    cart_items = current_cart.order_items.includes([:product])
+    order_total = cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    current_profile = current_user.profile
+    current_profile.decrement(:money, order_total)
+    if current_profile.save
+      current_cart.update(recieved: true)
+      flash[:notice] = 'ギフトカードの購入が完了しました'
+      redirect_to mypage_order_history_path(current_cart.id)
+    else
+      flash[:alert] = 'ご利用可能な金額を越えています。商品数を減らすまたはプロフィール画面よりチャージしてください。'
+      redirect_to giftcard_preview_path
+    end
   end
 
   def create

@@ -153,6 +153,8 @@ Lint/UselessMethodDefinition:
 # IgnoredMethods: refine
 Metrics/BlockLength:
   Max: 32
+  Exclude:
+  - 'config/routes.rb'
 
 # Offense count: 8
 # Configuration parameters: EnforcedStyle, CheckMethodNames, CheckSymbols, AllowedIdentifiers.

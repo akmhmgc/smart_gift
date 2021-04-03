@@ -1,0 +1,9 @@
+<h2>注文詳細</h2>
+<%= @order_items.length %>
+<% @order_items.each do |item| %>
+<%= item.product.name %>
+<%= item.price %>
+<%= item.quantity %>
+<% end %>
+<%= link_to "ギフトページへ", "#" %>
+<%= link_to "自分で受け取る", "#" %>

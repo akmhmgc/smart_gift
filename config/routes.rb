@@ -26,16 +26,19 @@ Rails.application.routes.draw do
     resources :products
   end
 
-  # get '/my_cart' => 'carts#my_cart'
-  # post '/add_item' => 'carts#add_item'
-  # post '/update_item' => 'carts#update_item'
-  # delete '/delete_item' => 'carts#delete_item'
-
   resource :order, only: %i[create]
+  # get 'giftcard/:id' => 'orders#giftcard_show', as: 'giftcard'
   get 'giftcard/edit' => 'orders#giftcard_edit'
   post '/add_item' => 'orders#add_item'
   get 'giftcard/preview' => 'orders#giftcard_preview'
   get 'payment' => 'orders#payment'
   post '/update_item' => 'orders#update_item'
   delete '/delete_item' => 'orders#delete_item'
+
+  namespace :mypage do
+    get 'order_histories' => 'orders#orders_index'
+    get 'order_histories/:id' => 'orders#orders_show' , as: 'order_history'
+    get 'gifts' => 'orders#gifts_index'
+    get 'gifts/:id' => 'orders#gifts_show', as: 'gift'
+  end
 end
