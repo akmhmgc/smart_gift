@@ -1,7 +1,7 @@
 <li><%= link_to "ギフト一覧", products_path%></li>
 <li><%= link_to 'お気に入りギフト', favorites_user_path(current_user) %></li>
-<li><a href="#">購入履歴</a></li>
-<li><a href="#">保存されたギフト</a></li>
+<li><%= link_to '保存されたギフトカード', mypage_gifts_path %></li>
+<li><%= link_to '購入履歴', mypage_order_histories_path %></li>
 <li><%= link_to 'ログイン情報の編集', edit_user_registration_path %></li>
 <li><%= link_to 'プロフィール', profiles_path(current_user) %></li>
 <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>

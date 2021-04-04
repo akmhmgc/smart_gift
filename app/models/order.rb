@@ -1,6 +1,8 @@
 class Order < ApplicationRecord
   generate_public_uid generator: PublicUid::Generators::HexStringSecureRandom.new(20)
 
+  default_scope -> { order(updated_at: :desc) }
+  
   def to_param
     public_uid
   end

@@ -5,6 +5,6 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    @products = User.find_by(params[:id]).products.with_attached_image.includes(:store)
+    @products = User.find(params[:id]).products.with_attached_image.includes(:store)
   end
 end

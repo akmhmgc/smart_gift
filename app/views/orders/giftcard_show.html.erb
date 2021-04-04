@@ -1,4 +1,3 @@
 <h2>ギフトカードページ</h2>
 購入おめでとうごぜーます！
-<p>受け取る</p>
-<p>使用する</p>
+<%= button_to '受け取る', controller: 'orders', action: 'giftcard_receive', method: :post , params: { id: @giftcard.to_param }%>

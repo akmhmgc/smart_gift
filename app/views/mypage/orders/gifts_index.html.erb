@@ -1,0 +1,7 @@
+<h2>保存されたギフトカード</h2>
+<% @gifts.each do |gift| %>
+<li class="list-none">
+    <%= render partial: "orders/recieved_order_item", collection:gift.order_items, as: "order_item"%>
+    <%= link_to " ギフト詳細" , mypage_gift_path(gift.id) %>
+</li>
+<% end %>

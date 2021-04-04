@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resource :order, only: %i[create]
   get 'giftcard/edit' => 'orders#giftcard_edit'
   get 'giftcards/:id' => 'orders#giftcard_show', as: 'giftcard'
+  post 'giftcards/:id' => 'orders#giftcard_receive', as: 'giftcard_receive'
   post '/add_item' => 'orders#add_item'
   get 'giftcard/preview' => 'orders#giftcard_preview'
   get 'payment' => 'orders#payment'

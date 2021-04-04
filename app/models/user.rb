@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_one :cart,  -> { where recieved: false }, class_name: 'Order', inverse_of: :user
   has_many :orders,  -> { where recieved: true }, class_name: 'Order', inverse_of: :user
-
+  
   validates :username, presence: true, length: { maximum: 20 }
 
   # Include default devise modules. Others available are:

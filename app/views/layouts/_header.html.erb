@@ -17,7 +17,6 @@
     </div>
     <div class="w-4/5 mx-auto flex items-center justify-between">
         <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),root_path, class: "inline-block"%>
-        <%# object-cover h-24 w-48  %>
         <ul class="flex text-gray-500">
             <% if store_signed_in? && !user_signed_in?%>
             <%= render 'layouts/shared/store_logged_in/header_nav' %>

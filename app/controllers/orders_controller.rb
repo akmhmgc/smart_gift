@@ -10,6 +10,22 @@ class OrdersController < ApplicationController
 
   def giftcard_edit; end
 
+  def giftcard_receive
+    @giftcard = Order.find_by!(public_uid: params[:id])
+
+    if @giftcard.recipient_id.nil?
+      # 注文完了時間を更新しない
+      @giftcard.recipient_id = current_user.id
+      @giftcard.record_timestamps = false
+      @giftcard.save
+      flash[:notice] = 'ギフトの受け取りに成功しました'
+      redirect_to mypage_gifts_path
+    else
+      flash[:alert] = '既にギフトは受け取られています'
+      redirect_to root_path
+    end
+  end
+
   def payment
     cart_items = current_cart.order_items
     order_total = cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
