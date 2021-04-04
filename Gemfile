@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'font-awesome-sass'
+gem 'public_uid'
 
 gem 'devise'
 gem 'devise-i18n'

@@ -28,7 +28,7 @@ pudding = sweets.children.create!({ name: 'プリン' })
 end
 
 20.times do |i|
-  product = store.products.build(name: "テストプリン_#{i}",
+  product = store2.products.build(name: "テストプリン_#{i}",
                                  price: 300 * (i + 1),
                                  category_id: pudding.id,
                                  description: '最高のプリンです')

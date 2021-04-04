@@ -1,0 +1,8 @@
+<h2>注文一覧</h2>
+<% @orders.each do |order| %>
+<li class="list-none">
+    <%= order.updated_at.strftime("%Y年%m月%d日") %>
+    <%= render partial: "orders/recieved_order_item", collection:order.order_items, as: "order_item"%>
+    <%= link_to "注文詳細" , mypage_order_history_path(order.id) %>
+</li>
+<% end %>

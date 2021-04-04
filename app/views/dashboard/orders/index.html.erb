@@ -1,0 +1,10 @@
+<h1>Dashboard::Orders#index</h1>
+<li>
+    <% @orders.each do |order| %>
+    <%= order.user.profile.name %>
+    <% order.order_items.each do |item| %>
+    <%= item.price %>
+    <%= item.product.name %>
+    <% end %>
+    <% end %>
+</li>

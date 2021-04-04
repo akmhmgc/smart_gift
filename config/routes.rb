@@ -24,11 +24,12 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :products
+    resources :orders, only: %i[index show]
   end
 
   resource :order, only: %i[create]
-  # get 'giftcard/:id' => 'orders#giftcard_show', as: 'giftcard'
   get 'giftcard/edit' => 'orders#giftcard_edit'
+  get 'giftcards/:id' => 'orders#giftcard_show', as: 'giftcard'
   post '/add_item' => 'orders#add_item'
   get 'giftcard/preview' => 'orders#giftcard_preview'
   get 'payment' => 'orders#payment'
