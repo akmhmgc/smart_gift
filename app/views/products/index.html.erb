@@ -2,7 +2,7 @@
 <div class="container my-12 mx-auto px-4 md:px-12">
     <%= render 'layouts/search_form', url: products_path, q: @q %>
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
-    <%= render partial: "products/user_product", collection: @products, as: "product"%>
+    <%= render partial: "products/product", collection: @products, as: "product"%>
     </div>
     <%= paginate @products %>
 </div>

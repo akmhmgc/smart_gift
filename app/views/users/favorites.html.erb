@@ -1,46 +1,7 @@
 <h1>いいねした商品</h1>
 <div class="container my-12 mx-auto px-4 md:px-12">
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
-
-        <% @products.each do |product| %>
-        <!-- Column -->
-        <div class="my-1 px-1 w-1/2 md:w-1/3 lg:my-4 lg:px-1 lg:w-1/5">
-
-            <!-- Article -->
-            <article class="overflow-hidden rounded-lg shadow-lg">
-
-    
-                <%= link_to image_tag(product.display_image, class: "block h-auto w-full"), product if product.image.attached?%>
-            
-
-                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                    <h1 class="text-base">
-                    <%= link_to product.name, product, class: "no-underline hover:underline text-black"%>
-                    </h1>
-                    <h1 class="text-sm">
-                        <%= "#{product.price.to_s} 円" %>
-                    </h1>
-                </header>
-
-                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                    <a class="flex items-center no-underline hover:underline text-black" href="<%= store_url(product.store) %>">
-                        <%= image_tag(product.store.image.variant(resize_to_fill: [32, 32]), class: "block rounded-full") if product.store.image.attached?%>
-                        <%# <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random"> %>
-                        <p class="ml-2 text-sm">
-                            <%= product.store.storename %>
-                        </p>
-                    </a>
-                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
-                        <span class="hidden">Like</span>
-                        <i class="fa fa-heart"></i>
-                    </a>
-                </footer>
-
-            </article>
-            <!-- END Article -->
-
-        </div>
-        <!-- END Column -->
-        <% end %>
+    <%= render partial: "products/product", collection: @products, as: "product"%>
     </div>
+    <%= paginate @products %>
 </div>

@@ -1,5 +1,14 @@
-<h1 class="text-3xl">店舗プロフィール</h1>
-<p><%= @store.storename %></p>
-<p><%= @store.email %></p>
-<%= image_tag(@store.display_image, class: "my-0 mx-auto rounded-full") if @store.image.attached?%>
-<%= link_to '編集', edit_store_registration_path if store_signed_in? && current_store == @store %>
+<div class="flex justify-between items-stretch mx-auto px-5 md:w-3/5">
+    <div><%= image_tag(@store.display_image, class: "my-0 mx-auto rounded-full") if @store.image.attached?%></div>
+    <div class="self-center text-left">
+        <p><%= @store.storename%></p>
+        <p>説明</p>
+        <p><p><%= @store.email %></p></p>
+        <%= link_to '編集', edit_store_registration_path if store_signed_in? && current_store == @store %> 
+    </div>
+</div>
+
+<div class="flex flex-wrap -mx-1 lg:-mx-4">
+    <%= render partial: "products/store_product", collection: @products, as: "product"%>
+</div>
+<%= paginate @products %>
