@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 class Stores::RegistrationsController < Devise::RegistrationsController
@@ -44,12 +45,12 @@ class Stores::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:storename])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:storename, :description])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:storename])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:storename ,:description])
   end
 
   # The path used after sign up.

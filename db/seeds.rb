@@ -2,11 +2,13 @@ Faker::Config.locale = :ja
 
 store = Store.create!(storename: '山田商店',
                       email: 'test@test.com',
+                      description: "1971年、スターバックスはアメリカ北西部のシアトルにコーヒー豆の専門店として誕生しました。その後、スペシャルティコーヒーストアとして成長。北米以外の海外展開は1996年の日本からスタートし、現在では世界各国の街角で一杯のコーヒーとともにくつろぎのひとときをご提供しています。",
                       password: 'foobar',
                       confirmed_at: Time.zone.now)
 
 store2 = Store.create!(storename: '田中商店',
-                       email: 'test2@test.com',
+  description: "1971年、スターバックスはアメリカ北西部のシアトルにコーヒー豆の専門店として誕生しました。その後、スペシャルティコーヒーストアとして成長。北米以外の海外展開は1996年の日本からスタートし、現在では世界各国の街角で一杯のコーヒーとともにくつろぎのひとときをご提供しています。",
+  email: 'test2@test.com',
                        password: 'foobar',
                        confirmed_at: Time.zone.now)
 # active

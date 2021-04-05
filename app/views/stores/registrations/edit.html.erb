@@ -9,6 +9,11 @@
 </div>
 
 <div class="field">
+  <%= f.label :description %><br />
+  <%= f.text_area :description, autocomplete: "店舗の説明を入力してください" %>
+</div>
+
+<div class="field">
   <%= f.label :email %><br />
   <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
 </div>
@@ -58,10 +63,10 @@
 <%# 画像サイズのチェック %>
 <script type="text/javascript">
   const imageElement = document.querySelector("#store_image");
-  imageElement.addEventListener('change', function(){
-     var size_in_megabytes = this.files[0].size/1024/1024;
-     console.log(size_in_megabytes);
-     if(size_in_megabytes > 5) {
+  imageElement.addEventListener('change', function () {
+    var size_in_megabytes = this.files[0].size / 1024 / 1024;
+    console.log(size_in_megabytes);
+    if (size_in_megabytes > 5) {
       alert("このサイトのアップロード最大サイズ(5MB)を超えています。");
       imageElement.value = "";
     }

@@ -11,6 +11,7 @@ class Store < ApplicationRecord
   #   notification
   has_many :notifications, dependent: :destroy
 
+  validates :description, length: { maximum: 500 }, presence: true
   validates :storename, length: { maximum: 20 }, presence: true
   # image validation
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png],

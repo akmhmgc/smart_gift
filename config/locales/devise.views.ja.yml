@@ -23,6 +23,7 @@ ja:
         username: ユーザーネーム(ニックネーム)
       store:
         storename: 店舗名
+        description: 店舗紹介文
         current_password: "現在のパスワード"
         name: 名前
         email: "メールアドレス"
