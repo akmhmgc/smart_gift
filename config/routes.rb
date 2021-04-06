@@ -4,9 +4,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  resources :stores, only: [:show] do
-    get :items
-  end
+  resources :stores, only: [:show]
 
   resources :products , only: %i[index show] 
   resources :reviews, only: %i[create destroy edit update]

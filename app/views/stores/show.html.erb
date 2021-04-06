@@ -1,11 +1,12 @@
-<div class="flex justify-between items-stretch mx-auto px-5 md:w-3/5">
-    <div><%= image_tag(@store.display_image, class: "my-0 mx-auto rounded-full") if @store.image.attached?%></div>
+<div class="flex items-stretch mx-auto">
+    <div><%= image_tag(@store.image.variant(resize_to_fill: [112, 112]), class: "my-0 mx-auto rounded-full") if @store.image.attached?%></div>
     <div class="self-center text-left">
-        <p><%= @store.storename%></p>
-        <p><%= @store.description%></p>
+        <span class="font-semibold text-lg"><%= @store.storename%></span>
         <%= link_to '編集', edit_store_registration_path if store_signed_in? && current_store == @store %>
     </div>
 </div>
+
+<div><p class="text-sm"><%= @store.description%></p></div>
 
 <div class="flex flex-wrap -mx-1 lg:-mx-4">
     <%= render partial: "products/store_product", collection: @products, as: "product"%>

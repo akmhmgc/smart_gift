@@ -140,3 +140,50 @@ main h1 {
     -webkit-text-fill-color: transparent;
   }
 }
+
+// forms
+.form{
+  @apply bg-white mx-auto border rounded px-8 pt-6 pb-8 mb-4 flex flex-col w-72 md:w-1/2;
+  h2{
+    @apply text-lg font-bold text-center;
+  }
+}
+
+.links{
+  @apply mt-2;
+  a{
+    @apply block text-xs text-gray-500 hover:underline;
+  }
+}
+
+
+.field {
+  @apply mb-4;
+}
+
+.field{
+  label {
+    @apply block text-sm font-bold mb-1;
+  }
+  
+  input{
+    @apply border rounded w-full px-3;
+  }
+}
+
+.auto_login{
+  label {
+    @apply text-sm mb-1;
+  }
+  
+  input{
+    @apply border rounded px-3;
+  }
+}
+
+.actions{
+  @apply text-center my-2;
+  input{
+    @apply bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded;
+  }
+}
