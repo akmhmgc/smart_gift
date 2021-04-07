@@ -144,7 +144,7 @@ main h1 {
 // forms
 .form{
   @apply bg-white mx-auto border rounded px-8 pt-6 pb-8 mb-4 flex flex-col w-72 md:w-1/2;
-  h2{
+  .title{
     @apply text-lg font-bold text-center;
   }
 }
@@ -186,4 +186,17 @@ main h1 {
   input{
     @apply bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded;
   }
+}
+
+// flash 
+.fade{
+  animation: fadeOut 1.5s ease-in forwards;
+}
+
+@keyframes fadeOut { /*animetion-nameで設定した値を書く*/
+
+  0% {opacity: 1} 
+
+  100% {opacity: 0} 
+
 }
