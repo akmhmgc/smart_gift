@@ -1,8 +1,17 @@
-<h1 class="text-3xl">プロフィール</h1>
-<p><%= @profile.name %></p>
-<% if @profile.user == current_user%>
-  <p><%= "#{@profile.money}円" %></p>
-  <%= button_to 'チャージする', {controller: 'profiles', action: 'add_money'}, {method: :get }%>
-<% end %>
-<%= image_tag(@profile.display_image, class: "my-0 mx-auto rounded-full") if @profile.image.attached?%>
-<%= link_to '編集する', edit_profiles_path(current_user) if user_signed_in? && current_user == @profile.user %>
+<div class="mx-auto w-72">
+  <div class="flex items-stretch mx-auto">
+    <div>
+      <%= image_tag(@profile.image.variant(resize_to_fill: [112, 112]), class: "my-0 mx-auto rounded-full") if @profile.image.attached?%>
+    </div>
+    <div class="self-center text-left mx-5">
+      <span class="font-semibold text-lg"><%= @profile.name %></span>
+    </div>
+  </div>
+  <%= link_to '編集', edit_profiles_path(current_user) if user_signed_in? && current_user == @profile.user%>
+  <div class="money mt-10 text-center">
+    <% if @profile.user == current_user%>
+    <p><%= "所有ポイント:#{@profile.money}円" %></p>
+    <%= button_to '10000円チャージする', {controller: 'profiles', action: 'add_money'}, {method: :get ,class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded"}%>
+    <% end %>
+  </div>
+</div>
