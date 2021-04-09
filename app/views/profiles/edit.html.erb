@@ -1,15 +1,28 @@
- <%= render 'shared/error_messages' , resource: @profile %>
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <%= form_with(url: profiles_path(current_user), method: :put,local: true) do |f| %>
+<div class="form">
+    <h2 class="title">プロフィールの編集</h2>
+    <%= render 'shared/error_messages' , resource: @profile %>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <%= form_with(url: profiles_path(current_user), method: :put,local: true) do |f| %>
 
-        <%= f.label :ユーザー名（ニックネーム） %>
-        <%= f.text_field :name, class: 'form-control' %>
+            <div class="field">
+                <%= f.label :ユーザー名（ニックネーム） %>
+                <%= f.text_field :name, class: 'form-control', value:current_user.profile.name %>
 
-        <%= f.label :プロフィール画像 %><br />
-        <%= f.file_field :image, autofocus: true%>
+            </div>
 
-        <%= f.submit "更新", class: "btn btn-primary" %>
-        <% end %>
+            <span class="image">
+                <%= f.label :プロフィール画像, class: "block text-sm font-bold mb-1" %>
+                <%= f.file_field :image, autofocus: true, id: "image_field", class: "hidden"%>
+                <%= image_tag(current_user.profile.image.variant(resize_to_fill: [112, 112]), class: "my-0 rounded-full cursor-pointer hover:opacity-70 transform hover:scale-110 w-28 image_prev",id: "image_btn", onclick: "document.querySelector('#image_field').click()")%>
+            </span>
+
+            <div class="actions">
+                <%= f.submit "更新" %>
+            </div>
+            <% end %>
+        </div>
     </div>
 </div>
+
+<%= javascript_pack_tag 'edit_info' %>
