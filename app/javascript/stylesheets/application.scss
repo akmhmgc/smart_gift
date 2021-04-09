@@ -169,6 +169,12 @@ main h1 {
   input{
     @apply border rounded w-full px-3;
   }
+  textarea{
+    @apply border rounded w-full px-3 h-20;
+  }
+  span{
+    @apply text-sm;
+  }
 }
 
 .auto_login{
@@ -190,10 +196,14 @@ main h1 {
 
 // flash 
 .fade{
-  animation: fadeOut 1.5s ease-in forwards;
+  animation-name: fadeOut;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
 }
 
-@keyframes fadeOut { /*animetion-nameで設定した値を書く*/
+@keyframes fadeOut {
 
   0% {opacity: 1} 
 
