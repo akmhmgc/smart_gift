@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
     @categories.each do |cat|
       cat.name.insert(0, '　') if cat.ancestry?
     end
-    
+
     @products = @q.result.page(params[:page])
   end
 
