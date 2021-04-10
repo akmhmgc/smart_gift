@@ -1,8 +1,11 @@
 <div class="search_box h-96 bg-cover" , style="background-image:url(<%= asset_path('present.jpg')%>)">
-    <div class="content absolute top-24 md:right-24 w-96">
-        <h2 class="text-xl md:text-2xl">「おいしい」をスマートにプレゼント</h2>
-        <p class="hidden md:block">例えば、賞味期限の短いモンブランケーキも相手の受けとり予定日を気にする必要はありません。
-            Smart Giftならメッセージ付きのオンラインカードを送るだけ。</p>
+    <div class="content absolute right-1/2 transform translate-x-1/2 lg:transform-none top-24 lg:right-24 w-96">
+        <div class="bg-white bg-opacity-80 lg:bg-opacity-0 p-4 lg:p-0">
+            <h2 class="text-xl font-semibold lg:text-2xl">
+                「おいしい」をスマートにプレゼント</h2>
+            <p class="text-sm mt-2">例えば、賞味期限の短いモンブランケーキも相手の受けとり予定日を気にする必要はありません。
+                Smart Giftならメッセージ付きのオンラインカードを送るだけ。</p>
+        </div>
         <%= link_to "商品一覧",products_url,class:"text-white bg-red-300 hover:bg-red-400 py-2 px-4 rounded inline-block mt-4" %>
     </div>
 </div>
@@ -72,7 +75,8 @@
                 </h1>
                 <% end %>
 
-                <div class="circle h-8 w-8 rounded-full bg-red-300 text-center leading-8 inline-block absolute top-3 left-3">
+                <div
+                    class="circle h-8 w-8 rounded-full bg-red-300 text-center leading-8 inline-block absolute top-3 left-3">
                     <span class="text-white font-semibold"><%= i %></span>
                 </div>
 
