@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   include Accessible
   skip_before_action :check_user, except: %i[new create]
   before_action :configure_sign_up_params, only: [:create]
+  before_action :ensure_normal_user, only: %i[update destroy]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -15,10 +16,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # ユーザー登録時にprofileを作成する
   def create
     super
-    if resource.save
-      profile = resource.create_profile!(name: resource.username)
-      profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
-    end
+    return unless resource.save
+
+    profile = resource.create_profile!(name: resource.username)
+    profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
   end
 
   # GET /resource/edit
@@ -46,6 +47,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
+
+  def ensure_normal_user
+    redirect_to root_path, alert: 'ゲストユーザーの更新・削除はできません。' if resource.email == 'guest_user@example.com'
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params

@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations' }
-  devise_for :stores, controllers: { sessions: 'stores/sessions', registrations: 'stores/registrations', confirmations: 'stores/confirmations' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations',passwords: 'users/passwords' }
+  devise_for :stores, controllers: { sessions: 'stores/sessions', registrations: 'stores/registrations', confirmations: 'stores/confirmations',passwords: 'stores/passwords' }
+  
+  devise_scope :user do
+    get 'user/guest_sign_in', to: 'users/sessions#new_guest'
+  end
+
+  devise_scope :store do
+    get 'store/guest_sign_in', to: 'stores/sessions#new_guest'
+  end
 
   root 'static_pages#home'
 

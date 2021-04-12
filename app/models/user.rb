@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_one :cart,  -> { where recieved: false }, class_name: 'Order', inverse_of: :user
   has_many :orders,  -> { where recieved: true }, class_name: 'Order', inverse_of: :user
-  
+
   validates :username, presence: true, length: { maximum: 20 }
 
   # Include default devise modules. Others available are:
@@ -30,6 +30,13 @@ class User < ApplicationRecord
     likes.exists?(product_id: product.id)
   end
 
+  def self.guest
+    find_or_create_by!(email: 'guest_user@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.username = "ゲストユーザー"
+      user.confirmed_at = Time.zone.now
+    end
+  end
   # private
 
   # def profile_setup

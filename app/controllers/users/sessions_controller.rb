@@ -20,6 +20,17 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def new_guest
+    user = User.guest
+    # 複数ゲストユーザーがログイン時にプロフィール情報を変更した時の対策は？
+    profile = user.profile || user.build_profile
+    profile.name = user.username
+    profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
+    profile.save
+    sign_in user
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

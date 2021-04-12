@@ -12,7 +12,7 @@
 # Include: **/*.gemfile, **/Gemfile, **/gems.rb
 Bundler/OrderedGems:
   Exclude:
-    - 'Gemfile'
+    - "Gemfile"
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -20,15 +20,15 @@ Bundler/OrderedGems:
 # SupportedStylesAlignWith: either, start_of_block, start_of_line
 Layout/BlockAlignment:
   Exclude:
-    - 'spec/models/like_spec.rb'
-    - 'spec/system/products_spec.rb'
+    - "spec/models/like_spec.rb"
+    - "spec/system/products_spec.rb"
 
 # Offense count: 2
 # Cop supports --auto-correct.
 Layout/EmptyLines:
   Exclude:
-    - 'config/environments/test.rb'
-    - 'spec/system/stores_spec.rb'
+    - "config/environments/test.rb"
+    - "spec/system/stores_spec.rb"
 
 # Offense count: 3
 # Cop supports --auto-correct.
@@ -36,9 +36,9 @@ Layout/EmptyLines:
 # SupportedStyles: empty_lines, no_empty_lines
 Layout/EmptyLinesAroundBlockBody:
   Exclude:
-    - 'spec/requests/dashboard/orders_spec.rb'
-    - 'spec/requests/dashboard/product_spec.rb'
-    - 'spec/system/reviews_spec.rb'
+    - "spec/requests/dashboard/orders_spec.rb"
+    - "spec/requests/dashboard/product_spec.rb"
+    - "spec/system/reviews_spec.rb"
 
 # Offense count: 3
 # Cop supports --auto-correct.
@@ -48,7 +48,7 @@ Layout/EmptyLinesAroundBlockBody:
 # SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
 Layout/HashAlignment:
   Exclude:
-    - 'db/seeds.rb'
+    - "db/seeds.rb"
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -56,14 +56,14 @@ Layout/HashAlignment:
 # SupportedStyles: normal, indented_internal_methods
 Layout/IndentationConsistency:
   Exclude:
-    - 'spec/models/like_spec.rb'
+    - "spec/models/like_spec.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: Width, IgnoredPatterns.
 Layout/IndentationWidth:
   Exclude:
-    - 'spec/system/products_spec.rb'
+    - "spec/system/products_spec.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -76,17 +76,17 @@ Layout/LineLength:
 # Cop supports --auto-correct.
 Layout/SpaceAfterColon:
   Exclude:
-    - 'spec/models/category_spec.rb'
-    - 'spec/models/order_spec.rb'
-    - 'spec/models/user_spec.rb'
-    - 'spec/system/stores_spec.rb'
-    - 'spec/system/users_spec.rb'
+    - "spec/models/category_spec.rb"
+    - "spec/models/order_spec.rb"
+    - "spec/models/user_spec.rb"
+    - "spec/system/stores_spec.rb"
+    - "spec/system/users_spec.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
 Layout/SpaceAroundMethodCallOperator:
   Exclude:
-    - 'spec/system/products_spec.rb'
+    - "spec/system/products_spec.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -95,13 +95,13 @@ Layout/SpaceAroundMethodCallOperator:
 # SupportedStylesForEmptyBraces: space, no_space
 Layout/SpaceBeforeBlockBraces:
   Exclude:
-    - 'spec/system/products_spec.rb'
+    - "spec/system/products_spec.rb"
 
 # Offense count: 3
 # Cop supports --auto-correct.
 Layout/SpaceBeforeComma:
   Exclude:
-    - 'config/routes.rb'
+    - "config/routes.rb"
 
 # Offense count: 3
 # Cop supports --auto-correct.
@@ -109,43 +109,45 @@ Layout/SpaceBeforeComma:
 # SupportedStyles: final_newline, final_blank_line
 Layout/TrailingEmptyLines:
   Exclude:
-    - 'app/models/notification.rb'
-    - 'spec/factories/notifications.rb'
-    - 'spec/models/like_spec.rb'
+    - "app/models/notification.rb"
+    - "spec/factories/notifications.rb"
+    - "spec/models/like_spec.rb"
 
 # Offense count: 15
 # Cop supports --auto-correct.
 # Configuration parameters: AllowInHeredoc.
 Layout/TrailingWhitespace:
   Exclude:
-    - 'config/routes.rb'
-    - 'spec/factories/products.rb'
-    - 'spec/models/like_spec.rb'
-    - 'spec/models/order_item_spec.rb'
-    - 'spec/rails_helper.rb'
-    - 'spec/system/likes_spec.rb'
-    - 'spec/system/products_spec.rb'
+    - "config/routes.rb"
+    - "spec/factories/products.rb"
+    - "spec/models/like_spec.rb"
+    - "spec/models/order_item_spec.rb"
+    - "spec/rails_helper.rb"
+    - "spec/system/likes_spec.rb"
+    - "spec/system/products_spec.rb"
 
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
 Lint/UnusedMethodArgument:
   Exclude:
-    - 'app/controllers/Stores/sessions_controller.rb'
-    - 'app/models/ability.rb'
+    - "app/controllers/Stores/sessions_controller.rb"
+    - "app/models/ability.rb"
 
 # Offense count: 3
 Lint/UselessAssignment:
   Exclude:
-    - 'spec/models/category_spec.rb'
-    - 'spec/models/store_spec.rb'
-    - 'spec/models/user_spec.rb'
+    - "spec/models/category_spec.rb"
+    - "spec/models/store_spec.rb"
+    - "spec/models/user_spec.rb"
 
 # Offense count: 2
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
 Metrics/BlockLength:
   Max: 35
+  Exclude:
+    - "config/routes.rb"
 
 # Offense count: 8
 # Configuration parameters: EnforcedStyle, CheckMethodNames, CheckSymbols, AllowedIdentifiers.
@@ -153,36 +155,36 @@ Metrics/BlockLength:
 # AllowedIdentifiers: capture3, iso8601, rfc1123_date, rfc822, rfc2822, rfc3339
 Naming/VariableNumber:
   Exclude:
-    - 'spec/models/category_spec.rb'
-    - 'spec/models/product_spec.rb'
-    - 'spec/models/store_spec.rb'
-    - 'spec/models/user_spec.rb'
+    - "spec/models/category_spec.rb"
+    - "spec/models/product_spec.rb"
+    - "spec/models/store_spec.rb"
+    - "spec/models/user_spec.rb"
 
 # Offense count: 3
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: slashes, arguments
 Rails/FilePath:
   Exclude:
-    - 'spec/rails_helper.rb'
-    - 'spec/system/products_spec.rb'
-    - 'spec/system/profiles_spec.rb'
+    - "spec/rails_helper.rb"
+    - "spec/system/products_spec.rb"
+    - "spec/system/profiles_spec.rb"
 
 # Offense count: 6
 # Configuration parameters: Include.
 # Include: app/controllers/**/*.rb
 Rails/LexicallyScopedActionFilter:
   Exclude:
-    - 'app/controllers/Stores/registrations_controller.rb'
-    - 'app/controllers/Stores/sessions_controller.rb'
-    - 'app/controllers/users/registrations_controller.rb'
-    - 'app/controllers/users/sessions_controller.rb'
+    - "app/controllers/Stores/registrations_controller.rb"
+    - "app/controllers/Stores/sessions_controller.rb"
+    - "app/controllers/users/registrations_controller.rb"
+    - "app/controllers/users/sessions_controller.rb"
 
 # Offense count: 1
 # Configuration parameters: Include.
 # Include: db/migrate/*.rb
 Rails/NotNullColumn:
   Exclude:
-    - 'db/migrate/20210301020939_add_category_id_to_products.rb'
+    - "db/migrate/20210301020939_add_category_id_to_products.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -193,7 +195,7 @@ Rails/NotNullColumn:
 # IgnoredMethods: lambda, proc, it
 Style/BlockDelimiters:
   Exclude:
-    - 'spec/system/products_spec.rb'
+    - "spec/system/products_spec.rb"
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -201,14 +203,14 @@ Style/BlockDelimiters:
 # SupportedStyles: compact, expanded
 Style/EmptyMethod:
   Exclude:
-    - 'app/controllers/dashboard/orders_controller.rb'
-    - 'app/controllers/static_pages_controller.rb'
+    - "app/controllers/dashboard/orders_controller.rb"
+    - "app/controllers/static_pages_controller.rb"
 
 # Offense count: 1
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
   Exclude:
-    - 'app/controllers/users/registrations_controller.rb'
+    - "app/controllers/users/registrations_controller.rb"
 
 # Offense count: 56
 # Cop supports --auto-correct.
