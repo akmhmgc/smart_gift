@@ -22,7 +22,7 @@ class Users::PasswordsController < Devise::PasswordsController
   #   super
   # end
 
-  # protected
+  protected
 
   def ensure_normal_user
     redirect_to new_user_session_path, alert: 'ゲストユーザーのパスワード再設定はできません。' if params[:user][:email].downcase == 'guest_user@example.com'

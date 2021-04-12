@@ -10,6 +10,13 @@ class Stores::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def new_guest
+    store = Store.guest
+    store.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
+    sign_in store
+    redirect_to root_path, notice: 'ゲストストアとしてログインしました。'
+  end
+
   # POST /resource/sign_in
   # def create
   #   super

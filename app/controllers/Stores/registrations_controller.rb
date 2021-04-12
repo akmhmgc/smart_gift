@@ -5,6 +5,7 @@ class Stores::RegistrationsController < Devise::RegistrationsController
   skip_before_action :check_user, except: [:new, :create]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  before_action :ensure_normal_store, only: %i[update destroy]
 
   # GET /resource/sign_up
   # def new
@@ -42,14 +43,18 @@ class Stores::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def ensure_normal_store
+    redirect_to root_path, alert: 'ゲストストアの更新・削除はできません。' if resource.email == 'guest_store@example.com'
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:storename, :description, :image])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[storename description image])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:storename, :description, :image])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[storename description image])
   end
 
   # The path used after sign up.

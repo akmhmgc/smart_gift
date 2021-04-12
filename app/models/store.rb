@@ -20,10 +20,11 @@ class Store < ApplicationRecord
                             message: 'should be less than 5MB' }
 
   def self.guest
-    find_or_create_by!(email: 'guest_store@example.com') do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.username = "ゲストストア"
-      user.confirmed_at = Time.zone.now
+    find_or_create_by!(email: 'guest_store@example.com') do |store|
+      store.password = SecureRandom.urlsafe_base64
+      store.storename = "ゲストストア"
+      store.description = "ゲストストアです"
+      store.confirmed_at = Time.zone.now
     end
   end
 end
