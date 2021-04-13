@@ -13,7 +13,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:facebook, :twitter]
 
   # 商品をお気に入りに入れる
   def like(product)
@@ -37,6 +37,22 @@ class User < ApplicationRecord
       user.confirmed_at = Time.zone.now
     end
   end
+
+  def self.from_omniauth(auth)
+    find_by(uid: auth.uid)
+  end
+
+  def self.new_with_session(_, session)
+    super.tap do |user|
+      if (data = session['devise.omniauth_data'])
+        user.email = data['email'] if user.email.blank?
+        user.provider = data['provider'] if data['provider'] && user.provider.blank?
+        user.uid = data['uid'] if data['uid'] && user.uid.blank?
+        user.skip_confirmation!
+      end
+    end
+  end
+
   # private
 
   # def profile_setup

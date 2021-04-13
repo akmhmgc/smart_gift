@@ -3,6 +3,11 @@
 class Users::SessionsController < Devise::SessionsController
   include Accessible
   skip_before_action :check_user, only: :destroy
+
+  def new
+    session.delete('devise.omniauth_data')
+    super
+  end
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

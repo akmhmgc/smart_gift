@@ -210,3 +210,16 @@ main h1 {
   100% {opacity: 0} 
 
 }
+
+
+.signup_btn {
+  @apply text-white text-sm font-bold py-2 px-4 rounded;
+}
+
+#facebook_btn {
+  background-color: #3B5998;
+}
+
+#twitter_btn {
+  background-color: #1DA1F2
+}

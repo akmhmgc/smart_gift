@@ -34,4 +34,15 @@
   </div>
   <% end %>
 
+  <%- if devise_mapping.omniauthable? %>
+  <div class="social border-t-2 py-4 mt-4">
+    <h2 class="text-sm text-center font-semibold py-2">ソーシャルアカウントでサインイン</h2>
+    <div class="flex justify-around">
+      <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to "#{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) ,class:"omniauth signup_btn w-32 text-center", id:"#{provider}_btn"%>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+
 </div>
