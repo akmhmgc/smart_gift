@@ -1,103 +1,105 @@
-<div class="search_box h-96 bg-cover" , style="background-image:url(<%= asset_path('present.jpg')%>)">
-    <div class="content absolute right-1/2 transform translate-x-1/2 lg:transform-none top-24 lg:right-24 w-96">
-        <div class="bg-white bg-opacity-80 lg:bg-opacity-0 p-4 lg:p-0">
-            <h2 class="text-xl font-semibold lg:text-2xl">
+<div class="search_box h-screen bg-cover -mt-32 relative" , style="background-image:url(<%= asset_path('present.jpg')%>)">
+    <div class="content absolute right-1/2 transform translate-x-1/2 -translate-y-1/2 top-1/2">
+        <div class="bg-white bg-opacity-80 p-6 md:p-8">
+            <h2 class="text-xl font-semibold md:text-3xl whitespace-nowrap">
                 「おいしい」をスマートにプレゼント</h2>
-            <p class="text-sm mt-2">例えば、賞味期限の短いモンブランケーキも相手の受けとり予定日を気にする必要はありません。
+            <p class="text-sm mt-2 lg:text-base">例えば、賞味期限の短いモンブランケーキも相手の受けとり予定日を気にする必要はありません。
                 Smart Giftならメッセージ付きのオンラインカードを送るだけ。</p>
+            <%= link_to "商品一覧",products_url,class:"text-white bg-red-300 hover:bg-red-400 py-2 px-4 rounded inline-block mt-4" %>
         </div>
-        <%= link_to "商品一覧",products_url,class:"text-white bg-red-300 hover:bg-red-400 py-2 px-4 rounded inline-block mt-4" %>
     </div>
 </div>
-<article class="mt-4">
-    <h2 class="text-xl font-semibold">カテゴリから探す</h2>
-    <div class="flex flex-wrap -mx-1 lg:-mx-4">
-        <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-            <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
-            <%= image_tag("cake.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
-            <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
-            <% end %>
-        </div>
-        <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-            <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
-            <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
-            <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
-            <% end %>
-        </div>
-        <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-            <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
-            <%= image_tag("cake.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
-            <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
-            <% end %>
-        </div>
-        <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-            <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
-            <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
-            <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
-            <% end %>
-        </div>
-        <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-            <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
-            <%= image_tag("cake.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
-            <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
-            <% end %>
-        </div>
-        <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-            <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
-            <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
-            <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
-            <% end %>
-        </div>
-        <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-            <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
-            <%= image_tag("cake.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
-            <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
-            <% end %>
-        </div>
-        <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-            <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
-            <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
-            <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
-            <% end %>
-        </div>
-</article>
 
-<article class="mt-4">
-    <h2 class="text-xl font-semibold">ランキングTOP5</h2>
-    <div class="flex flex-wrap -mx-1 lg:-mx-4">
-        <% @products.each.with_index(1) do |product,i| %>
-        <div class="my-1 px-1 w-1/3 md:w-1/4 lg:my-4 lg:px-1 lg:w-1/5">
-            <article class="overflow-hidden relative">
-                <%= link_to product , class:"hover:opacity-70 inline-block" do%>
-                <%= image_tag(product.display_image, class: "block h-auto w-full") %>
-                <h1 class="mt-2">
-                    <%= product.name %>
-                </h1>
+<div class="max-w-screen-lg mx-auto mt-10 my-12 px-4 md:px-12 relative" id="container">
+    <article class="mt-4">
+        <h2 class="text-xl font-semibold">カテゴリから探す</h2>
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
+                <%= image_tag("cake.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
                 <% end %>
-
-                <div
-                    class="circle h-8 w-8 rounded-full bg-red-300 text-center leading-8 inline-block absolute top-3 left-3">
-                    <span class="text-white font-semibold"><%= i %></span>
-                </div>
-
-                <% if product.reviews_count > 0 %>
-                <div class="Stars" style="--rating: <%= product.stars_average %>;"
-                    aria-label="Rating of this product is <%= product.stars_average %> out of 5."></div>
-                <span><%= "(#{product.reviews_count})" %></span>
+            </div>
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
+                <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
                 <% end %>
-                <h1 class="text-sm">
-                    <%= "#{product.price.to_s} 円" %>
-                </h1>
-                <%= link_to store_url(product.store),class:"hover:underline" do %>
-                <p class="text-sm">
-                    <%= product.store.storename %>
-                </p>
+            </div>
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
+                <%= image_tag("cake.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
                 <% end %>
+            </div>
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
+                <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
+                <% end %>
+            </div>
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
+                <%= image_tag("cake.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
+                <% end %>
+            </div>
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
+                <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
+                <% end %>
+            </div>
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
+                <%= image_tag("cake.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
+                <% end %>
+            </div>
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
+                <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
+                <% end %>
+            </div>
+    </article>
 
-            </article>
+    <article class="mt-4">
+        <h2 class="text-xl font-semibold">ランキングTOP5</h2>
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+            <% @products.each.with_index(1) do |product,i| %>
+            <div class="my-1 px-1 w-1/3 md:w-1/4 lg:my-4 lg:px-1 lg:w-1/5">
+                <article class="overflow-hidden relative">
+                    <%= link_to product , class:"hover:opacity-70 inline-block" do%>
+                    <%= image_tag(product.display_image, class: "block h-auto w-full") %>
+                    <h1 class="mt-2">
+                        <%= product.name %>
+                    </h1>
+                    <% end %>
 
+                    <div
+                        class="circle h-8 w-8 rounded-full bg-red-300 text-center leading-8 inline-block absolute top-3 left-3">
+                        <span class="text-white font-semibold"><%= i %></span>
+                    </div>
+
+                    <% if product.reviews_count > 0 %>
+                    <div class="Stars" style="--rating: <%= product.stars_average %>;"
+                        aria-label="Rating of this product is <%= product.stars_average %> out of 5."></div>
+                    <span><%= "(#{product.reviews_count})" %></span>
+                    <% end %>
+                    <h1 class="text-sm">
+                        <%= "#{product.price.to_s} 円" %>
+                    </h1>
+                    <%= link_to store_url(product.store),class:"hover:underline" do %>
+                    <p class="text-sm">
+                        <%= product.store.storename %>
+                    </p>
+                    <% end %>
+
+                </article>
+
+            </div>
+            <% end %>
         </div>
-        <% end %>
-    </div>
-</article>
+    </article>
 </div>
