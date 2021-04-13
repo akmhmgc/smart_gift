@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # ユーザー登録時にprofileを作成する
   def create
     super
-    return unless resource.save
+    return unless resource
 
     profile = resource.create_profile!(name: resource.username)
     profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')

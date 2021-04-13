@@ -12,7 +12,7 @@ class Store < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   validates :description, length: { maximum: 500 }, presence: true
-  validates :storename, length: { maximum: 20 }, presence: true
+  validates :storename, length: { maximum: 20 }, presence: true, uniqueness: { case_sensitive: true }
   # image validation
   validates :image, content_type: { in: %w[image/jpeg image/gif image/png],
                                     message: 'must be a valid image format' },
