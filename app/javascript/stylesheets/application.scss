@@ -210,3 +210,16 @@
 #twitter_btn {
   background-color: #1DA1F2
 }
+
+.pagination {
+  @apply relative inline-flex z-0 inline-flex rounded-md shadow-sm -space-x-px;
+  a {
+    @apply relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50;
+  }
+  .gap {
+    @apply relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700;
+  }
+  .current{
+    @apply relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium text-white bg-gray-500;
+  }
+}

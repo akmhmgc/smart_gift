@@ -15,21 +15,23 @@
             <p class="my-6"><%= @product.description %></p>
 
             <%= form_with(url: add_item_url, method: :post,local: true) do |f| %>
-            <div class="add_item">
+            <div class="add_item mb-10">
                 <%= f.hidden_field :product_id, value: @product.id %>
                 <div class="flex justify-end">
                     <%= f.label :"数量:"%>
                     <%= f.select :quantity, (1..10)%>
                 </div>
-            </div>
-            <div class="text-center">
-                <%= f.submit "カートに入れる", class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded" %>
+                <div class="text-center mt-2">
+                    <%= f.submit "カートに入れる", class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded" %>
+                </div>
             </div>
             <% end %>
-            <section id="reviews" class="pt-6">
+            <section id="reviews" class="pt-6 mb-10">
                 <h2 class="py-2 font-semibold">カスタマーレビュー</h2>
                 <%= render @reviews %>
-                <%= paginate @reviews %>
+                <div class="text-center">
+                    <%= paginate @reviews%>
+                </div>
             </section>
             <% if @review %>
             <section class="review_form py-4 w-full max-w-sm mx-auto">
