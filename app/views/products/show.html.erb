@@ -34,8 +34,8 @@
                 </div>
             </section>
             <% if @review %>
-            <section class="review_form py-4 w-full max-w-sm mx-auto">
-                <h2 class="py-2 font-semibold">レビュー投稿</h2>
+            <section class="form py-4 w-full max-w-sm mx-auto">
+                <h2 class="title mb-2">レビュー投稿</h2>
                 <%= render 'shared/error_messages' , resource: @review %>
                 <%= render 'shared/review_form' %>
             </section>

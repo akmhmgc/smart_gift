@@ -212,7 +212,7 @@
 }
 
 .pagination {
-  @apply relative inline-flex z-0 inline-flex rounded-md shadow-sm -space-x-px;
+  @apply relative inline-flex z-0 inline-flex rounded-md -space-x-px;
   a {
     @apply relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50;
   }

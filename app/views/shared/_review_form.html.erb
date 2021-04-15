@@ -1,9 +1,12 @@
 <%= form_with(model: @review, local: true) do |f| %>
 <div class="field">
     <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.label :"評価"%>
     <%= f.select :stars, "★★★★★": 5,"★★★★": 4,"★★★": 3,"★★": 2,"★": 1 %>
-    <%= f.text_field :title, placeholder: "タイトル" ,class:"mb-2"%>
-    <%= f.text_area :body, placeholder: "レビュー内容" %>
+    <%= f.label :"タイトル"%>
+    <%= f.text_field :title, placeholder: "30文字以内で入力してください。" ,class:"mb-2"%>
+    <%= f.label :"レビュー本文"%>
+    <%= f.text_area :body, placeholder: "140文字以内で入力してください。" %>
 </div>
 <%= f.submit "投稿", class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded" %>
 <% end %>
