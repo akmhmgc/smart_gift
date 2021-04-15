@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>SmartGift</title>
   <%= csrf_meta_tags %>
@@ -11,7 +10,7 @@
   <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
 </head>
 
-<body class="text-gray-700">
+<body class="text-gray-700 box-border max-w-full">
   <%= render 'layouts/header' %>
   <div class="pt-24 relative" id="container">
     <div class="mt-24 fade absolute top-0 left-0 right-0 mx-auto w-3/4 text-sm delay-1000 z-10">
@@ -30,7 +29,7 @@
       <% end %>
     </div>
     <%= yield %>
-    <div class="text-left">
+    <div class="text-left hidden md:inline-block">
       <%= debug(params) if Rails.env.development?%>
     </div>
   </div>

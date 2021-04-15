@@ -3,18 +3,17 @@
 <div class="text-left mb-5 text-sm">
     <div>
         <%= image_tag(@profile.image.variant(resize_to_fill: [32, 32]), class: "inline-block rounded-full bg-gray-300")%>
-        <span><%= @profile.name %></span>
+        <%= link_to @profile.name, profiles_path(@profile) %>
     </div>
     <div class="Stars" style="--rating: <%= review.stars %>;"
-        aria-label="Rating of this product is <%= review.stars %> out of 5."></div>
+        aria-label="Rating of this product is <%= review.stars %> out of 5."><span class="font-semibold"><%= review.title %></span></div>
     <div>
-        <p class="font-bold"><%= review.title %></p>
-        <p class="text-gray-500"><%= review.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+        <p class="text-gray-500"><%= review.created_at.strftime("%Y年%m月%d日にレビュー済み") %></p>
         <p><%= review.body %></p>
     </div>
     <% if current_user == review.user %>
-    <%= link_to "編集", edit_review_path(review) %>
+    <%= link_to "編集", edit_review_path(review), class:"hover:text-gray-500 hover:underline" %>
     <%= link_to "削除", review, method: :delete,
-                                       data: { confirm: "レビューを削除しますか？" } %>
+                                       data: { confirm: "レビューを削除しますか？" } , class:"hover:text-gray-500 hover:underline" %>
     <% end %>
 </div>

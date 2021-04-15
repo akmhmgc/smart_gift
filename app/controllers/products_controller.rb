@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @reviews = @product.reviews.includes(:user).page(params[:page]).per(5)
+    @reviews = @product.reviews.includes(user: { profile: { image_attachment: :blob } }).page(params[:page]).per(5)
     @review = current_user.reviews.build if user_signed_in?
   end
 end

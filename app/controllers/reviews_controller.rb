@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = 'レビューが投稿されました'
       redirect_to @product
     else
-      @reviews = @product.reviews.includes(:user).page(params[:page]).per(5)
+      @reviews = @product.reviews.includes(user: { profile: { image_attachment: :blob } }).page(params[:page]).per(5)
       flash.now[:alert] = 'レビューの投稿に失敗しました。詳細はタイトル入力欄上のエラーメッセージをご確認ください。'
       render 'products/show'
     end

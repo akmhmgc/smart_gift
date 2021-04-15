@@ -1,38 +1,45 @@
-<div class="max-w-screen-lg mx-auto mt-10 my-12 px-4 md:px-12 relative" id="container">
-    <main class="">
-        <div class="image"><%= image_tag(@product.image.variant(resize_to_fill: [300, 300]), class: "mx-auto") %></div>
-        <div class="description">
-            <p><%= @product.name %></p>
-            <p><%= "#{@product.price} 円" %></p>
-            <p><%= @product.description %></p>
+<div class="max-w-screen-lg w-4/5 mx-auto px-4 md:px-12 relative" id="container">
+    <main>
+        <div class="image"><%= image_tag(@product.image.variant(resize_to_fill: [400, 400]), class: "mx-auto w-full") %>
+        </div>
+        <div class="p-4">
+            <p><%= link_to @product.store.storename, @product.store, class:"text-blue-400 hover:text-blue-300 hover:underline text-sm" %>
+            </p>
+            <% if @product.reviews.present? %>
+            <div class="Stars" style="--rating: <%= @product.stars_average %>;"
+                aria-label="Rating of this product is <%= @product.stars_average %> out of 5."></div>
+            <span><%= "#{@product.reviews_count}個の評価" %></span>
+            <% end %>
+            <p class="text-lg font-semibold"><%= @product.name %></p>
+            <p class="text-lg font-semibold mt-4"><%= "#{@product.price} 円" %></p>
+            <p class="my-6"><%= @product.description %></p>
+
+            <%= form_with(url: add_item_url, method: :post,local: true) do |f| %>
+            <div class="add_item">
+                <%= f.hidden_field :product_id, value: @product.id %>
+                <div class="flex justify-end">
+                    <%= f.label :"数量:"%>
+                    <%= f.select :quantity, (1..10)%>
+                </div>
+            </div>
+            <div class="text-center">
+                <%= f.submit "カートに入れる", class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded" %>
+            </div>
+            <% end %>
+            <section id="reviews" class="pt-6">
+                <h2 class="py-2 font-semibold">カスタマーレビュー</h2>
+                <%= render @reviews %>
+                <%= paginate @reviews %>
+            </section>
+            <% if @review %>
+            <section class="review_form py-4 w-full max-w-sm mx-auto">
+                <h2 class="py-2 font-semibold">レビュー投稿</h2>
+                <%= render 'shared/error_messages' , resource: @review %>
+                <%= render 'shared/review_form' %>
+            </section>
+            <% else %>
+            <p>レビューを投稿するには、ユーザーとしてログインまたは会員登録してください。</p>
+            <% end %>
         </div>
     </main>
-    <% if @product.reviews.present? %>
-    <div class="Stars" style="--rating: <%= @product.stars_average %>;"
-        aria-label="Rating of this product is <%= @product.stars_average %> out of 5."></div>
-    <span><%= "(#{@product.reviews_count})" %></span>
-    <% end %>
-
-    <%= form_with(url: add_item_url, method: :post,local: true) do |f| %>
-    <div class="add_item">
-        <%= f.hidden_field :product_id, value: @product.id %>
-        <%= f.select :quantity, "5": 5,"4": 4,"3": 3,"2": 2,"1": 1 %>
-    </div>
-    <%= f.submit "カートに入れる", class: "" %>
-    <% end %>
-
-    <section id="reviews">
-        <%= render @reviews %>
-        <%= paginate @reviews %>
-    </section>
-
-    <% if @review %>
-    <section class="review_form">
-        <h2>レビュー投稿</h2>
-        <%= render 'shared/error_messages' , resource: @review %>
-        <%= render 'shared/review_form' %>
-    </section>
-    <% else %>
-    <p>レビューを投稿するには、ユーザーとしてログインまたは会員登録してください。</p>
-    <% end %>
 </div>
