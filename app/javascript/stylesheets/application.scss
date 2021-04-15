@@ -134,6 +134,13 @@
   .title{
     @apply text-lg font-bold text-center;
   }
+  select{
+    @apply border p-1;
+  }
+}
+
+#q_sorts{
+  @apply border p-1;
 }
 
 .links{
