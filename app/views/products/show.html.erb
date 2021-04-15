@@ -1,47 +1,50 @@
-<div class="max-w-screen-lg w-4/5 mx-auto px-4 md:px-12 relative" id="container">
+<div class="max-w-screen-lg w-5/6 mx-auto px-4 md:px-12 relative" id="container">
     <main>
-        <div class="image"><%= image_tag(@product.image.variant(resize_to_fill: [400, 400]), class: "mx-auto w-full") %>
-        </div>
-        <div class="p-4">
-            <p><%= link_to @product.store.storename, @product.store, class:"text-blue-400 hover:text-blue-300 hover:underline text-sm" %>
-            </p>
-            <% if @product.reviews.present? %>
-            <div class="Stars" style="--rating: <%= @product.stars_average %>;"
-                aria-label="Rating of this product is <%= @product.stars_average %> out of 5."></div>
-            <span><%= "#{@product.reviews_count}個の評価" %></span>
-            <% end %>
-            <p class="text-lg font-semibold"><%= @product.name %></p>
-            <p class="text-lg font-semibold mt-4"><%= "#{@product.price} 円" %></p>
-            <p class="my-6"><%= @product.description %></p>
-
-            <%= form_with(url: add_item_url, method: :post,local: true) do |f| %>
-            <div class="add_item mb-10">
-                <%= f.hidden_field :product_id, value: @product.id %>
-                <div class="flex justify-end">
-                    <%= f.label :"数量:"%>
-                    <%= f.select :quantity, (1..10)%>
-                </div>
-                <div class="text-center mt-2">
-                    <%= f.submit "カートに入れる", class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded" %>
-                </div>
+        <div class="item flex flex-col md:flex-row md:items-center">
+            <div class="image max-w-md md:w-2/5">
+                <%= image_tag(@product.image.variant(resize_to_fill: [400, 400]), class: "mx-auto w-full") %>
             </div>
-            <% end %>
-            <section id="reviews" class="pt-6 mb-10">
-                <h2 class="py-2 font-semibold">カスタマーレビュー</h2>
-                <%= render @reviews %>
-                <div class="text-center">
-                    <%= paginate @reviews%>
+            <div class="item_desc p-4 md:w-3/5">
+                <p><%= link_to @product.store.storename, @product.store, class:"text-blue-400 hover:text-blue-300 hover:underline text-sm" %>
+                </p>
+                <% if @product.reviews.present? %>
+                <div class="Stars" style="--rating: <%= @product.stars_average %>;"
+                    aria-label="Rating of this product is <%= @product.stars_average %> out of 5."></div>
+                <span><%= "#{@product.reviews_count}個の評価" %></span>
+                <% end %>
+                <p class="text-lg font-semibold"><%= @product.name %></p>
+                <p class="text-lg font-semibold mt-4"><%= "#{@product.price} 円" %></p>
+                <p class="my-6"><%= @product.description %></p>
+
+                <%= form_with(url: add_item_url, method: :post,local: true) do |f| %>
+                <div class="add_item mb-10">
+                    <%= f.hidden_field :product_id, value: @product.id %>
+                    <div class="flex justify-end">
+                        <%= f.label :"数量:"%>
+                        <%= f.select :quantity, (1..10)%>
+                    </div>
+                    <div class="text-center mt-2">
+                        <%= f.submit "カートに入れる", class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded" %>
+                    </div>
                 </div>
-            </section>
-            <% if @review %>
-            <section class="form py-4 w-full max-w-sm mx-auto">
-                <h2 class="title mb-2">レビュー投稿</h2>
-                <%= render 'shared/error_messages' , resource: @review %>
-                <%= render 'shared/review_form' %>
-            </section>
-            <% else %>
-            <p>レビューを投稿するには、ユーザーとしてログインまたは会員登録してください。</p>
-            <% end %>
+                <% end %>
+            </div>
         </div>
+        <section id="reviews" class="pt-6 mb-10">
+            <h2 class="py-2 font-semibold">カスタマーレビュー</h2>
+            <%= render @reviews %>
+            <div class="text-center">
+                <%= paginate @reviews%>
+            </div>
+        </section>
+        <% if @review %>
+        <section class="form py-4 w-full max-w-sm mx-auto">
+            <h2 class="title mb-2">レビュー投稿</h2>
+            <%= render 'shared/error_messages' , resource: @review %>
+            <%= render 'shared/review_form' %>
+        </section>
+        <% else %>
+        <p>レビューを投稿するには、ユーザーとしてログインまたは会員登録してください。</p>
+        <% end %>
     </main>
 </div>
