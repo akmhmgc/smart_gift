@@ -9,6 +9,11 @@ class ProductsController < ApplicationController
     end
 
     @products = @q.result.page(params[:page])
+
+    # 検索時の値段範囲
+    price_range = [100,300,500,1000,2000,3000,4000,5000].map { |n| ["¥#{n.to_s}", n] }.to_h
+    @price_range_low = {"下限なし":0}.merge(price_range)
+    @price_range_high = price_range.merge({"上限なし":999_999_999})
   end
 
   def show
