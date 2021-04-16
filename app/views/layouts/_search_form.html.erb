@@ -1,3 +1,4 @@
+
 <%= search_form_for q, url: url do |f| %>
 
 <div class="text-center form">
@@ -20,5 +21,4 @@
 <% else %>
 <%= f.select( :sorts, { '並び替え': 'id desc', '価格の安い順': 'price asc', '価格の高い順': 'price desc','レビューの多い順': 'reviews_count desc','星の多い順': 'stars_average desc' } , {}, { onchange: 'this.form.submit()'} )%>
 <% end %>
-
 <% end %>
