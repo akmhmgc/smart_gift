@@ -1,1 +1,5 @@
-document.querySelector("#like_form-<%=@product.id%>").innerHTML = "<%= escape_javascript(render partial: 'users/unlike', locals: {product: @product} )%>";
+document.querySelector("#like_form-<%=@product.id%>").innerHTML =
+"<%= escape_javascript(render partial: 'users/unlike', locals: {product: @product} )%>";
+
+document.querySelector("#flash").innerHTML =
+"<%= escape_javascript(render partial: 'shared/flash' )%>";

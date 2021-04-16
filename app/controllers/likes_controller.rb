@@ -9,7 +9,7 @@ class LikesController < ApplicationController
     @product.create_notification_like!(current_user)
     respond_to do |format|
       format.html { redirect_to current_user }
-      format.js
+      format.js { flash.now[:notice] = "商品がお気に入りに追加されました" }
     end
   end
 
@@ -18,7 +18,7 @@ class LikesController < ApplicationController
     current_user.unlike(@product)
     respond_to do |format|
       format.html { redirect_to current_user }
-      format.js
+      format.js { flash.now[:notice] = "商品がお気に入りから削除されました" }
     end
   end
 end
