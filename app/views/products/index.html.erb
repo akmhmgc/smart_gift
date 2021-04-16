@@ -1,5 +1,5 @@
-<%= render 'layouts/search_form', url: products_path, q: @q %>
-<main>
+<main class="max-w-screen-lg mx-auto mt-10 my-12 px-4 md:px-12 relative">
+    <%= render 'layouts/search_form', url: products_path, q: @q %>
     <% if @products.empty? %>
     <div class="text-center mt-4">
         <p class="text-lg font-semibold">ご指定の上限を満たす商品が見つかりませんでした</p>
@@ -9,6 +9,8 @@
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
         <%= render partial: "products/product", collection: @products, as: "product"%>
     </div>
-    <%= paginate @products %>
+    <div class="text-center">
+        <%= paginate @products %>
+    </div>
     <% end %>
 </main>
