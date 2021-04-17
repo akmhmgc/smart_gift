@@ -4,9 +4,11 @@
     <%= f.label :"評価"%>
     <%= f.select :stars, "★★★★★": 5,"★★★★": 4,"★★★": 3,"★★": 2,"★": 1 %>
     <%= f.label :"タイトル"%>
-    <%= f.text_field :title, placeholder: "30文字以内で入力してください。" ,class:"mb-2"%>
+    <%= f.text_field :title, placeholder: "30文字以内で入力してください。" ,class:"mb-2", id:"review_title"%>
     <%= f.label :"レビュー本文"%>
-    <%= f.text_area :body, placeholder: "140文字以内で入力してください。" %>
+    <%= f.text_area :body, placeholder: "140文字以内で入力してください。" , id:"review_body"%>
 </div>
-<%= f.submit "投稿", class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded" %>
+<%= f.submit "投稿", class: "bg-gray-300 text-white text-sm font-bold py-2 px-4 rounded",disabled:true, id:"review_post"%>
 <% end %>
+
+<%= javascript_pack_tag 'review_check' %>

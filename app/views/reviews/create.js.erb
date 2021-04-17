@@ -1,9 +1,0 @@
-// レビューの投稿
-var element = document.querySelector( "#reviews" ) ;
-var reviewElement = "<%= escape_javascript(render partial: 'reviews/review', locals: {review: @review} )%>";
-element.insertAdjacentHTML('afterbegin',reviewElement);
-
-// flashの表示
-var container = document.querySelector( "#container" ) ;
-var flashElement = "<%= escape_javascript(render partial: 'shared/flash')%>";
-container.insertAdjacentHTML('afterbegin',flashElement);

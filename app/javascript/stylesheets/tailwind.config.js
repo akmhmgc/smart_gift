@@ -5,7 +5,8 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {}
+    ,opacity: ({ after }) => after(['disabled']),
   },
   plugins: [require('tailwind-hamburgers')],
 }
