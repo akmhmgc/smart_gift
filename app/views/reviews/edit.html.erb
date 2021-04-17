@@ -1,11 +1,18 @@
- <%= render 'shared/error_messages' , resource: @review %>
- <%= form_with(model: @review, method: :put,local: true) do |f| %>
- <div class="field">
-     <%= f.hidden_field :product_id, value: @review.product.id %>
-     <%= f.select :stars, "★★★★★": 5,"★★★★": 4,"★★★": 3,"★★": 2,"★": 1 %>
-     <%= f.text_field :title %>
-     <br>
-     <%= f.text_area :body %>
+ <div class="max-w-sm w-full mx-auto px-4>
+     <h2 class="title mb-2">レビュー更新</h2>
+     <%= render 'shared/error_messages' , resource: @review %>
+     <%= form_with(model: @review, method: :put,local: true) do |f| %>
+     <div class="field">
+         <%= f.hidden_field :product_id, value: @review.product.id %>
+         <%= f.label :"評価"%>
+         <%= f.select :stars, "★★★★★": 5,"★★★★": 4,"★★★": 3,"★★": 2,"★": 1 %>
+         <%= f.label :"タイトル"%>
+         <%= f.text_field :title, class:"mb-2", id:"review_title"%>
+         <%= f.label :"レビュー本文"%>
+         <%= f.text_area :body , id:"review_body"%>
+     </div>
+     <%= f.submit "更新", class: "bg-gray-300 text-white text-sm font-bold py-2 px-4 rounded cursor-not-allowed",disabled:true, id:"review_post"%>
+     <% end %>
  </div>
- <%= f.submit "更新", class: "" %>
- <% end %>
+
+ <%= javascript_pack_tag 'review_check' %>
