@@ -7,7 +7,9 @@
       <span class="font-semibold text-lg"><%= @profile.name %></span>
     </div>
   </div>
-  <%= link_to '編集', edit_profiles_path(current_user) if user_signed_in? && current_user == @profile.user%>
+  <% if user_signed_in? && current_user == @profile.user %>
+  <%= link_to'編集', edit_profiles_path(current_user), class:"hover:underline hover:opacity-70"%>
+  <% end %>
   <div class="money mt-10 text-center">
     <% if @profile.user == current_user%>
     <p><%= "所有ポイント:#{@profile.money}円" %></p>

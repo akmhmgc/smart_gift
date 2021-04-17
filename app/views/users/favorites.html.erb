@@ -1,7 +1,17 @@
-<h1>いいねした商品</h1>
-<div class="container my-12 mx-auto px-4 md:px-12">
-    <div class="flex flex-wrap -mx-1 lg:-mx-4">
-    <%= render partial: "products/product", collection: @products, as: "product"%>
+<main class="max-w-screen-lg mx-auto mt-10 my-12 px-4 md:px-12 relative">
+    <h2 class="text-md font-semibold">いいねした商品</h2>
+    <% if @products.empty? %>
+    <div class="text-center mt-4">
+        <p class="text-lg font-semibold mb-2">お気に入りの商品を見つけてみませんか</p>
+        <p class="mb-6 text-sm">ハートをつけると、このページにあなただけのお気に入り商品が表示されます。</p>
+        <%= link_to "商品一覧ページに移動", products_path ,class:"bg-red-300 hover:bg-red-400 text-white text-sm py-3 px-5 rounded"%>
     </div>
-    <%= paginate @products %>
-</div>
+    <% else %>
+    <div class="flex flex-wrap -mx-1 lg:-mx-4">
+        <%= render partial: "products/product", collection: @products, as: "product"%>
+    </div>
+    <div class="text-center">
+        <%= paginate @products %>
+    </div>
+    <% end %>
+</main>

@@ -6,12 +6,12 @@
 
   <div class="field">
     <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true%>
   </div>
 
   <div class="field">
     <%= f.label :current_password %> <span>現在のパスワード(必須)</span>
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.password_field :current_password%>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -20,12 +20,12 @@
 
   <div class="field">
     <%= f.label :password %> <span>(パスワードを変更しない場合は空白のまま)</span>
-    <%= f.password_field :password, autocomplete: "new-password",placeholder: "6文字以上で入力" %>
+    <%= f.password_field :password,placeholder: "6文字以上で入力" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><span>(パスワードを変更しない場合は空白のまま)</span>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder: "6文字以上で入力" %>
+    <%= f.password_field :password_confirmation,placeholder: "6文字以上で入力" %>
   </div>
 
 

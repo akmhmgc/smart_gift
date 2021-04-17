@@ -61,21 +61,25 @@
             </div>
             <%= link_to "全ての商品を見る", @product.store, class:"text-blue-400 hover:text-blue-300 hover:underline text-sm"%>
         </article>
-        <section id="reviews" class="pt-6 mb-10">
+        <section class="pt-6 mb-10">
             <h2 class="py-2 font-semibold">カスタマーレビュー</h2>
-            <% if @reviews.empty? %>
-            <p class="text-center">レビューはまだ投稿されていません</p>
-            <% else %>
-            <%= render @reviews %>
-            <div class="text-center">
-                <%= paginate @reviews%>
+            <div id="reviews">
+                <% if @reviews.empty? %>
+                <p class="text-center">レビューはまだ投稿されていません</p>
+                <% else %>
+                <%= render @reviews %>
+                <div class="text-center">
+                    <%= paginate @reviews%>
+                </div>
+                <% end %>
             </div>
-            <% end %>
         </section>
         <% if @review %>
         <section class="form py-4 w-full max-w-sm mx-auto">
             <h2 class="title mb-2">レビュー投稿</h2>
-            <%= render 'shared/error_messages' , resource: @review %>
+            <div id="errors">
+                <%= render 'shared/error_messages' , resource: @review %>
+            </div>
             <%= render 'shared/review_form' %>
         </section>
         <% else %>

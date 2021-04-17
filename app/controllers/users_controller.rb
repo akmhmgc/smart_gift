@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    @products = User.find(params[:id]).products.page(params[:page]).with_attached_image.includes(:store)
+    product_ids = Like.where(user_id: params[:id]).select(:product_id)
+    @products = Product.where(id: product_ids).includes(:store, image_attachment: :blob).page(params[:page])
   end
 end
