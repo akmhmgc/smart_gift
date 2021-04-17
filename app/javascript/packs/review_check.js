@@ -8,11 +8,11 @@ var review_check = function () {
     if (0 < title_content.length && title_content.length <= 30 && 0 < body_content.length && body_content.length <= 140) {
         btn.disabled = false;
         btn.classList.add('bg-red-300','hover:bg-red-400');
-        btn.classList.remove('bg-gray-300');
+        btn.classList.remove('bg-gray-300','cursor-not-allowed');
     } else {
         btn.disabled = true;
-        btn.classList.remove('bg-red-300','hover:bg-red-400');
-        btn.classList.add('bg-gray-300');
+        btn.classList.remove('bg-red-300','hover:bg-red-400','cursor-pointer');
+        btn.classList.add('bg-gray-300','cursor-not-allowed');
     }
 };
 
