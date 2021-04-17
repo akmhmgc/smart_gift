@@ -13,6 +13,7 @@ class ReviewsController < ApplicationController
       redirect_to @product
     else
       @reviews = @product.reviews.includes(user: { profile: { image_attachment: :blob } }).page(params[:page]).per(5)
+      @other_products = Product.includes(:store, image_attachment: :blob).where("store_id = ? and NOT(id= ?)", @product.store.id, @product.id).limit(5)
       flash.now[:alert] = 'レビューの投稿に失敗しました。詳細はタイトル入力欄上のエラーメッセージをご確認ください。'
       render 'products/show'
     end

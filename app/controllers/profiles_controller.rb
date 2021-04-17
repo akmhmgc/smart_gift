@@ -1,9 +1,12 @@
 class ProfilesController < ApplicationController
-  before_action :profile_setup, only: %i[show edit update add_money]
+  before_action :profile_setup, only: %i[edit update add_money]
   before_action :authenticate_user!, only: %i[edit update add_money]
   before_action :correct_user, only: %i[edit update]
 
-  def show; end
+  def show
+    @profile = Profile.find_by(user_id: params[:id])
+    @reviews = Review.includes(:user, :product).where(user_id: params[:id]).page(params[:page]).per(5)
+  end
 
   # ログインしているユーザーが編集対象のユーザーかどうか
   def edit; end

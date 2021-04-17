@@ -1,4 +1,4 @@
-<div class="mx-auto w-72">
+<div class="max-w-md w-5/6 mx-auto px-4 relative">
   <div class="flex items-stretch mx-auto">
     <div>
       <%= image_tag(@profile.image.variant(resize_to_fill: [112, 112]), class: "my-0 mx-auto rounded-full") if @profile.image.attached?%>
@@ -14,4 +14,41 @@
     <%= button_to '10000円チャージする', {controller: 'profiles', action: 'add_money'}, {method: :get ,class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded"}%>
     <% end %>
   </div>
+  <section id="reviews" class="pt-6 mb-10">
+    <h2 class="py-2 font-semibold">過去に投稿したレビュー</h2>
+    <% if @reviews.empty? %>
+    <p class="text-center">レビューはまだ投稿されていません</p>
+    <% else %>
+    <% @reviews.each do |review| %>
+    <div class="text-left mb-5 text-sm p-4 border">
+      <div class="Stars" style="--rating: <%= review.stars %>;"
+        aria-label="Rating of this product is <%= review.stars %> out of 5."><span
+          class="font-semibold"><%= review.title %></span></div>
+      <div>
+        <p class="text-gray-500"><%= review.created_at.strftime("%Y年%m月%d日にレビュー済み") %></p>
+        <p><%= review.body %></p>
+      </div>
+      <%= link_to review.product, class:"hover:opacity-70 inline-block border p-2 w-full" do %>
+      <div class="flex flex-row">
+        <%= image_tag(review.product.image.variant(resize_to_fill: [100, 100]))%>
+        <div>
+          <p><%=review.product.name %></p>
+          <div class="Stars" style="--rating: <%= review.product.stars_average %>;"
+            aria-label="Rating of this product is <%= review.product.stars_average %> out of 5."></div>
+          <span><%= "(#{review.product.reviews_count})" %></span>
+        </div>
+      </div>
+      <% end %>
+      <% if current_user == review.user %>
+      <%= link_to "編集", edit_review_path(review), class:"hover:text-gray-500 hover:underline" %>
+      <%= link_to "削除", review, method: :delete,
+                                       data: { confirm: "レビューを削除しますか？" } , class:"hover:text-gray-500 hover:underline" %>
+      <% end %>
+    </div>
+    <% end %>
+    <div class="text-center">
+      <%= paginate @reviews%>
+    </div>
+    <% end %>
+  </section>
 </div>
