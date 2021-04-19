@@ -53,6 +53,17 @@ class User < ApplicationRecord
     end
   end
 
+  # カート内側アイテムを購入する
+  def buy
+    cart_items = cart.order_items
+    order_total = cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    profile.decrement(:money, order_total)
+    ActiveRecord::Base.transaction do
+      profile.save!
+      cart.update!(recieved: true)
+    end
+  end
+
   # private
 
   # def profile_setup

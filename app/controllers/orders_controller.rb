@@ -27,18 +27,15 @@ class OrdersController < ApplicationController
   end
 
   def payment
-    cart_items = current_cart.order_items
-    order_total = cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
-    current_profile = current_user.profile
-    current_profile.decrement(:money, order_total)
-    if current_profile.save
-      current_cart.update(recieved: true)
-      flash[:notice] = 'ギフトカードの購入が完了しました'
-      redirect_to giftcard_path(current_cart)
-    else
-      flash[:alert] = 'ご利用可能な金額を越えています。商品数を減らすまたはプロフィール画面よりチャージしてください。'
+    # 商品が存在しない場合の処理が書いていない
+    begin
+      current_user.buy
+    rescue StandardError
+      flash[:alert] = 'ご利用可能な金額を越えています。商品数を減らすかプロフィール画面よりチャージしてください。'
       redirect_to giftcard_preview_path
     end
+    flash[:notice] = 'ギフトカードの購入が完了しました'
+    redirect_to giftcard_path(current_user.cart)
   end
 
   def create
