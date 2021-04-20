@@ -54,7 +54,7 @@ class User < ApplicationRecord
   end
 
   # カート内側アイテムを購入する
-  def buy
+  def payment
     cart_items = cart.order_items
     order_total = cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
     profile.decrement(:money, order_total)

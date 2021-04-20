@@ -2,8 +2,8 @@
     <div class="form">
         <h2 class="title">ギフト内容</h2>
         <%= render 'shared/error_messages' , resource: current_cart%>
-        <%= render partial: "orders/order_item", collection: current_cart.order_items, as: "cart_item"%>
-        <p id="sum"></p>
+        <%= render partial: "orders/order_item", collection: current_cart.order_items.includes(product: { image_attachment: :blob }), as: "cart_item"%>
+        <p id="sum"><%= "#{@total}円" %></p>
         <p>利用可能金額：<%= "#{current_user.profile.money}円" %></p>
     </div>
 

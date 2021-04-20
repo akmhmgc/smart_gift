@@ -8,7 +8,9 @@ class OrdersController < ApplicationController
 
   def giftcard_preview; end
 
-  def giftcard_edit; end
+  def giftcard_edit
+    @total = current_cart.order_items.inject(0) { |sum, item| sum + item.sum_of_price }
+  end
 
   def giftcard_receive
     @giftcard = Order.find_by!(public_uid: params[:id])
@@ -29,7 +31,7 @@ class OrdersController < ApplicationController
   def payment
     # 商品が存在しない場合の処理が書いていない
     begin
-      current_user.buy
+      current_user.payment
     rescue StandardError
       flash[:alert] = 'ご利用可能な金額を越えています。商品数を減らすかプロフィール画面よりチャージしてください。'
       redirect_to giftcard_preview_path
@@ -69,11 +71,14 @@ class OrdersController < ApplicationController
   # アイテムの更新
   def update_item
     if @cart_item.update(quantity: params[:quantity].to_i)
-      flash[:notice] = 'カート内のギフトが更新されました'
+      respond_to do |format|
+        format.html { redirect_to giftcard_edit_path, notice: 'カート内のギフトが更新されました' }
+        format.js { flash.now[:notice] = 'カート内のギフトが更新されました' }
+      end
     else
       flash[:alert] = 'カート内のギフトの更新に失敗しました'
+      redirect_to giftcard_edit_path
     end
-    redirect_to giftcard_edit_path
   end
 
   # アイテムの削除

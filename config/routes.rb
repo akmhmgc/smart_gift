@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home'
+  get "home_2" => 'static_pages#home_2'
 
   resources :stores, only: [:show]
 
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
   get 'payment' => 'orders#payment'
   post '/update_item' => 'orders#update_item'
   delete '/delete_item' => 'orders#delete_item'
+
 
   namespace :mypage do
     get 'order_histories' => 'orders#orders_index'

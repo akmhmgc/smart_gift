@@ -1,0 +1,15 @@
+<%# 更新ボタンの非表示 %>
+document.querySelector("#update_order_<%=@cart_item.id%>").style.display = "none";
+
+var items = document.querySelectorAll(".item_quantity");
+  var sum = 0;
+  items.forEach((item) => {
+    price = item.querySelector("#price").value;
+    quantity = item.querySelector("#quantity").value;
+    sum += price * quantity;
+    });
+document.querySelector("#sum").textContent = `${sum}円`;
+
+<%# flash messageの表示 %>
+document.querySelector("#flash").innerHTML =
+"<%= escape_javascript(render partial: 'shared/flash' )%>";
