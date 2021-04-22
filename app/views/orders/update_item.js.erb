@@ -13,3 +13,10 @@ document.querySelector("#sum").textContent = `${sum}円`;
 <%# flash messageの表示 %>
 document.querySelector("#flash").innerHTML =
 "<%= escape_javascript(render partial: 'shared/flash' )%>";
+
+var sum_alert = document.querySelector("#sum_alert");
+if(<%= current_user.profile.money%> -sum < 0){
+  sum_alert.innerHTML = "利用可能金額を超えています。プロフィール画面よりチャージしてください。";
+}else{
+  sum_alert.innerHTML = "";
+};

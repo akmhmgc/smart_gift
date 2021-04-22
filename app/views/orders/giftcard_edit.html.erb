@@ -7,6 +7,7 @@
         </div>
         <p><span class="text-lg">合計 </span><span id="sum" , class="text-lg font-semibold"><%= "#{@total}円" %></span></p>
         <p>利用可能金額：<%= "#{current_user.profile.money}円" %></p>
+        <p class="text-xs text-red-500" , id="sum_alert"></p>
     </div>
 
     <div class="mt-8 md:border md:p-4">
@@ -24,7 +25,11 @@
     </div>
     <%= render 'shared/error_messages' , resource: current_cart%>
     <div class="text-center">
+        <% if current_cart.valid? %>
+        <%= f.submit "ギフトカードの作成",class:"mt-4 bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded cursor-not-allowed",id:"giftcard_post"%>
+        <% else %>
         <%= f.submit "ギフトカードの作成",class:"mt-4 bg-gray-300 text-white text-sm font-bold py-2 px-4 rounded cursor-not-allowed",disabled:true,id:"giftcard_post"%>
+        <% end %>
     </div>
     <% end %>
 </main>
