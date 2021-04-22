@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   def giftcard_preview; end
 
   def giftcard_edit
-    @total = current_cart.order_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    @total = current_cart.order_items.sum("order_items.price*quantity")
   end
 
   def giftcard_receive
