@@ -1,18 +1,18 @@
-<main class="max-w-screen-lg w-5/6 mx-auto px-4 md:px-12 relative" id="container">
-    <div class="form">
-        <h2 class="title">ギフト内容</h2>
+<main class="max-w-screen-lg mx-auto relative px-4" id="container">
+    <div>
+        <h2 class="text-lg font-semibold text-center">ギフト内容</h2>
         <%= render 'shared/error_messages' , resource: current_cart%>
         <%= render partial: "orders/order_item", collection: current_cart.order_items.includes(product: { image_attachment: :blob }), as: "cart_item"%>
-        <p id="sum"><%= "#{@total}円" %></p>
+        <p><span class="text-lg">合計 </span><span id="sum", class="text-lg font-semibold"><%= "#{@total}円" %></span></p>
         <p>利用可能金額：<%= "#{current_user.profile.money}円" %></p>
     </div>
 
-    <div class="form">
-        <h2 class="title">メッセージ</h2>
+    <div>
+        <h2 class="text-lg font-semibold text-center">メッセージ</h2>
         <%= form_with(url: order_url, method: :post,local: true) do |f| %>
-        <div class="field">
-            <%= f.label :"メッセージ"%>
-            <%= f.text_area :message, value:  current_cart.message%>
+        <div class="mb-4">
+            <%= f.label :"メッセージ", class:"block text-sm font-bold mb-1"%>
+            <%= f.text_area :message, value:  current_cart.message, class:"border rounded w-full px-3 h-16"%>
         </div>
 
         <div class="field">
