@@ -1,6 +1,6 @@
 <main class="max-w-screen-md mx-auto relative px-4" id="container">
     <div class="md:border md:p-4">
-        <h2 class="text-lg font-semibold text-center">ギフト内容</h2>
+        <h2 class="text-lg font-semibold text-center">①ギフトを選ぶ</h2>
         <p class="text-right px-4 text-sm">価格</p>
         <div class="border-t">
             <%= render partial: "orders/order_item", collection: current_cart.order_items.includes(product: { image_attachment: :blob }), as: "cart_item"%>
@@ -10,23 +10,24 @@
     </div>
 
     <div class="mt-8 md:border md:p-4">
-        <h2 class="text-lg font-semibold text-center">メッセージ</h2>
+        <h2 class="text-lg font-semibold text-center">②メッセージを書く</h2>
         <%= form_with(url: order_url, method: :post,local: true) do |f| %>
         <div class="mb-4 max-w-md mx-auto">
             <%= f.label :"メッセージ", class:"block text-sm font-bold mb-1"%>
-            <%= f.text_area :message, value:  current_cart.message, class:"border rounded w-full px-3 h-16"%>
+            <%= f.text_area :message, value:  current_cart.message, class:"border rounded w-full px-3 h-16",id:"message_box"%>
         </div>
 
         <div class="mb-4 max-w-md mx-auto">
             <%= f.label :"送り主の名前（ニックネーム）"%>
-            <%= f.text_field :sender_name, value: current_cart.sender_name, class:"border rounded w-full px-3" %>
+            <%= f.text_field :sender_name, value: current_cart.sender_name, class:"border rounded w-full px-3",id:"sender_name"%>
         </div>
     </div>
     <%= render 'shared/error_messages' , resource: current_cart%>
-    <div class="actions">
-        <%= f.submit "ギフトカードの作成",class:"mt-4"%>
+    <div class="text-center">
+        <%= f.submit "ギフトカードの作成",class:"mt-4 bg-gray-300 text-white text-sm font-bold py-2 px-4 rounded cursor-not-allowed",disabled:true,id:"giftcard_post"%>
     </div>
     <% end %>
 </main>
 
 <%= javascript_pack_tag 'orders/calc_orders' %>
+<%= javascript_pack_tag 'orders/giftcard_check' %>
