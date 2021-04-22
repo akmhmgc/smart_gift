@@ -1,27 +1,30 @@
-<main class="max-w-screen-lg mx-auto relative px-4" id="container">
-    <div>
+<main class="max-w-screen-md mx-auto relative px-4" id="container">
+    <div class="md:border md:p-4">
         <h2 class="text-lg font-semibold text-center">ギフト内容</h2>
-        <%= render 'shared/error_messages' , resource: current_cart%>
-        <%= render partial: "orders/order_item", collection: current_cart.order_items.includes(product: { image_attachment: :blob }), as: "cart_item"%>
-        <p><span class="text-lg">合計 </span><span id="sum", class="text-lg font-semibold"><%= "#{@total}円" %></span></p>
+        <p class="text-right px-4 text-sm">価格</p>
+        <div class="border-t">
+            <%= render partial: "orders/order_item", collection: current_cart.order_items.includes(product: { image_attachment: :blob }), as: "cart_item"%>
+        </div>
+        <p><span class="text-lg">合計 </span><span id="sum" , class="text-lg font-semibold"><%= "#{@total}円" %></span></p>
         <p>利用可能金額：<%= "#{current_user.profile.money}円" %></p>
     </div>
 
-    <div>
+    <div class="mt-8 md:border md:p-4">
         <h2 class="text-lg font-semibold text-center">メッセージ</h2>
         <%= form_with(url: order_url, method: :post,local: true) do |f| %>
-        <div class="mb-4">
+        <div class="mb-4 max-w-md mx-auto">
             <%= f.label :"メッセージ", class:"block text-sm font-bold mb-1"%>
             <%= f.text_area :message, value:  current_cart.message, class:"border rounded w-full px-3 h-16"%>
         </div>
 
-        <div class="field">
+        <div class="mb-4 max-w-md mx-auto">
             <%= f.label :"送り主の名前（ニックネーム）"%>
-            <%= f.text_field :sender_name, value: current_cart.sender_name %>
+            <%= f.text_field :sender_name, value: current_cart.sender_name, class:"border rounded w-full px-3" %>
         </div>
     </div>
+    <%= render 'shared/error_messages' , resource: current_cart%>
     <div class="actions">
-        <%= f.submit "ギフトカードの作成"%>
+        <%= f.submit "ギフトカードの作成",class:"mt-4"%>
     </div>
     <% end %>
 </main>
