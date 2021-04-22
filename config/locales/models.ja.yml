@@ -16,5 +16,11 @@ ja:
       review:
         title: タイトル
         body: レビュー本文
+      order:
+        order_items: ギフトカード内アイテム
+        sender_name: 送り主の名前（ニックネーム)
+        message: メッセージ
+
     models:
       review: レビュー
+      order: ギフトカード
