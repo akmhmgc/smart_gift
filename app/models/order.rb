@@ -12,4 +12,13 @@ class Order < ApplicationRecord
   validates :order_items, length: { minimum: 1, message: 'を1つ以上選択してください'  }, on: :update
   validates :sender_name, presence: true, length: { maximum: 20 }, on: :update
   validates :message, presence: true, length: { maximum: 300 }, on: :update
+  validate :total_cannnot_over_users_money, on: :update
+
+  def total_price
+    order_items.sum("order_items.price*quantity")
+  end
+
+  def total_cannnot_over_users_money
+    errors.add(:order_items, "ギフト合計が利用可能金額を超えています。プロフィール画面よりチャージしてください。") if total_price > user.profile.money
+  end
 end

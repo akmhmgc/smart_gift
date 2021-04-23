@@ -8,9 +8,7 @@ class OrdersController < ApplicationController
 
   def giftcard_preview; end
 
-  def giftcard_edit
-    @total = current_cart.order_items.sum("order_items.price*quantity")
-  end
+  def giftcard_edit; end
 
   def giftcard_receive
     @giftcard = Order.find_by!(public_uid: params[:id])
@@ -29,15 +27,12 @@ class OrdersController < ApplicationController
   end
 
   def payment
-    # 商品が存在しない場合の処理が書いていない
-    begin
-      current_user.payment
-    rescue StandardError
-      flash[:alert] = 'ご利用可能な金額を越えています。商品数を減らすかプロフィール画面よりチャージしてください。'
-      redirect_to giftcard_preview_path
-    end
+    current_user.payment
     flash[:notice] = 'ギフトカードの購入が完了しました'
     redirect_to giftcard_path(current_user.cart)
+  rescue StandardError
+    flash[:alert] = 'ご利用可能な金額を越えています。商品数を減らすかプロフィール画面よりチャージしてください。'
+    redirect_to giftcard_preview_path
   end
 
   def create
