@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home'
+  get 'home_2', to: 'static_pages#home_2'
 
   resources :stores, only: [:show]
 

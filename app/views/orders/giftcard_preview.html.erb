@@ -1,9 +1,27 @@
-<h2>プレビュー</h2>
-<%= current_cart.message %>
-<%= current_cart.sender_name %>
-<% current_cart.order_items.each do |item| %>
-<%= item.product.name %>
-<%= item.price %>
-<%= item.quantity %>
-<% end %>
-<%= button_to '決済する', {controller: 'orders', action: 'payment'}, {method: :get }%>
+<main class="max-w-md mx-auto relative px-4" id="container">
+    <h2 class="text-md font-semibold text-center p-4">プレビュー</h2>
+    <div class="border p-8">
+        <div class="message mb-6">
+            <p><span class="text-sm font-semibold"><%= current_cart.sender_name %></span><span
+                    class="text-xs">さんからのメッセージ</span></p>
+            <p class="text-sm p-4 bg-gray-100 mt-2 rounded"><%= current_cart.message %></p>
+        </div>
+        <h2 class="font-semibold p-4">ギフトが届いています</h2>
+        <% current_cart.order_items.preload(product: [{ image_attachment: :blob }, :store]).each do |item| %>
+        <div class="flex items-center mb-2 border rounded overflow-hidden">
+            <div class="img mr-6">
+                <%= image_tag(item.product.image.variant(resize_to_fill: [100, 100]), class: "") %>
+            </div>
+            <div class="content">
+                <p class="text-md font-bold"><%= item.product.name %></p>
+                <p class="text-xs"><%= item.product.store.storename %></p>
+                <p><%= item.quantity %>個</p>
+            </div>
+        </div>
+        <% end %>
+    </div>
+
+    <div class="text-center mt-6">
+        <%= button_to '決済する', {controller: 'orders', action: 'payment'}, {method: :get ,class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded"}%>
+    </div>
+</main>
