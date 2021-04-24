@@ -55,9 +55,7 @@ class User < ApplicationRecord
 
   # カート内側アイテムを購入する
   def payment
-    cart_items = cart.order_items
-    order_total = cart_items.order_items.sum("order_items.price*quantity")
-    profile.decrement(:money, order_total)
+    profile.decrement(:money, cart.total_price)
     ActiveRecord::Base.transaction do
       profile.save!
       cart.update!(recieved: true)
