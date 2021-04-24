@@ -20,3 +20,7 @@ if(<%= current_user.profile.money%> -sum < 0){
 }else{
   sum_alert.innerHTML = "";
 };
+
+
+<%# エラーメッセージを空にする%>
+document.querySelector("#error_messages").innerHTML = "";

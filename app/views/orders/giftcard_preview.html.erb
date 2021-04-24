@@ -22,6 +22,7 @@
     </div>
 
     <div class="text-center mt-6">
-        <%= button_to '決済する', {controller: 'orders', action: 'payment'}, {method: :get ,class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded"}%>
+        <%= button_to '決済する', {controller: 'orders', action: 'payment'}, {method: :get ,class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded inline-block"}%>
+        <%= link_to "ギフト作成に戻る", :back ,class:"text-sm py-2 px-4 hover:underline inline-block pt-4",data: {turbolinks: false }%>
     </div>
 </main>

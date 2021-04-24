@@ -16,8 +16,7 @@ var review_check = function () {
     }
 };
 
-// カートにアイテムが存在して所持金より合計が少ない
-if (document.querySelector(".order_item") != null) {
-    message.addEventListener('input', review_check);
-    sender_name.addEventListener('input', review_check);
-};
+review_check();
+
+message.addEventListener('input', review_check);
+sender_name.addEventListener('input', review_check);
