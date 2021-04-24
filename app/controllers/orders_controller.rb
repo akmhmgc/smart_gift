@@ -31,12 +31,13 @@ class OrdersController < ApplicationController
     flash[:notice] = 'ギフトカードの購入が完了しました'
     redirect_to giftcard_path(current_user.cart)
   rescue StandardError
-    flash[:alert] = 'ご利用可能な金額を越えています。商品数を減らすかプロフィール画面よりチャージしてください。'
+    flash[:alert] = '購入時にエラーが発生しました。'
     redirect_to giftcard_preview_path
   end
 
   def create
-    if current_cart.update(message: params[:message], sender_name: params[:sender_name])
+    cart_params = params.permit(:message, :sender_name)
+    if current_cart.update(cart_params)
       flash[:notice] = 'ギフトカードが完成しました。'
       redirect_to giftcard_preview_path
     else
