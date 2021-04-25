@@ -56,7 +56,8 @@ class User < ApplicationRecord
   # カート内側アイテムを購入する
   def pay
     ActiveRecord::Base.transaction do
-      cart.update!(recieved: true)
+      cart.attributes = { recieved: true }
+      cart.save!(context: :cart_check)
       profile.decrement(:money, cart.total_price)
       profile.save!
     end

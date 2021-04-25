@@ -12,18 +12,15 @@ class OrdersController < ApplicationController
   def giftcard_edit; end
 
   def giftcard_receive
-    @giftcard = Order.find_by!(public_uid: params[:id])
-
-    if @giftcard.recipient_id.nil?
-      # 注文完了時間を更新しない
-      @giftcard.recipient_id = current_user.id
-      @giftcard.record_timestamps = false
-      @giftcard.save
+    giftcard = Order.find_by!(public_uid: params[:id])
+    if giftcard.recipient_id.nil?
+      giftcard.recipient_id = current_user.id
+      giftcard.save!(touch: false)
       flash[:notice] = 'ギフトの受け取りに成功しました'
       redirect_to mypage_gifts_path
     else
       flash[:alert] = '既にギフトは受け取られています'
-      redirect_to root_path
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -38,7 +35,8 @@ class OrdersController < ApplicationController
 
   def create
     cart_params = params.permit(:message, :sender_name)
-    if current_cart.update(cart_params)
+    current_cart.attributes = cart_params 
+    if current_cart.save(context: :cart_check)
       flash[:notice] = 'ギフトカードが完成しました。'
       redirect_to giftcard_preview_path
     else

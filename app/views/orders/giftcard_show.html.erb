@@ -21,5 +21,8 @@
     </div>
     <div class="text-center pt-5">
         <%= button_to '受け取る', {controller: 'orders', action: 'giftcard_receive'}, {method: :post ,class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded",params: { id: @giftcard.to_param }} %>
+        <input type="button" value="URLをコピーする" id="url_copy" class="bg-blue-300 hover:bg-blue-400 text-white text-sm font-bold py-2 px-4 rounded mt-4">
     </div>
 </main>
+
+<%= javascript_pack_tag 'orders/copy_gift_url' %>
