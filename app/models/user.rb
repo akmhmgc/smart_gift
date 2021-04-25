@@ -54,11 +54,11 @@ class User < ApplicationRecord
   end
 
   # カート内側アイテムを購入する
-  def payment
-    profile.decrement(:money, cart.total_price)
+  def pay
     ActiveRecord::Base.transaction do
-      profile.save!
       cart.update!(recieved: true)
+      profile.decrement(:money, cart.total_price)
+      profile.save!
     end
   end
 

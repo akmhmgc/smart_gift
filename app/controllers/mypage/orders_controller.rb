@@ -6,7 +6,7 @@ class  Mypage::OrdersController < ApplicationController
   end
 
   def orders_index
-    @orders = current_user.orders.includes([:order_items])
+    @orders = current_user.orders.preload(order_items: { product: { image_attachment: :blob } }).page(params[:page]).per(5)
   end
 
   def gifts_index

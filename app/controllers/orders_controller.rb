@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
   end
 
   def payment
-    current_user.payment
+    current_user.pay
     flash[:notice] = 'ギフトカードの購入が完了しました'
     redirect_to giftcard_path(current_user.cart)
   rescue StandardError
