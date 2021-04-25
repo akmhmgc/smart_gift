@@ -13,7 +13,7 @@ class  Mypage::OrdersController < ApplicationController
     @gifts = Order.where(recipient_id: current_user.id, recieved: true).includes([:order_items])
   end
 
-  def gifts_show
+  def gifts_showre
     @gift = Order.find_by!(recipient_id: current_user.id, id: params[:id], recieved: true)
   end
 end

@@ -3,7 +3,8 @@ class OrdersController < ApplicationController
   before_action :setup_cart_item!, only: %i[add_item update_item delete_item]
 
   def giftcard_show
-    @giftcard = Order.find_by!(public_uid: params[:id])
+    # 購入済みのギフトカードを表示する
+    @giftcard = Order.where(recieved: true).find_by!(public_uid: params[:id])
   end
 
   def giftcard_preview; end
