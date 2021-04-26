@@ -1,7 +1,43 @@
-<h2>受け取ったギフトカード</h2>
-<% @gifts.each do |gift| %>
-<li class="list-none">
-    <%= render partial: "orders/recieved_order_item", collection:gift.order_items, as: "order_item"%>
-    <%= link_to " ギフト詳細" , mypage_gift_path(gift.id) %>
-</li>
-<% end %>
+<main class="max-w-screen-md mx-auto relative px-4" id="container">
+    <div class="md:p-4">
+        <h2 class="text-lg font-semibold text-center py-4">受け取ったギフトカード</h2>
+        <% @gifts.each do |gift| %>
+        <div class="each_order border rounded mb-4">
+            <div class="order_info">
+                <div class="total bg-gray-100 flex justify-between items-center p-5">
+                    <div class="flex">
+                        <div>
+                            <p class="text-xs">受け取り日</p>
+                            <p><%= gift.received_at.strftime("%Y年%m月%d日") %></p>
+                        </div>
+                    </div>
+                    <div class="ml-6">
+                        <%= link_to "ギフトカードを使用する（機能作成中）", "#" ,class:"text-xs text-blue-400 hover:text-blue-300 hover:underline"%>
+                    </div>
+                </div>
+            </div>
+            <div class="items p-4">
+                <% gift.order_items.each do |gift_item| %>
+                <div class="my-2 pb-2 gift_item">
+                    <%= link_to gift_item.product , class:"hover:opacity-70 block" do%>
+                    <div class="flex w-full justify-between">
+                        <div class="img px-4">
+                            <%= image_tag(gift_item.product.image.variant(resize_to_fill: [100, 100])) %>
+                        </div>
+                        <div class="content px-4">
+                            <p><%= gift_item.product.name %></p>
+                        </div>
+                        <div class="content px-4">
+                            <p><%= gift_item.quantity %>個</p>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+        <% end %>
+        <div class="text-center">
+            <%= paginate @gifts%>
+        </div>
+</main>

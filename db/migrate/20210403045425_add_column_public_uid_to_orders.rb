@@ -5,7 +5,7 @@ class AddColumnPublicUidToOrders < ActiveRecord::Migration[6.0]
       t.index :public_uid, unique: true
       t.integer :recipient_id
       t.index :recipient_id
-      t.index [:recipient_id, :recieved]
+      t.index [:recipient_id, :received]
     end
   end
 end

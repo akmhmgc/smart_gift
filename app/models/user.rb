@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_one :profile, dependent: :destroy
 
-  has_one :cart,  -> { where recieved: false }, class_name: 'Order', inverse_of: :user
-  has_many :orders,  -> { where recieved: true }, class_name: 'Order', inverse_of: :user
+  has_one :cart,  -> { where received: false }, class_name: 'Order', inverse_of: :user
+  has_many :orders,  -> { where received: true }, class_name: 'Order', inverse_of: :user
 
   validates :username, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: true }
 
@@ -56,11 +56,18 @@ class User < ApplicationRecord
   # カート内側アイテムを購入する
   def pay
     ActiveRecord::Base.transaction do
-      cart.attributes = { recieved: true }
+      cart.attributes = { received: true }
       cart.save!(context: :cart_check)
       profile.decrement(:money, cart.total_price)
       profile.save!
     end
+  end
+
+  def receive_giftcard?(giftcard)
+    return false unless giftcard.recipient_id.nil?
+
+    giftcard.attributes = { recipient_id: id, received_at: Time.zone.now }
+    giftcard.save!(touch: false)
   end
 
   # private

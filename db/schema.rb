@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_063529) do
+ActiveRecord::Schema.define(version: 2021_04_26_043457) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -81,13 +81,14 @@ ActiveRecord::Schema.define(version: 2021_04_13_063529) do
     t.bigint "user_id", null: false
     t.string "sender_name"
     t.text "message"
-    t.boolean "recieved", default: false, null: false
+    t.boolean "received", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "public_uid"
     t.integer "recipient_id"
+    t.datetime "received_at"
     t.index ["public_uid"], name: "index_orders_on_public_uid", unique: true
-    t.index ["recipient_id", "recieved"], name: "index_orders_on_recipient_id_and_recieved"
+    t.index ["recipient_id", "received"], name: "index_orders_on_recipient_id_and_received"
     t.index ["recipient_id"], name: "index_orders_on_recipient_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

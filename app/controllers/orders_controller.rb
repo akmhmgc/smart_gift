@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def giftcard_show
     # 購入済みのギフトカードを表示する
-    @giftcard = Order.where(recieved: true).find_by!(public_uid: params[:id])
+    @giftcard = Order.where(received: true).find_by!(public_uid: params[:id])
   end
 
   def giftcard_preview; end
@@ -13,9 +13,7 @@ class OrdersController < ApplicationController
 
   def giftcard_receive
     giftcard = Order.find_by!(public_uid: params[:id])
-    if giftcard.recipient_id.nil?
-      giftcard.recipient_id = current_user.id
-      giftcard.save!(touch: false)
+    if current_user.receive_giftcard?(giftcard)
       flash[:notice] = 'ギフトの受け取りに成功しました'
       redirect_to mypage_gifts_path
     else
@@ -35,7 +33,7 @@ class OrdersController < ApplicationController
 
   def create
     cart_params = params.permit(:message, :sender_name)
-    current_cart.attributes = cart_params 
+    current_cart.attributes = cart_params
     if current_cart.save(context: :cart_check)
       flash[:notice] = 'ギフトカードが完成しました。'
       redirect_to giftcard_preview_path
@@ -47,7 +45,6 @@ class OrdersController < ApplicationController
 
   # アイテムの追加
   def add_item
-    # カートに入れた時点での値段を記録する
     unless @cart_item
       price = Product.find_by(id: params[:product_id]).price
       @cart_item = current_cart.order_items.build(product_id: params[:product_id], price: price)

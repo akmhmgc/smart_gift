@@ -1,9 +1,16 @@
 const copyBtn = document.querySelector("#url_copy");
+var url = location.href;
 
-function copyUrl() {
-  var url = location.href;
-  navigator.clipboard.writeText(url);
-  alert("urlがコピーされました");
-}
 
-copyBtn.addEventListener('click', copyUrl);
+const clipbordCopy = () =>{
+  if( !navigator.clipboard ) {
+      alert("クリップボードにコピーできませんでした");return false;
+  }
+  navigator.clipboard.writeText(url).then(
+      ()=>alert("クリップボードにコピーしました"),
+      ()=>alert("クリップボードにコピーできませんでした")
+  );
+  return true;
+};
+
+copyBtn.addEventListener('click', clipbordCopy);

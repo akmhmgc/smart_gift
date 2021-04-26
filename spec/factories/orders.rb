@@ -3,6 +3,6 @@ FactoryBot.define do
     association :user
     sender_name { 'test_taro' }
     message { 'hello world' }
-    recieved { false }
+    received { false }
   end
 end
