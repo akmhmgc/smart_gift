@@ -3,9 +3,9 @@
         <nav class="sidebar">
             <div class="inner">
                 <ul>
-                    <% if store_signed_in? && !user_signed_in?%>
+                    <% if store_signed_in?%>
                     <%= render 'layouts/shared/store_logged_in/sidebar' %>
-                    <% elsif user_signed_in? && !store_signed_in?%>
+                    <% elsif user_signed_in?%>
                     <%= render 'layouts/shared/user_logged_in/sidebar' %>
                     <% else %>
                     <%= render 'layouts/shared/logged_out/sidebar' %>
@@ -18,9 +18,9 @@
     <div class="w-4/5 mx-auto flex items-center justify-between">
         <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),root_path, class: "inline-block"%>
         <ul class="flex text-gray-500">
-            <% if store_signed_in? && !user_signed_in?%>
+            <% if store_signed_in?%>
             <%= render 'layouts/shared/store_logged_in/header_nav' %>
-            <% elsif user_signed_in? && !store_signed_in?%>
+            <% elsif user_signed_in?%>
             <%= render 'layouts/shared/user_logged_in/header_nav' %>
             <% else %>
             <%= render 'layouts/shared/logged_out/header_nav' %>

@@ -1,7 +1,7 @@
 <main class="max-w-screen-lg mx-auto mt-10 my-12 px-4 md:px-12 relative">
     <div class="flex items-stretch mx-auto">
         <div>
-            <%= image_tag(@store.image.variant(resize_to_fill: [112, 112]), class: "my-0 mx-auto rounded-full") if @store.image.attached?%>
+            <%= image_tag(@store.image.variant(resize_to_fill: [112, 112]), class: "my-0 mx-auto rounded-full")%>
         </div>
         <div class="self-center text-left mt-2">
             <span class="font-semibold text-lg"><%= @store.storename%></span>

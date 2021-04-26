@@ -49,6 +49,5 @@ Rails.application.routes.draw do
     get 'order_histories' => 'orders#orders_index'
     get 'order_histories/:id' => 'orders#orders_show' , as: 'order_history'
     get 'gifts' => 'orders#gifts_index'
-    get 'gifts/:id' => 'orders#gifts_show', as: 'gift'
   end
 end

@@ -1,4 +1,4 @@
-<h2>保存されたギフトカード</h2>
+<h2>受け取ったギフトカード</h2>
 <% @gifts.each do |gift| %>
 <li class="list-none">
     <%= render partial: "orders/recieved_order_item", collection:gift.order_items, as: "order_item"%>

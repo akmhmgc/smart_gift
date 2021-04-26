@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find_by(user_id: params[:id])
-    @reviews = Review.eager_load(:user, :product).where(user_id: params[:id]).page(params[:page]).per(5)
+    @reviews = Review.preload([:user], [product: { image_attachment: :blob }]).where(user_id: params[:id]).page(params[:page]).per(5)
   end
 
   # ログインしているユーザーが編集対象のユーザーかどうか
