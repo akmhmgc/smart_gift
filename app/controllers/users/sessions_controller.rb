@@ -27,11 +27,12 @@ class Users::SessionsController < Devise::SessionsController
 
   def new_guest
     user = User.guest
-    # 複数ゲストユーザーがログイン時にプロフィール情報を変更した時の対策は？
     profile = user.profile || user.build_profile
+    # profile情報の初期化
     profile.name = user.username
     profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
     profile.save
+    
     sign_in user
     flash[:notice] = "ゲストユーザーとしてログインしました"
     redirect_to stored_location_for(:user) || root_url
