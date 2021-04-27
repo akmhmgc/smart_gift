@@ -33,7 +33,8 @@ class Users::SessionsController < Devise::SessionsController
     profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
     profile.save
     sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    flash[:notice] = "ゲストユーザーとしてログインしました"
+    redirect_to stored_location_for(:user) || root_url
   end
 
   # protected
