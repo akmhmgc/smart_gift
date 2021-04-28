@@ -1,15 +1,16 @@
+<% price_range_array = [100, 300, 500, 1000, 2000, 3000, 4000, 5000].index_by { |n| "¥#{n}" } %>
 <%= search_form_for q, url: url do |f| %>
 <div class="text-center form">
     <div class="mb-2">
-        <%= f.collection_select(:category_id_or_category_ancestry_eq, @categories, :id, :name, include_blank: '指定なし') %>
+        <%= f.collection_select(:category_id_or_category_ancestry_eq, @categories, :id, :name_for_search, include_blank: '指定なし') %>
         <%= f.search_field :name_or_description_or_store_storename_cont, id: "search", placeholder: '検索ワード',class:"p-1 border w-48"%>
 
     </div>
     <div class="mb-2">
         <%= f.label :price_gteq, "価格" %>
-        <%= f.select :price_gteq, @price_range_low %>
-        <%= f.label :price_lteq, " ~ " %>
-        <%= f.select :price_lteq, @price_range_high, selected:999_999_999%>
+        <%= f.select :price_gteq, { "下限なし": 0 }.merge(price_range_array) %>
+        <%= f.label :price_lteq, " 〜 " %>
+        <%= f.select :price_lteq, price_range_array.merge({ "上限なし": 999_999_999 }), selected:999_999_999%>
     </div>
     <%= f.submit "検索", class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded w-32 mx-auto"%>
 </div>
