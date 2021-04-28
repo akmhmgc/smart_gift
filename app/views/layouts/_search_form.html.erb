@@ -2,7 +2,7 @@
 <div class="text-center form">
     <div class="mb-2">
         <%= f.collection_select(:category_id_or_category_ancestry_eq, @categories, :id, :name, include_blank: '指定なし') %>
-        <%= f.search_field :name_or_store_storename_cont, id: "search", placeholder: '検索ワード',class:"p-1 border w-48"%>
+        <%= f.search_field :name_or_description_or_store_storename_cont, id: "search", placeholder: '検索ワード',class:"p-1 border w-48"%>
 
     </div>
     <div class="mb-2">

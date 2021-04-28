@@ -45,4 +45,16 @@ class Product < ApplicationRecord
     stars_average = reviews.average(:stars) || 0.0
     update(stars_average: stars_average)
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name price created_at category_id description]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[store category likes reviews]
+  end
+
+  def self.ransortable_attributes(_auth_object = nil)
+    %w[price reviews_count stars_average]
+  end
 end
