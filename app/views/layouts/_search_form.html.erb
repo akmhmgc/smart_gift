@@ -9,7 +9,7 @@
         <%= f.label :price_gteq, "価格" %>
         <%= f.select :price_gteq, @price_range_low %>
         <%= f.label :price_lteq, " ~ " %>
-        <%= f.select :price_lteq, @price_range_high%>
+        <%= f.select :price_lteq, @price_range_high, selected:999_999_999%>
     </div>
     <%= f.submit "検索", class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded w-32 mx-auto"%>
 </div>

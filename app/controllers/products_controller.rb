@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+  PRICE_RANGE_ARRAY = [100, 300, 500, 1000, 2000, 3000, 4000, 5000].index_by { |n| "¥#{n}" }
+  PRICE_RANGE_ARRAY.freeze
+
   def index
     @q = Product.with_attached_image.includes(:store).ransack(params[:q])
     @categories = Category.select(:name, :ancestry)
@@ -9,11 +12,8 @@ class ProductsController < ApplicationController
     end
 
     @products = @q.result.page(params[:page])
-
-    # 検索時の値段範囲
-    price_range = [100, 300, 500, 1000, 2000, 3000, 4000, 5000].index_by { |n| "¥#{n}" }
-    @price_range_low = { "下限なし": 0 }.merge(price_range)
-    @price_range_high = price_range.merge({ "上限なし": 999_999_999 })
+    @price_range_low = { "下限なし": 0 }.merge(PRICE_RANGE_ARRAY)
+    @price_range_high = PRICE_RANGE_ARRAY.merge({ "上限なし": 999_999_999 })
   end
 
   def show
