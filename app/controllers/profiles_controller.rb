@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   before_action :correct_user, only: %i[edit update]
 
   def show
-    @profile = Profile.find_by(user_id: params[:id])
+    @profile = Profile.find_by!(user_id: params[:id])
     @reviews = Review.preload([:user], [product: { image_attachment: :blob }]).where(user_id: params[:id]).page(params[:page]).per(5)
   end
 
