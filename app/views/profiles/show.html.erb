@@ -49,7 +49,8 @@
     </div>
     <% end %>
     <div class="text-center">
-      <%= paginate @reviews%>
+        <div class="mb-3"><%= paginate @reviews %></div>
+        <div><%= page_entries_info @reviews%></div>
     </div>
     <% end %>
   </section>

@@ -11,7 +11,8 @@
         <%= render partial: "products/product", collection: @products, as: "product"%>
     </div>
     <div class="text-center">
-        <%= paginate @products %>
+        <div class="mb-3"><%= paginate @products %></div>
+        <div><%= page_entries_info @products%></div>
     </div>
     <% end %>
 </main>

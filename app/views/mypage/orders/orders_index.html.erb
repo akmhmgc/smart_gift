@@ -45,6 +45,7 @@
         </div>
         <% end %>
         <div class="text-center">
-            <%= paginate @orders%>
+            <div class="mb-3"><%= paginate @orders %></div>
+            <div><%= page_entries_info @orders%></div>
         </div>
 </main>

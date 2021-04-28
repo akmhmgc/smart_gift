@@ -5,5 +5,8 @@
 
     <%= render partial: "products/dashboard_product_grid", collection: @products, as: "product"%>
 
-    <%= paginate @products %>
+    <div class="text-center">
+        <div class="mb-3"><%= paginate @products %></div>
+        <div><%= page_entries_info @products%></div>
+    </div>
 </div>
