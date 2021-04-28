@@ -8,12 +8,10 @@ class ProfilesController < ApplicationController
     @reviews = Review.preload([:user], [product: { image_attachment: :blob }]).where(user_id: params[:id]).page(params[:page]).per(5)
   end
 
-  # ログインしているユーザーが編集対象のユーザーかどうか
   def edit; end
 
   def add_money
-    @profile.increment(:money, 10_000)
-    if @profile.save
+    if @profile.add_money(100_000)
       flash[:notice] = '10000円がチャージされました'
     else
       flash[:alert] = 'チャージに失敗しました'

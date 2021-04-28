@@ -8,4 +8,9 @@ class Profile < ApplicationRecord
                                     message: '正しいファイル形式を選択して下さい。' },
                     size: { less_than: 5.megabytes,
                             message: 'ファイルは最大5MBです。' }
+
+  def add_money(money)
+    increment(:money, money)
+    save
+  end
 end
