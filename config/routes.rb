@@ -36,8 +36,18 @@ Rails.application.routes.draw do
   # 店舗用ページ
   namespace :dashboard do
     resources :products
-    resources :orders, only: %i[index show]
+    controller :orders do
+      resources :orders, only: %i[index show]
+      get "report", action: :report
+    end
   end
+
+  # controller :orders do
+  #   scope module: :dashboard do
+  #     get "test", action: :test
+  #   end
+  # end
+  
 
   resource :order, only: %i[create]
   get 'giftcard/edit' => 'orders#giftcard_edit'
@@ -54,4 +64,7 @@ Rails.application.routes.draw do
     get 'order_histories/:id' => 'orders#orders_show' , as: 'order_history'
     get 'gifts' => 'orders#gifts_index'
   end
+
+  # 店舗用root pathの作成
+  get 'dashboard/report', to: 'dashboard/orders#report', as: "store_root"
 end

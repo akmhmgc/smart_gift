@@ -7,4 +7,8 @@ class Dashboard::OrdersController < ApplicationController
 
   def show
   end
+
+  def report
+    
+  end
 end

@@ -15,7 +15,7 @@ class Stores::SessionsController < Devise::SessionsController
     store.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
     sign_in store
     flash[:notice] = "ゲストストアとしてログインしました"
-    redirect_to dashboard_products_path
+    redirect_to store_root_path
   end
 
   # POST /resource/sign_in
@@ -28,11 +28,11 @@ class Stores::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  protected
+  # protected
 
-  def after_sign_in_path_for(_resource)
-    dashboard_products_path
-  end
+  # def after_sign_in_path_for(_resource)
+  #   dashboard_products_path
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

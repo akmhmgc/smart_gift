@@ -50,7 +50,7 @@ class Stores::RegistrationsController < Devise::RegistrationsController
   protected
 
   def ensure_normal_store
-    redirect_to root_path, alert: 'ゲストストアの更新・削除はできません。' if resource.email == 'guest_store@example.com'
+    redirect_to store_root_path, alert: 'ゲストストアの更新・削除はできません。' if resource.email == 'guest_store@example.com'
   end
 
   # If you have extra params to permit, append them to the sanitizer.
