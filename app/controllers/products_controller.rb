@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   def index
     @q = Product.includes([:store], [{ image_attachment: :blob }]).ransack(params[:q])
-    @categories = Category.select(:name, :ancestry)
-    @products = @q.result.page(params[:page])
+    @categories = Category.select(:name, :ancestry, :id)
+    @products = @q.result.page(params[:page]).per(10)
   end
 
   def show

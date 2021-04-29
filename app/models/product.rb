@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   # バリデーション
-  validates :name, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: true, scope: :store }
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: true, scope: :store }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 999_999 }
   validates :image, presence: true, content_type: { in: %w[image/jpeg image/gif image/png],
                                                     message: '有効な形式の画像をアップロードしてください。' },
@@ -47,7 +47,7 @@ class Product < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[name price created_at category_id description]
+    %w[name price created_at category_id description ancestry]
   end
 
   def self.ransackable_associations(_auth_object = nil)
