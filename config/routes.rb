@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations',passwords: 'users/passwords', omniauth_callbacks: "users/omniauth_callbacks" }
-  devise_for :stores, controllers: { sessions: 'stores/sessions', registrations: 'stores/registrations', confirmations: 'stores/confirmations',passwords: 'stores/passwords' }
+  devise_for :users, 
+             controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations', passwords: 'users/passwords', 
+                            omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :stores, 
+             controllers: { sessions: 'stores/sessions', registrations: 'stores/registrations', confirmations: 'stores/confirmations', 
+                            passwords: 'stores/passwords' }
   
   devise_scope :user do
     get 'user/guest_sign_in', to: 'users/sessions#new_guest'
@@ -29,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :likes, only: %i[create destroy]
 
+  # 店舗用ページ
   namespace :dashboard do
     resources :products
     resources :orders, only: %i[index show]
@@ -43,7 +48,6 @@ Rails.application.routes.draw do
   get 'payment' => 'orders#payment'
   post '/update_item' => 'orders#update_item'
   delete '/delete_item' => 'orders#delete_item'
-
 
   namespace :mypage do
     get 'order_histories' => 'orders#orders_index'

@@ -14,7 +14,8 @@ class Stores::SessionsController < Devise::SessionsController
     store = Store.guest
     store.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
     sign_in store
-    redirect_to root_path, notice: 'ゲストストアとしてログインしました。'
+    flash[:notice] = "ゲストストアとしてログインしました"
+    redirect_to dashboard_products_path
   end
 
   # POST /resource/sign_in
@@ -29,7 +30,7 @@ class Stores::SessionsController < Devise::SessionsController
 
   protected
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     dashboard_products_path
   end
 
