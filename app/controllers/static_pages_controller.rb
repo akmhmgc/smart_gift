@@ -4,7 +4,7 @@ class StaticPagesController < ApplicationController
   end
 
   def home_2
-    @store= Store.find(1)
+    @store = Store.find(1)
     @products = @store.products
   end
 end

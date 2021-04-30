@@ -8,7 +8,7 @@
     <div class="Stars" style="--rating: <%= review.stars %>;"
         aria-label="Rating of this product is <%= review.stars %> out of 5."><span class="font-semibold"><%= review.title %></span></div>
     <div>
-        <p class="text-gray-500"><%= review.created_at.strftime("%Y年%m月%d日にレビュー済み") %></p>
+        <p class="text-gray-500"><%= review.updated_at.strftime("%Y年%m月%d日にレビュー済み") %></p>
         <p><%= review.body %></p>
     </div>
     <% if current_user == review.user %>

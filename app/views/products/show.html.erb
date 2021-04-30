@@ -65,6 +65,7 @@
             <h2 class="py-2 font-semibold">カスタマーレビュー</h2>
             <div id="reviews">
                 <div class="text-center">
+                <%= render @reviews %>
                     <div class="mb-3"><%= paginate @reviews %></div>
                     <div><%= page_entries_info @reviews%></div>
                 </div>
@@ -74,7 +75,7 @@
         <section class="form py-4 w-full max-w-sm mx-auto">
             <h2 class="title mb-2">レビュー投稿</h2>
             <div id="errors">
-                <%= render 'shared/error_messages' , resource: @review %>
+                <%= render 'shared/error_messages' , review: @review %>
             </div>
             <%= render 'shared/review_form' %>
         </section>

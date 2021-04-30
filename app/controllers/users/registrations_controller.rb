@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     return unless resource.save
-    
+
     profile = resource.create_profile!(name: resource.username)
     profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
   end

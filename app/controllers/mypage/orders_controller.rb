@@ -10,6 +10,7 @@ class  Mypage::OrdersController < ApplicationController
   end
 
   def gifts_index
-    @gifts = Order.where(recipient_id: current_user.id, received: true).preload(order_items: { product: { image_attachment: :blob } }).page(params[:page]).per(5)
+    @gifts = Order.where(recipient_id: current_user.id,
+                         received: true).preload(order_items: { product: { image_attachment: :blob } }).page(params[:page]).per(5)
   end
 end

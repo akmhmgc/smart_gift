@@ -9,6 +9,5 @@ class Dashboard::OrdersController < ApplicationController
   end
 
   def report
-    
   end
 end

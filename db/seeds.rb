@@ -71,7 +71,6 @@ foods_store = Store.create!(storename: '南方フルーツパーラー',
   confirmed_at: Time.zone.now)
 foods_store.image.attach(io: File.open('./app/assets/images/minamikata.jpeg'), filename: 'store_1-min.jpeg')
 
-
 product = foods_store.products.build(name: "マスクメロン　箱入り",
   price: 9800,
   category_id: Category.find_by(name: "フルーツ").id,
@@ -148,32 +147,101 @@ guest_store = Store.create!(
 guest_store.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
 
 # ゲストストアの商品登録
-product = guest_store.products.build(name: "チョコバー",
+product = guest_store.products.build(name: "おいしいチョコバー",
   price: 450,
   category_id: Category.find_by(name: "チョコレート").id,
   description: 'おいしいチョコバーです。')
 product.image.attach(io: File.open('./app/assets/images/chocolate_1-min.jpeg'), filename: 'store_2_product.jpeg')
 product.save!
 
-product = guest_store.products.build(name: "いちごチョコレート",
+product = guest_store.products.build(name: "いちごのチョコレート",
   price: 560,
   category_id: Category.find_by(name: "チョコレート").id,
   description: 'いちごのチョコレートです。')
 product.image.attach(io: File.open('./app/assets/images/chocolate_2-min.jpeg'), filename: 'store_2_product.jpeg')
 product.save!
 
-
 # ゲストユーザーが予め注文しておく（１件）
+order = guest_user.orders.create!(sender_name: "ゲストユーザー",
+                          message: "ゲストユーザーです",)
+
+order.order_items.create!(product_id: product.id,
+                            price: product.price,
+                          quantity: 4)
 
 # user１が購入したギフトを予めゲストユーザーが受け取っておく（1件）
+order = user.orders.create!(sender_name: "けんじろう",
+                          message: "よろしくお願いします。")
 
-# ゲストストアの商品を含む注文を複数件作成（購入者は問わない）
+3.times do |i|
+  order.order_items.create!(product_id: i + 1,
+  price: Product.find(i + 1).price,
+  quantity: rand(1..5))
+end
+guest_user.receive_giftcard?(order)
 
-# レビュー投稿（６商品以上必要）
+# ゲストストアの商品を含む注文を複数件作成（購入者は問わない） => 注文のギフト用 日付は変える
+60.times do
+  guest_order = Order.create!(user_id: rand(1..2),
+  sender_name: "ゲスト用注文",
+  message: "ゲスト用注文です",
+  created_at: "2021-04-01 01:58:35",
+  updated_at: Time.zone.now - (60 * 60 * 24) * rand(0..50),
+  received: true)
+
+  guest_store.products.each do |guest_product|
+    guest_order.order_items.create!(product_id: guest_product.id,
+    price: guest_product.price,
+    quantity: rand(1..10))
+  end
+end
+
+# 注文の日付適当に分ける(現在より50日範囲のランダムで良いか?)
+
+# ユーザー作成 + 4人
+name_list = ["aki","松崎","まるぼう","ゆき"]
+(3..6).each do |n|
+  user = User.create!(
+    username: name_list[n-3],
+    email: "test_#{n}@test.com",
+    password: 'foobar',
+    confirmed_at: Time.zone.now
+  )
+  user.create_profile(name: user.username)
+  user.profile.image.attach(io: File.open("./app/assets/images/user_#{n}.jpeg"), filename: 'cake.jpg')
+end
+
+# レビュー投稿（5商品以上必要）
+TITILES =["なかなか","おいしい","悪くない","これこれ","アリですね","おすすめです"]
+BODIES = ["おいしすぎて、ペロッと食べてしまいました!",
+  "なかなか食べたことのない美味しさです。 娘は苦手の様でした。",
+  "ボリュームもあって、喜ばれました！",
+  "しっとりとした食感がよかった。",
+  "昔ながらのやさしい味が良いです。たくさん食べれて大満足です。",
+  "しっかりとした箱入り。",
+  "喜んでもらえたようです。",
+  "相手の時間を気にせず送れるのはやっぱりここだけ。",
+  "心のこもった美味しいお菓子をご馳走さまでした。",
+  "届いたときには小さく感じましたが、食べてみるとものすごい食べ応え！",
+  "毎年、年何回かは頂いております。 使っている材料、味、丁寧な作り、いずれをとっても気に入っております。",
+  "甘さがしつこくなくて自分好みでした、とってもおいしかったです！"
+]
 
 
+# レビューの投稿
+# store_1,2 4~9でおkの商品から適当に6商品選ぶ > その商品に対して全員がコメント残す
+(4..9).each do |product_id|
+  [1,2,4,5,6,7].each do |user_id|
+  Review.create!(user_id:user_id,
+  title: TITILES.sample,
+                       body: BODIES.sample,
+                       stars: rand(2..5),
+                       product_id: product_id,
+                       created_at: "2021-04-01 01:58:35",
+  updated_at: Time.zone.now - (60 * 60 * 24) * rand(0..50))
+  end
+end
 
-# # レビューの投稿
 # 5.times do |_i|
 #   title = Faker::Lorem.sentence
 #   body = Faker::Lorem.sentence

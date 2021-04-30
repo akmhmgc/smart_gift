@@ -22,4 +22,4 @@ ja:
         message: メッセージ
     models:
       review: レビュー
-      order: ギフトカード
+      order: 注文
