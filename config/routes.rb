@@ -38,7 +38,6 @@ Rails.application.routes.draw do
     resources :products
     controller :orders do
       resources :orders, only: %i[index show]
-      get "report", action: :report
     end
   end
 
@@ -66,5 +65,5 @@ Rails.application.routes.draw do
   end
 
   # 店舗用root pathの作成
-  get 'dashboard/report/:year_month', to: 'dashboard/orders#report', as: "store_root"
+  get 'dashboard/report', to: 'dashboard/orders#report', as: "store_root"
 end

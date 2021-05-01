@@ -1,2 +1,4 @@
-<h2>売り上げレポート</h2>
+<h2 class="font-semibold"><%= @month.strftime("%m月") %>の売り上げレポート</h2>
+<%= link_to "先月の売り上げ", store_root_path(month:@month.prev_month) %>
 <%= column_chart @order_items.group_by_day(:created_at).sum("order_items.price*quantity") %>
+<%= @order_items.group_by_day(:created_at).sum("order_items.price*quantity") %>
