@@ -10,3 +10,4 @@ require("hamburger")
 
 import "stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
+import "chartkick/chart.js"

@@ -8,6 +8,8 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "autoprefixer": "^10.2.5",
+    "chart.js": "^3.2.0",
+    "chartkick": "^4.0.3",
     "postcss": "^8.2.10",
     "tailwind-hamburgers": "^1.0.2",
     "tailwindcss": "^2.1.1",
