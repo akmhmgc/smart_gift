@@ -9,5 +9,6 @@ class Dashboard::OrdersController < ApplicationController
   end
 
   def report
+    @orders = Order.includes(order_items: :product).where(order_items: { products: { store_id: current_store.id } })
   end
 end

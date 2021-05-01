@@ -155,6 +155,8 @@ GEM
       sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    groupdate (5.2.2)
+      activesupport (>= 5)
     hashie (4.1.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -396,6 +398,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   font-awesome-sass
+  groupdate
   image_processing (= 1.9.3)
   jbuilder (~> 2.7)
   kaminari
