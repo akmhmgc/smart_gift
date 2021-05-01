@@ -66,5 +66,5 @@ Rails.application.routes.draw do
   end
 
   # 店舗用root pathの作成
-  get 'dashboard/report', to: 'dashboard/orders#report', as: "store_root"
+  get 'dashboard/report/:year_month', to: 'dashboard/orders#report', as: "store_root"
 end

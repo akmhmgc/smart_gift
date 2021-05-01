@@ -182,17 +182,20 @@ guest_user.receive_giftcard?(order)
 
 # ゲストストアの商品を含む注文を複数件作成（購入者は問わない） => 注文のギフト用 日付は変える
 60.times do
+  time = Time.zone.now - (60 * 60 * 24) * rand(0..50)
   guest_order = Order.create!(user_id: rand(1..2),
   sender_name: "ゲスト用注文",
   message: "ゲスト用注文です",
-  created_at: "2021-04-01 01:58:35",
-  updated_at: Time.zone.now - (60 * 60 * 24) * rand(0..50),
+  created_at: time,
+  updated_at: time,
   received: true)
 
   guest_store.products.each do |guest_product|
     guest_order.order_items.create!(product_id: guest_product.id,
     price: guest_product.price,
-    quantity: rand(1..10))
+    quantity: rand(1..10),
+    created_at: time,
+    updated_at: time)
   end
 end
 

@@ -58,6 +58,7 @@ class User < ApplicationRecord
     ActiveRecord::Base.transaction do
       cart.attributes = { received: true }
       cart.save!(context: :cart_check)
+      cart.order_items.touch_all
       profile.decrement(:money, cart.total_price)
       profile.save!
     end

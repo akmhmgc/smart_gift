@@ -1,1 +1,2 @@
 <h2>売り上げレポート</h2>
+<%= column_chart @order_items.group_by_day(:created_at).sum("order_items.price*quantity") %>

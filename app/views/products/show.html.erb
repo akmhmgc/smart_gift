@@ -75,7 +75,7 @@
         <section class="form py-4 w-full max-w-sm mx-auto">
             <h2 class="title mb-2">レビュー投稿</h2>
             <div id="errors">
-                <%= render 'shared/error_messages' , review: @review %>
+                <%= render 'shared/error_messages' , resource: @review %>
             </div>
             <%= render 'shared/review_form' %>
         </section>
