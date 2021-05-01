@@ -35,10 +35,15 @@
                 </div>
                 <% end %>
             </div>
+            <div class="message mb-6 w-4/5 mx-auto max-w-screen-sm">
+                <p><span class="text-sm font-semibold"><%= gift.sender_name %></span><span
+                        class="text-xs">さんからのメッセージ</span></p>
+                <p class="text-sm p-4 bg-gray-100 mt-2 rounded"><%= gift.message %></p>
+            </div>
         </div>
         <% end %>
         <div class="text-center">
-        <div class="mb-3"><%= paginate @gifts %></div>
-        <div><%= page_entries_info @gifts%></div>
-    </div>
+            <div class="mb-3"><%= paginate @gifts %></div>
+            <div><%= page_entries_info @gifts%></div>
+        </div>
 </main>

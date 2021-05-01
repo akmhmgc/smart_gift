@@ -163,7 +163,7 @@ product.save!
 
 # ゲストユーザーが予め注文しておく（１件）
 order = guest_user.orders.create!(sender_name: "ゲストユーザー",
-                          message: "ゲストユーザーです",)
+                          message: "ゲストユーザーです")
 
 order.order_items.create!(product_id: product.id,
                             price: product.price,
@@ -199,10 +199,10 @@ end
 # 注文の日付適当に分ける(現在より50日範囲のランダムで良いか?)
 
 # ユーザー作成 + 4人
-name_list = ["aki","松崎","まるぼう","ゆき"]
+name_list = %w[aki 松崎 まるぼう ゆき]
 (3..6).each do |n|
   user = User.create!(
-    username: name_list[n-3],
+    username: name_list[n - 3],
     email: "test_#{n}@test.com",
     password: 'foobar',
     confirmed_at: Time.zone.now
@@ -212,33 +212,31 @@ name_list = ["aki","松崎","まるぼう","ゆき"]
 end
 
 # レビュー投稿（5商品以上必要）
-TITILES =["なかなか","おいしい","悪くない","これこれ","アリですね","おすすめです"]
+TITILES = %w[なかなか おいしい 悪くない これこれ アリですね おすすめです]
 BODIES = ["おいしすぎて、ペロッと食べてしまいました!",
-  "なかなか食べたことのない美味しさです。 娘は苦手の様でした。",
-  "ボリュームもあって、喜ばれました！",
-  "しっとりとした食感がよかった。",
-  "昔ながらのやさしい味が良いです。たくさん食べれて大満足です。",
-  "しっかりとした箱入り。",
-  "喜んでもらえたようです。",
-  "相手の時間を気にせず送れるのはやっぱりここだけ。",
-  "心のこもった美味しいお菓子をご馳走さまでした。",
-  "届いたときには小さく感じましたが、食べてみるとものすごい食べ応え！",
-  "毎年、年何回かは頂いております。 使っている材料、味、丁寧な作り、いずれをとっても気に入っております。",
-  "甘さがしつこくなくて自分好みでした、とってもおいしかったです！"
-]
-
+          "なかなか食べたことのない美味しさです。 娘は苦手の様でした。",
+          "ボリュームもあって、喜ばれました！",
+          "しっとりとした食感がよかった。",
+          "昔ながらのやさしい味が良いです。たくさん食べれて大満足です。",
+          "しっかりとした箱入り。",
+          "喜んでもらえたようです。",
+          "相手の時間を気にせず送れるのはやっぱりここだけ。",
+          "心のこもった美味しいお菓子をご馳走さまでした。",
+          "届いたときには小さく感じましたが、食べてみるとものすごい食べ応え！",
+          "毎年、年何回かは頂いております。 使っている材料、味、丁寧な作り、いずれをとっても気に入っております。",
+          "甘さがしつこくなくて自分好みでした、とってもおいしかったです！"]
 
 # レビューの投稿
 # store_1,2 4~9でおkの商品から適当に6商品選ぶ > その商品に対して全員がコメント残す
 (4..9).each do |product_id|
-  [1,2,4,5,6,7].each do |user_id|
-  Review.create!(user_id:user_id,
-  title: TITILES.sample,
-                       body: BODIES.sample,
-                       stars: rand(2..5),
-                       product_id: product_id,
-                       created_at: "2021-04-01 01:58:35",
-  updated_at: Time.zone.now - (60 * 60 * 24) * rand(0..50))
+  [1, 2, 4, 5, 6, 7].each do |user_id|
+    Review.create!(user_id: user_id,
+    title: TITILES.sample,
+                         body: BODIES.sample,
+                         stars: rand(2..5),
+                         product_id: product_id,
+                         created_at: "2021-04-01 01:58:35",
+    updated_at: Time.zone.now - (60 * 60 * 24) * rand(0..50))
   end
 end
 
