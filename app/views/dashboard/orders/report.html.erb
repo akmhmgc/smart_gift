@@ -1,4 +1,22 @@
-<h2 class="font-semibold"><%= @month.strftime("%m月") %>の売り上げレポート</h2>
-<%= link_to "先月の売り上げ", store_root_path(month:@month.prev_month) %>
-<%= column_chart @order_items.group_by_day(:created_at).sum("order_items.price*quantity") %>
-<%= @order_items.group_by_day(:created_at).sum("order_items.price*quantity") %>
+<main class="max-w-md mx-auto relative px-4" id="container">
+    <div class="text-center">
+        <%= link_to store_root_path(month:@month.prev_month) do%>
+        <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
+            <span class="text-white font-semibold"><</span>
+        </div>
+        <% end %>
+        <span class="text-md font-semibold text-center p-4"><%= @month.strftime("%Y年%m月") %>の売り上げレポート</span>
+        <%= link_to store_root_path(month:@month.next_month) do%>
+        <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
+            <span class="text-white font-semibold">></span>
+        </div>
+        <% end %>
+    </div>
+    <div class="text-center mt-4">
+        <% if @data.empty? %>
+        <p class="text-sm">データは存在しません</p>
+        <% else %>
+        <%= column_chart @data %>
+        <% end %>
+    </div>
+</main>

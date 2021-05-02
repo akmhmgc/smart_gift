@@ -10,7 +10,8 @@ class Dashboard::OrdersController < ApplicationController
 
   def report
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
-    @order_items = OrderItem.includes(:product).where(products: { store_id: current_store.id }).where(updated_at: @month.all_month)
+    order_items = OrderItem.includes(:product).where(products: { store_id: current_store.id }).where(updated_at: @month.all_month)
+    @data = order_items.group_by_day(:created_at).sum("order_items.price*quantity")
     @orders = Order.includes(order_items: :product).where(order_items: { products: { store_id: current_store.id } })
   end
 end
