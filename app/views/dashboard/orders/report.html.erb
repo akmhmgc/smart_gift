@@ -1,22 +1,50 @@
-<main class="max-w-md mx-auto relative px-4" id="container">
+<main class="max-w-md mx-auto relative p-6 bg-white rounded shadow-sm" id="container">
     <div class="text-center">
         <%= link_to store_root_path(month:@month.prev_month) do%>
         <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
-            <span class="text-white font-semibold"><</span>
+            <span class="text-white font-semibold">
+                <</span> </div> <% end %> <span class="text-lg font-semibold text-center p-4">
+                    <%= @month.strftime("%Y年%m月") %>の売り上げレポート
+            </span>
+            <%= link_to store_root_path(month:@month.next_month) do%>
+            <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
+                <span class="text-white font-semibold">></span>
+            </div>
+            <% end %>
         </div>
-        <% end %>
-        <span class="text-md font-semibold text-center p-4"><%= @month.strftime("%Y年%m月") %>の売り上げレポート</span>
-        <%= link_to store_root_path(month:@month.next_month) do%>
-        <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
-            <span class="text-white font-semibold">></span>
-        </div>
-        <% end %>
-    </div>
-    <div class="text-center mt-4">
         <% if @data.empty? %>
-        <p class="text-sm">データは存在しません</p>
+        <p class="text-sm text-center mt-6">データは存在しません</p>
         <% else %>
-        <%= column_chart @data %>
+        <div class="sales_total flex justify-between bg-red-300 rounded py-4 px-4 my-4">
+            <p class="text-lg text-white">総額</p>
+            <p class="text-lg text-white">￥<%= @total %> </p>
+        </div>
+        <div class="text-center mt-6">
+            <h2 class="font-semibold">売り上げグラフ</h2>
+            <%= column_chart @data %>
+        </div>
+        <div class="text-center mt-10">
+            <h2 class="font-semibold">売り上げランキング</h2>
+            <table class="table-auto w-full mt-4">
+                <thead>
+                    <tr class="bg-red-300 text-white">
+                        <th class="text-sm border p-2 font-normal">順位</th>
+                        <th class="text-sm border font-normal">商品名</th>
+                        <th class="text-sm border font-normal">商品価格（円）</th>
+                        <th class="text-sm border font-normal">売り上げ個数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @products.each_with_index do |product,idx| %>
+                    <tr>
+                        <th class="text-sm font-normal border py-2"><%= idx+1 %></th>
+                        <th class="text-sm font-normal truncate border"><%= link_to product.name, product,class:"text-blue-400 hover:text-blue-300 hover:underline" %></th>
+                        <th class="text-sm font-normal border"><%= product.price %></th>
+                        <th class="text-sm font-normal border"><%= @rank_hash[product.id] %></th>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
         <% end %>
-    </div>
 </main>
