@@ -8,9 +8,7 @@ class Dashboard::ProductsController < ApplicationController
     # 自店舗アイテム一覧
     @q = Product.where(store_id: current_store.id).with_attached_image.ransack(params[:q])
     @categories = Category.all
-    @categories.each do |cat|
-      cat.name.insert(0, '　') if cat.ancestry?
-    end
+    @categories = Category.select(:name, :ancestry, :id)
     @products = @q.result.page(params[:page])
   end
 
