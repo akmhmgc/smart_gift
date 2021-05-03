@@ -1,10 +1,8 @@
 class Dashboard::OrdersController < ApplicationController
   before_action :authenticate_store!
-  def index
-    @orders = Order.belongs_to_store(current_store).where(updated_at: @month.all_month).page(params[:page]).per(10)
-  end
-
   def show
+    @order = Order.find(params[:id])
+    @order_items = @order.order_items.preload(product: { image_attachment: :blob } )
   end
 
   def report

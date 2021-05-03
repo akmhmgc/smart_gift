@@ -4,7 +4,7 @@
         <% @orders.each do |order| %>
         <div class="each_order border rounded mb-4">
             <div class="order_info">
-                <div class="total bg-gray-100 flex justify-between items-center p-5">
+                <div class="total bg-gray-200 flex justify-between items-center p-5">
                     <div class="flex">
                         <div>
                             <p class="text-xs">注文日</p>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="items p-4">
+            <div class="items p-4 bg-white">
                 <% order.order_items.each do |order_item| %>
                 <div class="my-2 pb-2 order_item">
                     <%= link_to order_item.product , class:"hover:opacity-70 block" do%>
@@ -32,7 +32,7 @@
                             <p><%= order_item.product.name %></p>
                         </div>
                         <div class="content px-4">
-                            <p class="text-md font-semibold"><%="#{order_item.product.price}円" %></p>
+                            <p class="text-md font-semibold"><%="#{order_item.price}円" %></p>
                         </div>
                         <div class="content px-4">
                             <p><%= order_item.quantity %>個</p>

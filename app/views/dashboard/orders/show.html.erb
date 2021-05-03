@@ -1,2 +1,47 @@
-<h1>Dashboard::Orders#show</h1>
-<p>Find me in app/views/dashboard/orders/show.html.erb</p>
+<main class="max-w-screen-md mx-auto relative px-4" id="container">
+    <div class="md:p-4">
+        <h2 class="text-lg font-semibold text-center py-4">注文履歴</h2>
+        <div class="each_order border rounded mb-4">
+            <div class="order_info">
+                <div class="total bg-gray-200 flex justify-between items-center p-5">
+                    <div class="flex">
+                        <div>
+                            <p class="text-xs">注文日</p>
+                            <p><%=@order.updated_at.strftime("%Y年%m月%d日") %></p>
+                        </div>
+                        <div class="ml-6">
+                            <p class="text-xs">合計</p>
+                            <p><%=@order.total_price %>円</p>
+                        </div>
+                        <div class="ml-6">
+                            <p class="text-xs">購入者</p>
+                            <p><%=@order.user.profile.name %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="items p-4 bg-white">
+                <%@order_items.each do |order_item| %>
+                <div class="my-2 pb-2 order_item">
+                    <%= link_to order_item.product , class:"hover:opacity-70 block" do%>
+                    <div class="flex w-full justify-between">
+                        <div class="img px-4">
+                            <%= image_tag(order_item.product.image.variant(resize_to_fill: [100, 100])) %>
+                        </div>
+                        <div class="content px-4">
+                            <p><%= order_item.product.name %></p>
+                        </div>
+                        <div class="content px-4">
+                            <p class="text-md font-semibold"><%="#{order_item.price}円" %></p>
+                        </div>
+                        <div class="content px-4">
+                            <p><%= order_item.quantity %>個</p>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+</main>

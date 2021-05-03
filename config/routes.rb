@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   namespace :dashboard do
     resources :products
     controller :orders do
-      resources :orders, only: %i[index show]
+      resources :orders, only: %i[show]
     end
   end
 
