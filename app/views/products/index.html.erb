@@ -1,4 +1,4 @@
-<main class="max-w-screen-lg mx-auto mt-10 my-12 px-4 md:px-12 relative">
+<main class="max-w-screen-lg mx-auto mt-10 my-12 px-4 md:px-12 relative bg-white rounded border pb-6 pt-4">
     <%= render 'layouts/search_form', url: products_path, q: @q %>
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
         <%= render partial: "products/product", collection: @products, as: "product"%>

@@ -1,8 +1,8 @@
 <% price_range_array = [100, 300, 500, 1000, 2000, 3000, 4000, 5000].index_by { |n| "¥#{n}" } %>
 <%= search_form_for q, url: url do |f| %>
-<div class="text-center form">
+<div class="text-center search_form">
     <div class="mb-2">
-        <%= f.collection_select(:category_id_or_category_ancestry_eq, @categories, :id, :name_for_search, include_blank: '指定なし') %>
+        <%= f.collection_select(:category_id_or_category_ancestry_eq, @categories, :id, :name_for_search, include_blank: '指定なし',class:"border") %>
         <%= f.search_field :name_or_description_or_store_storename_cont, id: "search", placeholder: '検索ワード',class:"p-1 border w-48"%>
 
     </div>
