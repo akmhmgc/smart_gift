@@ -2,6 +2,10 @@ class Order < ApplicationRecord
   generate_public_uid generator: PublicUid::Generators::HexStringSecureRandom.new(20)
 
   default_scope -> { order(updated_at: :desc) }
+  scope :belongs_to_store, lambda { |store|
+                             includes([{ order_items: :product },
+                                       { user: :profile }]).where(order_items: { products: { store_id: store.id } })
+                           }
 
   def to_param
     public_uid

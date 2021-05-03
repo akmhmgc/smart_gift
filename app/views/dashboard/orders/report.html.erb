@@ -1,10 +1,10 @@
-<main class="max-w-md mx-auto relative p-6 bg-white rounded shadow-sm" id="container">
+<main class="max-w-4xl mx-auto relative p-6 bg-white rounded shadow-sm" id="container">
     <div class="text-center">
         <%= link_to store_root_path(month:@month.prev_month) do%>
         <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
             <span class="text-white font-semibold">
                 <</span> </div> <% end %> <span class="text-lg font-semibold text-center p-4">
-                    <%= @month.strftime("%Y年%m月") %>の売り上げレポート
+                    <%= @month.strftime("%Y年%m月") %>のレポート
             </span>
             <%= link_to store_root_path(month:@month.next_month) do%>
             <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
@@ -13,14 +13,14 @@
             <% end %>
         </div>
         <% if @data.empty? %>
-        <p class="text-sm text-center mt-6">データは存在しません</p>
+        <p class="text-xs text-center mt-6">データは存在しません</p>
         <% else %>
         <div class="sales_total flex justify-between bg-red-300 rounded py-4 px-4 my-4">
             <p class="text-lg text-white">総額</p>
             <p class="text-lg text-white">￥<%= @total %> </p>
         </div>
         <div class="text-center mt-6">
-            <h2 class="font-semibold">売り上げグラフ</h2>
+            <h2 class="font-semibold">売上高</h2>
             <%= column_chart @data %>
         </div>
         <div class="text-center mt-10">
@@ -28,23 +28,56 @@
             <table class="table-auto w-full mt-4">
                 <thead>
                     <tr class="bg-red-300 text-white">
-                        <th class="text-sm border p-2 font-normal">順位</th>
-                        <th class="text-sm border font-normal">商品名</th>
-                        <th class="text-sm border font-normal">商品価格（円）</th>
-                        <th class="text-sm border font-normal">売り上げ個数</th>
+                        <th class="text-xs border p-2 font-normal">順位</th>
+                        <th class="text-xs border font-normal">商品名</th>
+                        <th class="text-xs border font-normal">商品価格（円）</th>
+                        <th class="text-xs border font-normal">売り上げ個数</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% @products.each_with_index do |product,idx| %>
                     <tr>
-                        <th class="text-sm font-normal border py-2"><%= idx+1 %></th>
-                        <th class="text-sm font-normal truncate border"><%= link_to product.name, product,class:"text-blue-400 hover:text-blue-300 hover:underline" %></th>
-                        <th class="text-sm font-normal border"><%= product.price %></th>
-                        <th class="text-sm font-normal border"><%= @rank_hash[product.id] %></th>
+                        <th class="text-xs font-normal border py-2"><%= idx+1 %></th>
+                        <th class="text-xs font-normal truncate border">
+                            <%= link_to product.name, product,class:"text-blue-400 hover:text-blue-300 hover:underline" %>
+                        </th>
+                        <th class="text-xs font-normal border"><%= product.price %></th>
+                        <th class="text-xs font-normal border"><%= @rank_hash[product.id] %></th>
                     </tr>
                     <% end %>
                 </tbody>
             </table>
+        </div>
+        <div class="text-center mt-10">
+            <h2 class="font-semibold">販売履歴一覧</h2>
+            <table class="table-auto w-full mt-4">
+                <thead>
+                    <tr class="bg-red-300 text-white">
+                        <th class="text-xs border p-2 font-normal">購入日</th>
+                        <th class="text-xs border p-2 font-normal">注文id</th>
+                        <th class="text-xs border font-normal">購入者</th>
+                        <th class="text-xs border font-normal">合計注文金額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @orders.each do |order| %>
+                    <tr>
+                        <th class="text-xs font-normal truncate border">
+                            <%= order.updated_at.strftime("%Y/%m/%d") %><br><span
+                                class="text-gray-500"><%= order.updated_at.strftime("%I:%M%p") %></span></th>
+                        <th class="text-xs font-normal border py-2">
+                            <%= link_to order.id, order,class:"text-blue-400 hover:text-blue-300 hover:underline" %>
+                        </th>
+                        <th class="text-xs font-normal truncate border"><%= order.user.profile.name %></th>
+                        <th class="text-xs font-normal border"><%= "¥#{order.total_price}" %></th>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <div class="text-center my-6">
+                <div class="mb-3"><%= paginate @orders %></div>
+                <div><%= page_entries_info @orders%></div>
+            </div>
         </div>
         <% end %>
 </main>
