@@ -1,25 +1,40 @@
-<h2>商品の編集</h2>
-<%= form_with(model: [:dashboard, @product],method: :put, local: true) do |f| %>
-<%= render 'shared/error_messages' , resource: @product %>
+<div class="form">
+    <h2 class="title">アイテムの編集</h2>
+    <%= form_with(model: [:dashboard, @product],method: :put, local: true) do |f| %>
+    <%= render 'shared/error_messages' , resource: @product %>
 
-<div class="">
-    <%= f.label :image %>
-    <%= f.file_field :image%>
+    <div class="image my-4">
+        <%= f.label :アイテム画像, class: "block text-sm font-bold mb-1" %>
+        <%= f.file_field :image, autofocus: true, id: "image_field", class: "hidden",accept: 'image/jpg,image/jpeg,image/png,image/gif'%>
+        <%= image_tag(@product.image.variant(resize_to_fill: [112, 112]), class: "my-0 cursor-pointer hover:opacity-70 transform hover:scale-110 w-28 image_prev",id: "image_btn", onclick: "document.querySelector('#image_field').click()")%>
+    </div>
 
-    <%= f.label :category %>
-    <%= f.collection_select :category_id, @categories, :id, :name %>
+    <div class="field">
+        <%= f.label :category %>
+        <%= f.collection_select :category_id, @categories, :id, :name %>
+    </div>
 
-    <%= f.label :name %><br />
-    <%= f.text_field :name, placeholder: "商品名" %>
+    <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: "商品名" %>
+    </div>
 
-    <%= f.label :price %><br />
-    <%= f.number_field :price %>
+    <div class="field">
+        <%= f.label :price %>
+        <%= f.number_field :price %>
+    </div>
+    <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description, placeholder: "説明を入力してください" %>
+    </div>
 
-    <%= f.label :description %><br />
-    <%= f.text_area :description, placeholder: "説明を入力してください" %>
+    <div class="actions">
+        <%= f.submit "更新する", class: "" %>
+    </div>
 
+    <%= link_to "削除する", [:dashboard, @product], method: :delete,
+                                       data: { confirm: "商品を削除しますか？" } ,class:"hover:underline"%>
+    <% end %>
 </div>
-<%= f.submit "更新する", class: "" %>
-<%= link_to "削除する", [:dashboard, @product], method: :delete,
-                                       data: { confirm: "商品を削除しますか？" } %>
-<% end %>
+
+<%= javascript_pack_tag 'edit_info' %>

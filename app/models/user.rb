@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_one :cart,  -> { where received: false }, class_name: 'Order', inverse_of: :user
   has_many :orders,  -> { where received: true }, class_name: 'Order', inverse_of: :user
 
-  validates :username, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: true }
+  validates :username, presence: true, length: { maximum: 20 }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

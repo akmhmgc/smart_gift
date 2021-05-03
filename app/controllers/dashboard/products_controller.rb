@@ -5,6 +5,7 @@ class Dashboard::ProductsController < ApplicationController
   before_action :correct_store, only: %i[edit update destroy]
 
   def index
+    # 自店舗アイテム一覧
     @q = Product.where(store_id: current_store.id).with_attached_image.ransack(params[:q])
     @categories = Category.all
     @categories.each do |cat|

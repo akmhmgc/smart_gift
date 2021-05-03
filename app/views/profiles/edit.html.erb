@@ -13,7 +13,7 @@
 
             <span class="image">
                 <%= f.label :プロフィール画像, class: "block text-sm font-bold mb-1" %>
-                <%= f.file_field :image, autofocus: true, id: "image_field", class: "hidden"%>
+                <%= f.file_field :image, autofocus: true, id: "image_field", class: "hidden",accept: 'image/jpg,image/jpeg,image/png,image/gif'%>
                 <%= image_tag(current_user.profile.image.variant(resize_to_fill: [112, 112]), class: "my-0 rounded-full cursor-pointer hover:opacity-70 transform hover:scale-110 w-28 image_prev",id: "image_btn", onclick: "document.querySelector('#image_field').click()")%>
             </span>
 

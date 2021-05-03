@@ -1,23 +1,39 @@
-<h2>商品の追加</h2>
-<%= form_with(model: [:dashboard, @product], local: true) do |f| %>
-<%= render 'shared/error_messages' , resource: @product %>
+<div class="form">
+    <h2 class="title">アイテムの追加</h2>
+    <%= form_with(model: [:dashboard, @product], local: true) do |f| %>
+    <%= render 'shared/error_messages' , resource: @product %>
+    <div class="field">
+        <%= f.label :アイテム画像, class: "block text-sm font-bold mb-1" %>
+        <%= f.file_field :image, autofocus: true, id: "image_field", class: "hidden",accept: 'image/jpg,image/jpeg,image/png,image/gif'%>
+        <% if @product.image.attached? %>
+        <%= image_tag @product.image.variant(resize_to_fill: [112, 112]), class: "my-0 cursor-pointer hover:opacity-70 transform hover:scale-110 w-28 image_prev",id: "image_btn", onclick: "document.querySelector('#image_field').click()"%>
+        <% else %>
+        <%= image_tag "add-a-photo.png",class: "my-0 cursor-pointer hover:opacity-70 transform hover:scale-110 w-28 image_prev",id: "image_btn", onclick: "document.querySelector('#image_field').click()" %>
+        <% end %>
+    </div>
 
-<div class="">
-    <%= f.label :image %>
-    <%= f.file_field :image%>
-
-    <%= f.label :category %>
-    <%= f.collection_select :category_id, @categories, :id, :name,
+    <div class="field">
+        <%= f.label :category %>
+        <%= f.collection_select :category_id, @categories, :id, :name,
                                                             :include_blank => "カテゴリを選択してください" %>
 
-    <%= f.label :name %><br />
-    <%= f.text_field :name, placeholder: "商品名" %>
-
-    <%= f.label :price %><br />
-    <%= f.number_field :price %>
-
-    <%= f.label :description %><br />
-    <%= f.text_area :description, placeholder: "説明を入力してください" %>
+    </div>
+    <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: "商品名" %>
+    </div>
+    <div class="field">
+        <%= f.label :price %>
+        <%= f.number_field :price %>
+    </div>
+    <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description, placeholder: "説明を入力してください" %>
+    </div>
+    <div class="actions">
+        <%= f.submit "登録する", class: "" %>
+    </div>
+    <% end %>
 </div>
-<%= f.submit "登録する", class: "" %>
-<% end %>
+
+<%= javascript_pack_tag 'edit_info' %>

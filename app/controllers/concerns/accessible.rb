@@ -9,7 +9,7 @@ module Accessible
   def check_user
     if current_store
       flash[:notice] = '店舗として既にログインしています。'
-      redirect_to(current_store) and return
+      redirect_to(store_root_path) and return
     elsif current_user
       flash[:notice] = 'ユーザーとして既にログインしています。'
       redirect_to(root_path)

@@ -1,12 +1,32 @@
-<h1>アイテム</h1>
-<%= link_to "商品登録", new_dashboard_product_path %>
-<div class="container my-12 mx-auto px-4 md:px-12">
-    <%= render 'layouts/search_form', url: dashboard_products_path, q: @q %>
-
-    <%= render partial: "products/dashboard_product_grid", collection: @products, as: "product"%>
-
-    <div class="text-center">
-        <div class="mb-3"><%= paginate @products %></div>
-        <div><%= page_entries_info @products%></div>
+<main class="max-w-3xl mx-auto relative p-6 bg-white rounded shadow-sm" id="container">
+    <h1 class="text-lg font-semibold text-center">アイテム</h1>
+    <div class="container my-12 mx-auto px-4 md:px-12">
+        <%= render 'layouts/search_form', url: dashboard_products_path, q: @q %>
+        <div class="my-4">
+            <div class="text-right mb-2">
+                <%= link_to "商品登録", new_dashboard_product_path ,class:"text-sm md:text-base bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded"%>
+            </div>
+            <% @products.each do |product| %>
+            <div class="flex items-center justify-between mb-3">
+                <div>
+                    <%= link_to product do%>
+                    <%= image_tag(product.image.variant(resize_to_fill: [60, 60]), class:"hover:opacity-70")%>
+                    <% end %>
+                </div>
+                <p class="text-xs sm:text-sm w-48 break-all">
+                    <%= product.name %>
+                </p>
+                <p class="text-xs sm:text-base">
+                    <%= "#{product.price.to_s} 円" %>
+                </p>
+                <%= link_to "編集", edit_dashboard_product_url(product) ,class:"text-xs md:text-base text-blue-400 hover:underline"%>
+            </div>
+            <% end %>
+        </div>
+        <div class="text-center">
+            <div class="mb-3"><%= paginate @products %></div>
+            <div><%= page_entries_info @products%></div>
+        </div>
     </div>
-</div>
+
+</main>
