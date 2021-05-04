@@ -5,14 +5,14 @@ class Product < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_one_attached :image
-  
+
   validates :image, presence: true, content_type: { in: %w[image/jpeg image/gif image/png],
-                                                      message: '有効な形式の画像をアップロードしてください。' },
-                      size: { less_than: 5.megabytes,
-                              message: 'アップロード可能な画像は5MB以下となります' }
+                                                    message: '有効な形式の画像をアップロードしてください。' },
+                    size: { less_than: 5.megabytes,
+                            message: 'アップロード可能な画像は5MB以下となります' }
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: true, scope: :store }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 999_999 }  # 商品にいいねされた時の通知メソッド
-  
+
   def display_image
     image.variant(resize_to_fill: [200, 200])
   end

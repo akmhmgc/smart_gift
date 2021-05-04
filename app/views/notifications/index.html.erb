@@ -1,4 +1,26 @@
-<% if @notifications.exists? %>
-  <%= render @notifications %>
-  <%= paginate @notifications %>
+<h1 class="text-lg font-semibold text-center mb-6 pt-6">通知</h1>
+<% @notifications.each do |notification| %>
+<div class="max-w-screen-lg mx-auto relative p-6 bg-white rounded border mb-3 w-5/6">
+  <div class="flex items-center">
+    <%= image_tag(notification.user.profile.image.variant(resize_to_fill: [50, 50]),class:"rounded-full") %>
+    <div class="text-sm ml-4">
+      <p class="text-gray-500"><%= notification.updated_at.strftime("%Y年%m月%d日") %></p>
+      <span>
+        <%= link_to notification.user.profile.name, profiles_url(notification.user),class:"font-semibold" %>さんが
+        <%= link_to notification.product.name,notification.product, class:"font-semibold" %>
+      </span>
+      <% if notification.action == "like" %>
+      <span>にいいねしました。</span>
+      <% elsif notification.action == "review" %>
+      <span>にレビューを投稿しました。</span>
+      <p class="mt-2 text-xs font-semibold"><%= notification.review.title %></p>
+      <p class="text-xs"><%= notification.review.body %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
 <% end %>
+<div class="text-center mb-4">
+  <div class="mb-3"><%= paginate @notifications %></div>
+  <div><%= page_entries_info @notifications%></div>
+</div>

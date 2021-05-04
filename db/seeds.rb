@@ -245,7 +245,6 @@ BODIES = ["おいしすぎて、ペロッと食べてしまいました!",
   end
 end
 
-
 # ゲストストアの商品に対するいいねの投稿
 guest_store.products.each do |product|
   guest_user.like(product)

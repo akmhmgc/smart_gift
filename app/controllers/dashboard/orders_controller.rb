@@ -2,7 +2,7 @@ class Dashboard::OrdersController < ApplicationController
   before_action :authenticate_store!
   def show
     @order = Order.find(params[:id])
-    @order_items = @order.order_items.preload(product: { image_attachment: :blob } )
+    @order_items = @order.order_items.preload(product: { image_attachment: :blob })
   end
 
   def report
