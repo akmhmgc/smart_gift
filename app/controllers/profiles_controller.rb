@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
     else
       flash[:alert] = 'チャージに失敗しました'
     end
-    redirect_to profiles_url(current_user)
+    redirect_back(fallback_location: profiles_url(current_user))
   end
 
   def update

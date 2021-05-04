@@ -5,6 +5,7 @@
         <%= render partial: "orders/order_item", collection: current_cart.order_items.includes(product: { image_attachment: :blob }), as: "cart_item"%>
         <p class="sum"><%= "#{@total}円" %></p>
         <p>利用可能金額：<%= "#{current_user.profile.money}円" %></p>
+        <%= link_to "チャージ",  %>
     </div>
 
     <div class="form">

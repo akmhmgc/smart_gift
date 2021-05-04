@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :users, path: '/', only: %i[show likes] , constraints: { id: /\d+/ } do
     member do
       resource :profiles, only: %i[show update edit]
-      get 'add_money' => 'profiles#add_money'
+      post 'add_money' => 'profiles#add_money'
       get :favorites
     end
   end

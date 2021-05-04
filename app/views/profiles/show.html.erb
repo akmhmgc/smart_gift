@@ -13,7 +13,7 @@
   <div class="money text-center">
     <% if @profile.user == current_user%>
     <p><%= "所有ポイント:#{@profile.money}円" %></p>
-    <%= button_to '10000円チャージする', {controller: 'profiles', action: 'add_money'}, {method: :get ,class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded"}%>
+    <%= button_to '10000円チャージする', {controller: 'profiles', action: 'add_money'}, {method: :post ,class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded"}%>
     <% end %>
   </div>
   <section id="reviews" class="pt-6 mb-10">
