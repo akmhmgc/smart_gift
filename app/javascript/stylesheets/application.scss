@@ -130,7 +130,7 @@
 
 // forms
 .form{
-  @apply bg-white mx-auto border rounded px-8 pt-6 pb-8 mb-4 flex flex-col w-full max-w-sm;
+  @apply bg-white my-24 mx-auto border rounded px-8 pt-6 pb-8 flex flex-col w-full max-w-sm;
   .title{
     @apply text-lg font-bold text-center;
   }
