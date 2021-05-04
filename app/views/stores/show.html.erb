@@ -1,11 +1,13 @@
-<main class="max-w-screen-lg mx-auto px-4 md:px-12 relative bg-white rounded border pb-6">
+<main class="max-w-screen-lg mx-auto px-4 md:px-12 relative bg-white rounded border py-6">
     <div class="flex items-center mb-5">
         <div>
             <%= image_tag(@store.image.variant(resize_to_fill: [112, 112]), class: "my-0 mx-auto rounded-full")%>
         </div>
         <div class="ml-4">
             <span class="font-semibold text-lg"><%= @store.storename%></span>
-            <%= link_to '編集', edit_store_registration_path if store_signed_in? && current_store == @store %>
+            <% if current_store == @store %>
+            <%= link_to "編集", edit_store_registration_path, class:"hover:underline hover:opacity-70"%>
+            <% end %>
         </div>
     </div>
 

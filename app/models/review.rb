@@ -8,7 +8,7 @@ class Review < ApplicationRecord
   # notification
   has_one :notification, dependent: :destroy
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(updated_at: :desc) }
 
   validates :user_id, presence: true
   validates :product_id, presence: true
