@@ -78,10 +78,10 @@ product = foods_store.products.build(name: "マスクメロン　箱入り",
 product.image.attach(io: File.open('./app/assets/images/melon2.jpeg'), filename: 'store_2_product.jpeg')
 product.save!
 
-product = foods_store.products.build(name: "ブル-ベリー 500g",
+product = foods_store.products.build(name: "ブルーベリー 500g",
   price: 2800,
   category_id: Category.find_by(name: "フルーツ").id,
-  description: '茨城県に所有する大農場で手塩にかけて育てたしたブルーベリーです。')
+  description: '茨城県に所有する大農場で手塩にかけて育てたブルーベリーです。')
 product.image.attach(io: File.open('./app/assets/images/berry.jpeg'), filename: 'store_2_product.jpeg')
 product.save!
 

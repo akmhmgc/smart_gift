@@ -1,5 +1,5 @@
-<div class="max-w-md w-5/6 mx-auto px-4 relative">
-  <div class="flex items-stretch mx-auto">
+<div class="max-w-screen-lg mx-auto px-4 relative bg-white border">
+  <div class="flex items-stretch mx-auto p-6">
     <div>
       <%= image_tag(@profile.image.variant(resize_to_fill: [112, 112]), class: "my-0 mx-auto rounded-full")%>
     </div>
@@ -10,7 +10,7 @@
   <% if current_user == @profile.user %>
   <%= link_to'編集', edit_profiles_path(current_user), class:"hover:underline hover:opacity-70"%>
   <% end %>
-  <div class="money mt-10 text-center">
+  <div class="money text-center">
     <% if @profile.user == current_user%>
     <p><%= "所有ポイント:#{@profile.money}円" %></p>
     <%= button_to '10000円チャージする', {controller: 'profiles', action: 'add_money'}, {method: :get ,class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded"}%>
@@ -22,7 +22,7 @@
     <p class="text-center">レビューはまだ投稿されていません</p>
     <% else %>
     <% @reviews.each do |review| %>
-    <div class="text-left mb-5 text-sm p-4 border">
+    <div class="text-left mb-5 text-sm p-4">
       <div class="Stars" style="--rating: <%= review.stars %>;"
         aria-label="Rating of this product is <%= review.stars %> out of 5."><span
           class="font-semibold"><%= review.title %></span></div>
