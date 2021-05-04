@@ -11,8 +11,8 @@ class ProfilesController < ApplicationController
   def edit; end
 
   def add_money
-    if @profile.add_money(100_000)
-      flash[:notice] = '10000円がチャージされました'
+    if @profile.add_money(params[:money])
+      flash[:notice] = "#{params[:money]}円がチャージされました"
     else
       flash[:alert] = 'チャージに失敗しました'
     end

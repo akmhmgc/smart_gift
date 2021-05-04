@@ -1,0 +1,11 @@
+<h2 class="font-semibold">チャージする</h2>
+<%= link_to '10000円', add_money_user_path(current_user.id, money:10000), method: :post,class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded inline-block mr-2"%>
+<%= link_to '5000円', add_money_user_path(current_user.id, money:5000), method: :post,class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded inline-block mr-2"%>
+<%= link_to '1000円', add_money_user_path(current_user.id, money:1000), method: :post,class:"bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded inline-block mr-2"%>
+<div class="mt-4 ">
+  <%= form_with(url:add_money_user_path(current_user.id) ,method: :post, local: true) do |f| %>
+  <%= f.number_field :money ,class:"border inline-block py-1"%>
+  <span>円</span>
+  <%= f.submit "チャージ", class: "border inline-block py-2 px-3 rounded text-sm ml-2" %>
+  <% end %>
+</div>

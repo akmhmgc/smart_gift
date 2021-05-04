@@ -13,7 +13,9 @@
   <div class="money text-center">
     <% if @profile.user == current_user%>
     <p><%= "所有ポイント:#{@profile.money}円" %></p>
-    <%= button_to '10000円チャージする', {controller: 'profiles', action: 'add_money'}, {method: :post ,class: "bg-red-300 hover:bg-red-400 text-white text-sm font-bold py-2 px-4 rounded"}%>
+    <div class="charge mt-8">
+      <%= render 'shared/charge_form'%>
+    </div>
     <% end %>
   </div>
   <section id="reviews" class="pt-6 mb-10">
@@ -49,8 +51,8 @@
     </div>
     <% end %>
     <div class="text-center">
-        <div class="mb-3"><%= paginate @reviews %></div>
-        <div><%= page_entries_info @reviews%></div>
+      <div class="mb-3"><%= paginate @reviews %></div>
+      <div><%= page_entries_info @reviews%></div>
     </div>
     <% end %>
   </section>

@@ -5,7 +5,9 @@ class Profile < ApplicationRecord
   validates :money, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 999_999 }
 
   def add_money(money)
-    increment(:money, money)
-    save
+    return false unless money.to_s =~ /\A([1-9][0-9]*)\z/ && money.to_i.positive?
+
+    increment(:money, money.to_i)
+    save!
   end
 end

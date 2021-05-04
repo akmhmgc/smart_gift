@@ -8,7 +8,10 @@
         <p><span class="text-lg">合計 </span><span id="sum" ,
                 class="text-lg font-semibold"><%= "#{current_cart.total_price}円" %></span></p>
         <p>利用可能金額：<%= "#{current_user.profile.money}円" %></p>
-        <p class="text-xs text-red-500" , id="sum_alert"></p>
+
+        <div class="charge mt-8">
+            <%= render 'shared/charge_form'%>
+        </div>
     </div>
 
     <div class="mt-8 md:border md:p-4 bg-white border p-4 rounded">
