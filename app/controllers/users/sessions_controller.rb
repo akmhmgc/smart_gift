@@ -32,7 +32,7 @@ class Users::SessionsController < Devise::SessionsController
     profile.name = user.username
     profile.money = 10_000
     profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
-    profile.save
+    profile.save!
 
     sign_in user
     flash[:notice] = "ゲストユーザーとしてログインしました"

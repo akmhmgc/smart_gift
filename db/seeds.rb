@@ -20,7 +20,6 @@ sweets_store = Store.create!(storename: '花鳥風月堂',
                       description: "創業明治33年、和菓子から洋菓子まで手掛ける老舗です。",
                       password: 'foobar',
                       confirmed_at: Time.zone.now)
-sweets_store.image.attach(io: File.open('./app/assets/images/sweets_store-min.jpeg'), filename: 'sweets_store-min.jpeg')
 
 product = sweets_store.products.build(name: "いちごのタルト ホール",
   price: 2300,
@@ -69,7 +68,6 @@ foods_store = Store.create!(storename: '南方フルーツパーラー',
   description: "オンライン店舗では、独自契約農家との直接取引でしか流通しないフルーツを取り扱っております。",
   password: 'foobar',
   confirmed_at: Time.zone.now)
-foods_store.image.attach(io: File.open('./app/assets/images/minamikata.jpeg'), filename: 'store_1-min.jpeg')
 
 product = foods_store.products.build(name: "マスクメロン　箱入り",
   price: 9800,
@@ -144,7 +142,6 @@ guest_store = Store.create!(
   password: 'foobar',
   confirmed_at: Time.zone.now
 )
-guest_store.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
 
 # ゲストストアの商品登録
 product = guest_store.products.build(name: "おいしいチョコバー",
@@ -231,32 +228,26 @@ BODIES = ["おいしすぎて、ペロッと食べてしまいました!",
 
 # レビューの投稿
 # store_1,2 4~9でおkの商品から適当に6商品選ぶ > その商品に対して全員がコメント残す
-(4..9).each do |product_id|
+(3..13).each do |product_id|
   [1, 2, 4, 5, 6, 7].each do |user_id|
-    Review.create!(user_id: user_id,
+    review = Review.create!(user_id: user_id,
     title: TITILES.sample,
                          body: BODIES.sample,
                          stars: rand(2..5),
                          product_id: product_id,
                          created_at: "2021-04-01 01:58:35",
     updated_at: Time.zone.now - (60 * 60 * 24) * rand(0..50))
+    product = Product.find(product_id)
+    user = User.find(user_id)
+
+    # 通知の作成
+    product.create_notification_review!(user, review.id)
   end
 end
 
-# 5.times do |_i|
-#   title = Faker::Lorem.sentence
-#   body = Faker::Lorem.sentence
-#   user.reviews.create!(title: title,
-#                        body: body,
-#                        stars: rand(1..5),
-#                        product_id: 1)
-# end
 
-# 10.times do |_i|
-#   title = Faker::Lorem.sentence
-#   body = Faker::Lorem.sentence
-#   user.reviews.create!(title: title,
-#                        body: body,
-#                        stars: rand(1..5),
-#                        product_id: 2)
-# end
+# ゲストストアの商品に対するいいねの投稿
+guest_store.products.each do |product|
+  guest_user.like(product)
+  product.create_notification_like!(guest_user)
+end

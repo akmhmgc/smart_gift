@@ -1,5 +1,5 @@
 class Store < ApplicationRecord
-  include ImageModule
+  include AddDefaultImageModule
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

@@ -17,11 +17,6 @@ class Stores::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # ユーザー登録時にデフォルト画像を設定
-  def create
-    super
-    resource.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
-  end
 
   # GET /resource/edit
   # def edit

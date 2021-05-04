@@ -1,16 +1,23 @@
 class Product < ApplicationRecord
-  include ImageModule
   belongs_to :store
   belongs_to :category
   has_many :likes, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :notifications, dependent: :destroy
-
-  # バリデーション
+  has_one_attached :image
+  
+  validates :image, presence: true, content_type: { in: %w[image/jpeg image/gif image/png],
+                                                      message: '有効な形式の画像をアップロードしてください。' },
+                      size: { less_than: 5.megabytes,
+                              message: 'アップロード可能な画像は5MB以下となります' }
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: true, scope: :store }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 999_999 }  # 商品にいいねされた時の通知メソッド
+  
+  def display_image
+    image.variant(resize_to_fill: [200, 200])
+  end
+
   def create_notification_like!(current_user)
-    # すでに「いいね」されているか検索
     temp = Notification.where(['user_id = ? and store_id = ? and product_id = ? and action = ? ', current_user.id, store_id, id, 'like'])
 
     # いいねされていない場合のみ、通知レコードを作成
