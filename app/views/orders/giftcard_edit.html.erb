@@ -1,5 +1,5 @@
-<main class="max-w-screen-md mx-auto relative px-4 bg-white rounded border pb-6" id="container">
-    <div class="md:border md:p-4">
+<main class="max-w-screen-md mx-auto relative px-4 pb-6 mt-24" id="container">
+    <div class="md:border md:p-4 bg-white border p-4 rounde">
         <h2 class="text-lg font-semibold text-center">①ギフトを選ぶ</h2>
         <p class="text-right px-4 text-sm">価格</p>
         <div class="border-t">
@@ -11,7 +11,7 @@
         <p class="text-xs text-red-500" , id="sum_alert"></p>
     </div>
 
-    <div class="mt-8 md:border md:p-4">
+    <div class="mt-8 md:border md:p-4 bg-white border p-4 rounded">
         <h2 class="text-lg font-semibold text-center">②メッセージを書く</h2>
         <%= form_with(url: order_url, method: :post,local: true) do |f| %>
         <div class="mb-4 max-w-md mx-auto">

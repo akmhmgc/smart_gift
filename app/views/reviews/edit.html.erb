@@ -1,4 +1,4 @@
- <div class="max-w-sm w-full mx-auto px-4>
+ <div class="form">
      <h2 class="title mb-2">レビュー更新</h2>
      <%= render 'shared/error_messages' , resource: @review %>
      <%= form_with(model: @review, method: :put,local: true) do |f| %>
@@ -14,5 +14,5 @@
      <%= f.submit "更新", class: "bg-gray-300 text-white text-sm font-bold py-2 px-4 rounded cursor-not-allowed",disabled:true, id:"review_post"%>
      <% end %>
  </div>
-
+ 
  <%= javascript_pack_tag 'review_check' %>

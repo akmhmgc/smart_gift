@@ -16,5 +16,7 @@ var review_check = function () {
     }
 };
 
+review_check();
 review_title.addEventListener('input',review_check);
 review_body.addEventListener('input',review_check);
+
