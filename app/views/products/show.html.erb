@@ -12,7 +12,7 @@
                     aria-label="Rating of this product is <%= @product.stars_average %> out of 5."></div>
                 <span><%= "#{@product.reviews_count}個の評価" %></span>
                 <% end %>
-                <p class="text-lg font-semibold"><%= @product.name %></p>
+                <p cl ass="text-lg font-semibold"><%= @product.name %></p>
                 <p class="text-lg font-semibold mt-4"><%= "#{@product.price} 円" %></p>
                 <p class="my-6"><%= @product.description %></p>
 
@@ -52,7 +52,7 @@
                             <%= "#{product.price.to_s} 円" %>
                         </h1>
                         <%= link_to store_url(product.store),class:"hover:underline" do %>
-                        <% end %>x
+                        <% end %>
 
                     </article>
 
@@ -71,11 +71,11 @@
                 </div>
             </div>
         </section>
-        <% if @review %>
+        <% if @new_review %>
         <section class="form py-4 w-full max-w-sm mx-auto">
             <h2 class="title mb-2">レビュー投稿</h2>
             <div id="errors">
-                <%= render 'shared/error_messages' , resource: @review %>
+                <%= render 'shared/error_messages' , resource: @new_review %>
             </div>
             <%= render 'shared/review_form' %>
         </section>
