@@ -17,8 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     return unless resource.save
-
-    profile = resource.create_profile!(name: resource.username)
+    resource.create_profile!(name: resource.username)
   end
 
   # GET /resource/edit
