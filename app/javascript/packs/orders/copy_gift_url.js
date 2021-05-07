@@ -7,7 +7,7 @@ const clipbordCopy = () =>{
       alert("クリップボードにコピーできませんでした");return false;
   }
   navigator.clipboard.writeText(url).then(
-      ()=>alert("クリップボードにコピーしました"),
+      ()=>alert("クリップボードにコピーしました。SNSなどでプレゼントできます。"),
       ()=>alert("クリップボードにコピーできませんでした")
   );
   return true;
