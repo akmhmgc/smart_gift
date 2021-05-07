@@ -16,50 +16,32 @@
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
             <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
                 <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
-                <%= image_tag("cake_1-min.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
+                <%= image_tag("category_cake.jpeg", class: "my-0 mx-auto rounded object-cover w-full h-32 hover:opacity-70")%>
                 <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
                 <% end %>
             </div>
             <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
                 <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
-                <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
+                <%= image_tag("category_wagashi.jpeg", class: "my-0 mx-auto object-cover rounded w-full h-32 hover:opacity-70")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">和菓子</h2>
+                <% end %>
+            </div>
+            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"4")) do %>
+                <%= image_tag("pudding.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32 hover:opacity-70")%>
                 <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
                 <% end %>
             </div>
             <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
-                <%= image_tag("cake_1-min.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
-                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"5")) do %>
+                <%= image_tag("category_chocolate.jpeg", class: "my-0 mx-auto object-cover rounded w-full h-32 hover:opacity-70")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">チョコ</h2>
                 <% end %>
             </div>
             <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
-                <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
-                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
-                <% end %>
-            </div>
-            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
-                <%= image_tag("cake_1-min.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
-                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
-                <% end %>
-            </div>
-            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
-                <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
-                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
-                <% end %>
-            </div>
-            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"2")) do %>
-                <%= image_tag("cake_1-min.jpg", class: "my-0 mx-auto rounded object-cover w-full h-32")%>
-                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">ケーキ</h2>
-                <% end %>
-            </div>
-            <div class="relative w-1/3 p-1 md:w-1/4 md:p-2">
-                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"3")) do %>
-                <%= image_tag("pudding.jpg", class: "my-0 mx-auto object-cover rounded w-full h-32")%>
-                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">プリン</h2>
+                <%= link_to(products_url("q[category_id_or_category_ancestry_eq]":"8")) do %>
+                <%= image_tag("category_fruit.jpeg", class: "my-0 mx-auto rounded object-cover w-full h-32 hover:opacity-70")%>
+                <h2 class="text-white font-bold absolute top-1/2 right-1/2 transform translate-x-1/2">フルーツ</h2>
                 <% end %>
             </div>
     </article>
