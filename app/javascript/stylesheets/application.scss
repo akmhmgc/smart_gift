@@ -222,6 +222,7 @@
 
 #facebook_btn {
   background-color: #3B5998;
+  @apply hover:opacity-70;
 }
 
 #twitter_btn {
