@@ -17,6 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     return unless resource.save
+
     resource.create_profile!(name: resource.username)
   end
 
