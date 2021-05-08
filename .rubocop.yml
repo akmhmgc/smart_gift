@@ -74,8 +74,9 @@ Metrics/MethodLength:
     - "spec/**/*.rb"
 
 Metrics/BlockLength:
+  Max: 50
   Exclude:
-    - 'spec/**/*.rb'
+    - "spec/**/*"
     - "spec/system/*.rb"
     - "config/routes.rb"
 

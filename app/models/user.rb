@@ -15,17 +15,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:facebook]
 
-  # 商品をお気に入りに入れる
   def like(product)
     products << product
   end
-
-  # 商品のお気に入りの解除
+  
   def unlike(product)
     likes.find_by(product_id: product.id).destroy
   end
 
-  # 現在のユーザーがフォローしてたらtrueを返す
   def like?(product)
     likes.exists?(product_id: product.id)
   end
@@ -53,7 +50,6 @@ class User < ApplicationRecord
     end
   end
 
-  # カート内側アイテムを購入する
   def pay
     ActiveRecord::Base.transaction do
       cart.attributes = { received: true }
@@ -71,11 +67,4 @@ class User < ApplicationRecord
     giftcard.save!(touch: false)
   end
 
-  # private
-
-  # def profile_setup
-  #   build_profile
-  #   profile.update(name: 'ユーザー')
-  #   profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
-  # end
 end

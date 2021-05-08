@@ -100,6 +100,64 @@ RSpec.describe User, type: :model do
         expect { user.destroy }.to change(Notification, :count).by(-1)
       end
     end
+  end
 
+  fdescribe "メソッドのテスト" do
+    let(:user) { create(:user) }
+    let(:product) { create(:product) }
+    describe "#like" do
+      it "商品をお気に入りに追加する" do
+        expect { user.like(product) }.to change(Like.where(user_id:user.id, product_id:product.id), :count).by(1)
+      end
+
+      it "既にお気に入りしている商品をいいねするとエラーが発生する" do
+        user.like(product)
+        expect { user.like(product) }.to raise_error ActiveRecord::RecordInvalid
+      end
+    end
+
+    describe "like?" do
+      it "既にお気に入りしている商品の場合trueを返す" do
+        user.like(product)
+        expect(user.like?(product)).to be_truthy
+      end
+
+      it "お気に入りしていない商品の場合falseを返す" do
+        expect(user.like?(product)).to be_falsey
+      end
+    end
+
+    describe "unlike" do
+      it "商品をお気に入りから外す" do
+        user.like product
+        expect { user.unlike(product) }.to change(Like.where(user_id:user.id, product_id:product.id), :count).by(-1)
+      end
+    end
+
+    describe "#self.guest" do
+      it "ゲストユーザーが存在しない場合新規で作成される" do
+        expect { User.guest }.to change(User.where(email: 'guest_user@example.com'), :count).by(1)
+      end
+
+      it "ゲストユーザーが存在する場合は作成しない" do
+        create(:user, email: 'guest_user@example.com')
+        expect { User.guest }.to change(User.where(email: 'guest_user@example.com'), :count).by(0)
+      end
+    end
+
+    describe "#receive_giftcard?" do
+      before do
+        @giftcard = create(:order,received:true,recipient_id:nil)
+        create(:order_item, order_id: @giftcard.id)
+      end
+      it "ギフトカードが既に受け取られている場合はfalseを返す" do
+        user.receive_giftcard?(@giftcard)
+        expect { user.receive_giftcard?(@giftcard) }.to change(Order.where(recipient_id:user.id, received:true), :count).by(0)
+      end
+
+      it "ギフトカードが受け取られていない場合はtrueを返し、recipient_idが変更される" do
+        expect { user.receive_giftcard?(@giftcard) }.to change(Order.where(recipient_id:user.id, received:true), :count).by(1)
+      end
+    end
   end
 end
