@@ -15,6 +15,6 @@ module AddDefaultImageModule
   private
 
   def add_default_image
-    image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'default.png')
+    image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'default_img.png')
   end
 end
