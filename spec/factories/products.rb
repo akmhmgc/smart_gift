@@ -7,7 +7,6 @@ FactoryBot.define do
     association :store
     association :category
     after(:build) do |post|
-      sleep 0.4
       post.image.attach(io: File.open('spec/fixtures/image/user_default.png'), filename: 'user_default.png', content_type: 'image/png')
     end
   end
@@ -19,7 +18,6 @@ FactoryBot.define do
     association :store
     association :category
     after(:build) do |post|
-      sleep 0.4
       post.image.attach(io: File.open('spec/fixtures/image/user_default.png'), filename: 'user_default.png', content_type: 'image/png')
     end
   end
@@ -31,7 +29,6 @@ FactoryBot.define do
     association :store
     association :category
     after(:build) do |post|
-      sleep 0.4
       post.image.attach(io: File.open('spec/fixtures/image/user_default.png'), filename: 'user_default.png', content_type: 'image/png')
     end
   end
