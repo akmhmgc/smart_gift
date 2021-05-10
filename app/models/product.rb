@@ -42,7 +42,6 @@ class Product < ApplicationRecord
   end
 
   def update_stars_avarage
-    # stars_average = reviews.empty? ? 0.0 : reviews.average(:stars)
     stars_average = reviews.average(:stars) || 0.0
     update(stars_average: stars_average)
   end

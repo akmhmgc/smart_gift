@@ -11,32 +11,21 @@ RSpec.describe Product, type: :model do
     expect(product.errors.of_kind?(:name, :blank)).to be_truthy
   end
   it '名前が長すぎると無効' do
-    product = FactoryBot.build(:product, name: 'a' * 21)
+    product = FactoryBot.build(:product, name: 'a' * 31)
     product.valid?
     expect(product.errors.of_kind?(:name, :too_long)).to be_truthy
   end
   it '同一storeが同じ名前のproductを持つのは無効' do
-    category = FactoryBot.create(:category)
     store = FactoryBot.create(:store)
-    store.products.create!(name: 'サンプルアイテム',
-                           price: 300,
-                           category_id: category.id)
-    product = store.products.build(name: 'サンプルアイテム',
-                                   price: 300,
-                                   category_id: category.id)
+    create(:product, store_id: store.id, name: "サンプルストア")
+    product  = build(:product, store_id: store.id, name: "サンプルストア")
     product.valid?
     expect(product.errors.of_kind?(:name, :taken)).to be_truthy
   end
   it '異なるstoreが同じ名前のproductを持つのは有効' do
-    category = FactoryBot.create(:category)
-    store_1 = FactoryBot.create(:store)
-    store_1.products.create!(name: 'サンプルアイテム',
-                             price: 300,
-                             category_id: category.id)
-    store_2 = FactoryBot.create(:store)
-    product = store_2.products.build(name: 'サンプルアイテム',
-                                     price: 300,
-                                     category_id: category.id)
+    store = FactoryBot.create(:store)
+    create(:product, store_id: store.id, name: "サンプルストア")
+    product  = build(:product, name: "サンプルストア")
     expect(product).to be_valid
   end
 
@@ -110,6 +99,47 @@ RSpec.describe Product, type: :model do
 
       it 'Productが削除されたらreviewも削除されること' do
         expect { @product.destroy }.to change(Review, :count).by(-1)
+      end
+    end
+
+    context "Order_itemsモデルとのアソシエーション" do
+      let(:target) { :order_items }
+
+      it "OrderItemsとの関連付けはhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+
+      it "Productが削除されたらOrderItemsも削除されること" do
+        create(:order_item, product_id: @product.id)
+        expect { @product.destroy }.to change(OrderItem, :count).by(-1)
+      end
+    end
+
+    context "Notificationsモデルとのアソシエーション" do
+      let(:target) { :notifications }
+
+      it "OrderItemsとの関連付けはhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+
+      it "Productが削除されたらOrderItemsも削除されること" do
+        create(:notification, product_id: @product.id)
+        expect { @product.destroy }.to change(Notification, :count).by(-1)
+      end
+    end
+  end
+
+  describe 'メソッドテスト' do
+    let(:product) { create(:product) }
+    let(:user) { create(:user) }
+    describe "#create_notification_like!" do
+      it "いいねしていいない時、通知レコードを作成" do
+        expect { product.create_notification_like!(user) }.to change(Notification, :count).by(1)
+      end
+
+      it "既にいいねしている場合は通知レコードを作成しない" do
+        product.create_notification_like!(user)
+        expect { product.create_notification_like!(user) }.to change(Notification, :count).by(0)
       end
     end
   end

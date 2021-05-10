@@ -19,10 +19,10 @@ RSpec.describe Category, type: :model do
   end
 
   it '同じnameのカテゴリは無効である' do
-    category_1 = FactoryBot.create(:category, name:'サンプルカテゴリ')
-    category_2 = FactoryBot.build(:category, name:'サンプルカテゴリ')
-    category_2.valid?
-    expect(category_2.errors.of_kind?(:name, :taken)).to be_truthy
+    create(:category, name:'サンプルカテゴリ')
+    category = build(:category, name:'サンプルカテゴリ')
+    category.valid?
+    expect(category.errors.of_kind?(:name, :taken)).to be_truthy
   end
 
   describe '各モデルとのアソシエーション' do

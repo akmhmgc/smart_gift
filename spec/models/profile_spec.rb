@@ -29,6 +29,18 @@ RSpec.describe Profile, type: :model do
       profile.valid?
       expect(profile.errors.of_kind?(:name, :too_long)).to be_truthy
     end
+
+    it '所持金がマイナスの場合無効である' do
+      profile = FactoryBot.build(:profile, money: -100)
+      profile.valid?
+      expect(profile.errors.of_kind?(:money, :greater_than_or_equal_to)).to be_truthy
+    end
+
+    it '所持金が小数点を含む数の場合無効である' do
+      profile = FactoryBot.build(:profile, money: 100.5)
+      profile.valid?
+      expect(profile.errors.of_kind?(:money, :not_an_integer)).to be_truthy
+    end
   end
 
   it 'userを削除すると、userと紐づくprofileも削除される' do
@@ -47,6 +59,19 @@ RSpec.describe Profile, type: :model do
 
       it 'Userとの関連付けはbelongs_toであること' do
         expect(association.macro).to eq :belongs_to
+      end
+    end
+  end
+
+  describe "メソッドのテスト" do
+    let(:profile){create(:profile)}
+    describe "add_money" do
+      it "正の値を渡すとuserのmoneyが増える" do
+        expect { profile.add_money(100) }.to change { profile.money }.by(100)
+      end
+
+      it "負の値を渡すとuserのmoneyは変化しない" do
+        expect { profile.add_money(-100) }.to change { profile.money }.by(0)
       end
     end
   end

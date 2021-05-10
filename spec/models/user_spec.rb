@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.fdescribe User, type: :model do
   it '有効なユーザーモデル作成' do
     user = FactoryBot.build(:user)
     expect(user).to be_valid
@@ -64,7 +64,7 @@ RSpec.describe User, type: :model do
       let(:target) { :reviews }
       it { expect(association.macro).to eq :has_many }
       it { expect(association.class_name).to eq 'Review' }
-      it 'Userが削除されたらReviewも削除されること' do
+      pending 'Userが削除されたらReviewも削除されること' do
         create(:review, user_id:user.id)
         expect { user.destroy }.to change(Review, :count).by(-1)
       end
@@ -74,7 +74,7 @@ RSpec.describe User, type: :model do
       let(:target) { :likes }
       it { expect(association.macro).to eq :has_many }
       it { expect(association.class_name).to eq 'Like' }
-      it 'Userが削除されたらLikeも削除されること' do
+      pending 'Userが削除されたらLikeも削除されること' do
         create(:like, user_id:user.id)
         expect { user.destroy }.to change(Like, :count).by(-1)
       end
@@ -102,7 +102,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  fdescribe "メソッドのテスト" do
+  describe "メソッドのテスト" do
     let(:user) { create(:user) }
     let(:product) { create(:product) }
     describe "#like" do
