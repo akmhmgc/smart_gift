@@ -13,22 +13,14 @@ RSpec.describe Order, type: :model do
       it 'OrderItemとの関連付けはhas_manyであること' do
         expect(association.macro).to eq :has_many
       end
-
-      # it 'Orderが削除されたらOrderItemも削除されること' do
-      #   expect { order.destroy }.to change(OrderItem, :count).by(-1)
-      # end
     end
 
-    context 'OrderItemモデルとのアソシエーション' do
-      let(:target) { :order_items }
+    context 'Userモデルとのアソシエーション' do
+      let(:target) { :user }
 
       it 'OrderItemとの関連付けはhas_manyであること' do
-        expect(association.macro).to eq :has_many
+        expect(association.macro).to eq :belongs_to
       end
-
-      # it 'Orderが削除されたらOrderItemも削除されること' do
-      #   expect { order.destroy }.to change(OrderItem, :count).by(-1)
-      # end
     end
   end
 end

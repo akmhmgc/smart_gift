@@ -23,6 +23,8 @@ class Order < ApplicationRecord
     order_items.sum("order_items.price*quantity")
   end
 
+  private
+  
   def total_cannnot_over_users_money
     errors.add(:order_items, "が利用可能金額を超えています。プロフィール画面よりチャージまたはアイテムを減らしてください。") if total_price > user.profile.money
   end

@@ -65,5 +65,18 @@ RSpec.describe Store, type: :model do
         expect { @store.destroy }.to change(Product, :count).by(-1)
       end
     end
+
+    describe "メソッドのテスト" do 
+      describe "#self.guest" do
+        it "ゲストストアが存在しない場合新規で作成される" do
+          expect { Store.guest }.to change(Store.where(email: 'guest_store@example.com'), :count).by(1)
+        end
+  
+        it "ゲストストアが存在する場合は作成しない" do
+          create(:store, email: 'guest_store@example.com')
+          expect { Store.guest }.to change(Store.where(email: 'guest_store@example.com'), :count).by(0)
+        end
+      end
+    end
   end
 end
