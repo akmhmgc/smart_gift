@@ -96,4 +96,7 @@ RSpec.configure do |config|
       end
     end
   end
+
+  OmniAuth.config.test_mode = true
+  config.include OmniauthMacros
 end

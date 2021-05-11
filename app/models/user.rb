@@ -43,6 +43,7 @@ class User < ApplicationRecord
     super.tap do |user|
       if (data = session['devise.omniauth_data'])
         user.email = data['email'] if user.email.blank?
+        user.username = data['username'] if user.username.blank?
         user.provider = data['provider'] if data['provider'] && user.provider.blank?
         user.uid = data['uid'] if data['uid'] && user.uid.blank?
         user.skip_confirmation!
@@ -66,5 +67,4 @@ class User < ApplicationRecord
     giftcard.attributes = { recipient_id: id, received_at: Time.zone.now }
     giftcard.save!(touch: false)
   end
-
 end

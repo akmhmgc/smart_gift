@@ -1,5 +1,6 @@
 <%- if controller_name != 'sessions' %>
   <%= link_to "ログイン", new_session_path(resource_name) %>
+  <%= link_to "Facebookでサインアップ", omniauth_authorize_path(:user, :facebook) %>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>

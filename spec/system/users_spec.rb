@@ -65,7 +65,7 @@ RSpec.describe 'Users', type: :system do
 
       # ユーザーのログインページに移動するとリダイレクトされる
       visit new_user_session_path
-      expect(current_path).to eq store_path(current_store)
+      expect(current_path).to eq store_root_path
       expect(page).to have_content '店舗として既にログインしています。'
 
       # 店舗がログアウトするとユーザーはログイン可能
@@ -77,6 +77,37 @@ RSpec.describe 'Users', type: :system do
       fill_in 'パスワード', with: 'foobar'
       click_on 'ログインする'
       expect(page).to have_content 'ログインしました。'
+    end
+  end
+
+  describe "Faceebookでのログインができること", js: true do
+    before do
+      OmniAuth.config.mock_auth[:facebook] = nil
+      Rails.application.env_config['omniauth.auth'] = facebook_mock
+      visit root_path
+      click_link "ログイン"
+      click_link "Facebook"
+      sleep 0.5
+      fill_in 'パスワード', with: 'foobar'
+      fill_in '確認用パスワード', with: 'foobar'
+    end
+
+    it "新規サインアップするとユーザーが増える" do
+      expect  do
+        click_button '新規登録する'
+      end.to change(User, :count).by(1)
+    end
+
+    it "一度サインアップした後だとログインしてトップページに移動" do
+      click_button '新規登録する'
+      find(".tham-box").click
+      sleep 1
+      click_link "ログアウト"
+      sleep 0.5
+      click_link "ログイン"
+      click_link "Facebook"
+      sleep 0.5
+      expect(current_path).to eq root_path
     end
   end
 end
