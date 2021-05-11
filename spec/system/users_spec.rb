@@ -98,7 +98,7 @@ RSpec.describe 'Users', type: :system do
       end.to change(User, :count).by(1)
     end
 
-    fit "一度サインアップした後だとログインしてトップページに移動" do
+    it "一度サインアップした後だとログインしてトップページに移動" do
       click_button '新規登録する'
       find(".tham-box").click
       sleep 1

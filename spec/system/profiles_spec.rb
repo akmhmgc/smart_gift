@@ -39,18 +39,18 @@ RSpec.describe 'Profiles', type: :system do
 
       it 'プロフィール画面が表示される' do
         expect(page).to have_selector 'img'
-        expect(page).to have_selector 'p', text: 'テスト太郎'
+        expect(page).to have_selector 'span', text: 'テスト太郎'
       end
 
       it '編集画面にアクセスでき、プロフィールを編集できる' do
-        click_on '編集する'
+        click_on '編集'
         expect(current_path).to eq edit_profiles_path(current_profile.user)
         attach_file 'image', "#{Rails.root}/spec/fixtures/image/cake.jpg"
         fill_in 'name', with: 'テスト次郎'
         click_on '更新'
         expect(current_path).to eq profiles_path(current_profile.user)
         expect(page).to have_selector "img[src$='cake.jpg']"
-        expect(page).to have_selector 'p', text: 'テスト次郎'
+        expect(page).to have_selector 'span', text: 'テスト次郎'
       end
     end
 
@@ -61,7 +61,7 @@ RSpec.describe 'Profiles', type: :system do
 
       it 'プロフィール画面が表示されるが、編集できないこと' do
         expect(page).to have_selector 'img'
-        expect(page).to have_selector 'p', text: 'テスト三郎'
+        expect(page).to have_selector 'span', text: 'テスト三郎'
 
         visit edit_profiles_path(other_user)
         expect(current_path).to eq profiles_path(other_user)
@@ -77,7 +77,7 @@ RSpec.describe 'Profiles', type: :system do
 
     it 'プロフィール画面が表示されるが、編集できないこと' do
       expect(page).to have_selector 'img'
-      expect(page).to have_selector 'p', text: 'テスト三郎'
+      expect(page).to have_selector 'span', text: 'テスト三郎'
       expect(page).not_to have_selector 'a', text: '編集する'
 
       visit edit_profiles_path(other_user)
