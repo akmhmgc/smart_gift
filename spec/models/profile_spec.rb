@@ -64,7 +64,7 @@ RSpec.describe Profile, type: :model do
   end
 
   describe "メソッドのテスト" do
-    let(:profile){create(:profile)}
+    let(:profile) { create(:profile) }
     describe "add_money" do
       it "正の値を渡すとuserのmoneyが増える" do
         expect { profile.add_money(100) }.to change { profile.money }.by(100)

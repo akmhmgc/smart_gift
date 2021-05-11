@@ -147,7 +147,7 @@ RSpec.fdescribe User, type: :model do
 
     describe "#receive_giftcard?" do
       before do
-        @giftcard = create(:order,received:true,recipient_id:nil)
+        @giftcard = create(:order, received:true, recipient_id:nil)
         create(:order_item, order_id: @giftcard.id)
       end
       it "ギフトカードが既に受け取られている場合はfalseを返す" do

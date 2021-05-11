@@ -18,7 +18,7 @@ class User < ApplicationRecord
   def like(product)
     products << product
   end
-  
+
   def unlike(product)
     likes.find_by(product_id: product.id).destroy
   end
