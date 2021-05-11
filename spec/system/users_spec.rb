@@ -98,7 +98,7 @@ RSpec.describe 'Users', type: :system do
       end.to change(User, :count).by(1)
     end
 
-    it "一度サインアップした後だとログインしてトップページに移動" do
+    fit "一度サインアップした後だとログインしてトップページに移動" do
       click_button '新規登録する'
       find(".tham-box").click
       sleep 1
@@ -108,6 +108,7 @@ RSpec.describe 'Users', type: :system do
       click_link "Facebook"
       sleep 0.5
       expect(current_path).to eq root_path
+      expect(page).to have_content 'Facebook アカウントによる認証に成功しました。'
     end
   end
 end
