@@ -4,12 +4,12 @@
     <%= render 'shared/error_messages' , resource: @product %>
 
     <div class="image my-4">
-        <%= f.label :アイテム画像, class: "block text-sm font-bold mb-1" %>
+        <%= f.label :image, class: "block text-sm font-bold mb-1" %>
         <%= f.file_field :image, autofocus: true, id: "image_field", class: "hidden",accept: 'image/jpg,image/jpeg,image/png,image/gif'%>
         <%= image_tag(@product.image.variant(resize_to_fill: [112, 112]), class: "my-0 cursor-pointer hover:opacity-70 transform hover:scale-110 w-28 image_prev",id: "image_btn", onclick: "document.querySelector('#image_field').click()")%>
     </div>
 
-    <div class="field">
+    <div class="field mt-4">
         <%= f.label :category %>
         <%= f.collection_select :category_id, @categories, :id, :name %>
     </div>

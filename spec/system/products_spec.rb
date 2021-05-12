@@ -20,9 +20,12 @@ RSpec.describe 'Products', type: :system do
     let(:login_store) { current_store }
 
     it '新しい商品を作成可能' do
+      find(".tham-box").click
+      sleep 1
+      click_link "販売アイテム"
       click_on '商品登録'
       expect(current_path).to eq new_dashboard_product_path
-      attach_file 'product_image', "#{Rails.root}/spec/fixtures/image/cake.jpg"
+      find("#image_field").attach_file(Rails.root.join('spec/fixtures/image/cake.jpg'))
       fill_in 'product_name', with: 'テスト商品'
       fill_in 'product_price', with: 3000
       select 'ケーキ', from: 'product[category_id]'
@@ -45,16 +48,18 @@ RSpec.describe 'Products', type: :system do
     end
 
     context '現在の店舗=商品の店舗' do
-      it '商品の編集ができる' do
+      fit '商品の編集ができる' do
         visit edit_dashboard_product_path(current_product)
         fill_in 'product_name', with: 'テスト商品2'
         fill_in 'product_price', with: 999
         fill_in 'product_description', with: 'テスト商品2です。'
+        find("#image_field").attach_file(Rails.root.join('spec/fixtures/image/pudding.jpg'))
         click_on '更新する'
 
         expect(current_path).to eq dashboard_products_path
         expect(page).to have_selector 'p', text: 'テスト商品2'
         expect(page).to have_selector 'p', text: '999'
+        expect(page).to have_selector "img[src$='pudding.jpg']"
       end
 
       it '商品の削除ができる', js: true do
