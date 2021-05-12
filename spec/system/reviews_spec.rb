@@ -4,7 +4,6 @@ RSpec.describe 'Reviews', type: :system do
   let(:current_user) { FactoryBot.create(:user, email: 'user_test@test.com') }
   let!(:current_profile) { FactoryBot.create(:profile, user_id: current_user.id) }
   let(:current_product) { FactoryBot.create(:product) }
-  # let(:current_product) { FactoryBot.create(:product) }
 
   context 'ユーザーがログインしているとき' do
     let(:login_user) { current_user }
@@ -14,7 +13,7 @@ RSpec.describe 'Reviews', type: :system do
       visit product_path(current_product)
     end
 
-    fdescribe 'レビュー投稿' do
+    describe 'レビュー投稿' do
       it 'レビュー投稿フォームが表示されること' do
         expect(page).to have_content 'レビュー投稿'
         expect(page).to have_selector('input', id: 'review_title')
@@ -31,10 +30,28 @@ RSpec.describe 'Reviews', type: :system do
         expect(page).to have_content 'review_body'
         expect(page).to have_selector 'div', style: '--rating: 5;'
       end
+
+      it 'レビューを投稿すると評価の平均が変わること', js: true do
+        user = create(:user, email: 'other_user_test@test.com')
+        create(:profile, user_id: user.id)
+        create(:review, product_id: current_product.id, stars: 3, user_id:user.id)
+        fill_in 'review_title', with: 'review_title'
+        fill_in 'review_body', with: 'review_body'
+        select '★★★★★', from: 'review[stars]'
+        click_button '投稿'
+
+        expect(page).to have_content 'レビューが投稿されました'
+        expect(page).to have_content 'review_title'
+        expect(page).to have_content 'review_body'
+        expect(page).to have_selector 'div', style: "--rating: #{current_product.reload.stars_average};"
+      end
     end
 
     describe 'レビュー編集・削除' do
       before 'レビュー投稿' do
+        user = create(:user, email: 'other_user_test@test.com')
+        create(:profile, user_id: user.id)
+        create(:review, product_id: current_product.id, stars: 3, user_id:user.id)
         fill_in 'review_title', with: 'review_title'
         fill_in 'review_body', with: 'review_body'
         click_button '投稿'
@@ -42,7 +59,7 @@ RSpec.describe 'Reviews', type: :system do
       end
 
       describe 'レビュー編集', js: true do
-        it '自分のレビューには編集ボタンが表示され、編集可能である ' do
+        it '自分のレビューは編集可能であり、編集すると評価の平均が変わる' do
           expect(page).to have_link '編集'
           click_on '編集'
           fill_in 'review_title', with: 'edited_review_title'
@@ -53,7 +70,7 @@ RSpec.describe 'Reviews', type: :system do
           expect(page).to have_content 'レビューが更新されました'
           expect(page).to have_selector 'span', text: 'review_title'
           expect(page).to have_selector 'p', text: 'review_body'
-          expect(page).to have_selector 'div', style: '--rating: 3;'
+          expect(page).to have_selector 'div', style: "--rating: #{current_product.reload.stars_average};"
         end
       end
 

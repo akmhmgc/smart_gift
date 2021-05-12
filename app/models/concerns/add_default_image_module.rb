@@ -17,7 +17,7 @@ module AddDefaultImageModule
 
   def add_default_image
     return if image.attached?
-
+    
     image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'default_img.png')
   end
 end
