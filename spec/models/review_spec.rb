@@ -45,4 +45,27 @@ RSpec.describe Review, type: :model do
       end
     end
   end
+
+  describe "callback" do
+    before do
+      @product = create(:product)
+      sleep 0.5
+      create_list(:review, 3, product_id: @product.id, stars: 3)
+      @review = create(:review, product_id: @product.id, stars: 1)
+    end
+
+    it "レビューが追加されると商品の星の平均と評価の数が変わる" do
+      create(:review, product_id: @product.id, stars: 5)
+      @product.reload
+      expect(@product.reviews_count).to eq 5
+      expect(@product.stars_average).to eq @product.reviews.average(:stars)
+    end
+
+    it "レビューが削除されると商品の星の平均と評価の数が変わる" do
+      @review.destroy
+      @product.reload
+      expect(@product.reviews_count).to eq 3
+      expect(@product.stars_average).to eq @product.reviews.average(:stars)
+    end
+  end
 end
