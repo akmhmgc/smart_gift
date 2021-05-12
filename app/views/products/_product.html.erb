@@ -1,10 +1,10 @@
         <!-- Column -->
-        <div class="my-1 px-1 w-1/3 md:w-1/4 lg:my-4 lg:px-1 lg:w-1/5 mb-10 mt-2">
+        <div class="my-1 px-1 w-1/3 md:w-1/4 lg:my-4 lg:px-1 lg:w-1/5 mb-10 mt-2 product">
             <%= link_to product , class:"hover:opacity-70 inline-block" do%>
             <%= image_tag(product.display_image, class: "block h-auto w-full") %>
-            <h1 class="mt-2">
+            <h2 class="mt-2">
                 <%= product.name %>
-            </h1>
+            </h2>
             <% end %>
             <% if product.reviews_count > 0 %>
             <div class="Stars" style="--rating: <%= product.stars_average %>;"

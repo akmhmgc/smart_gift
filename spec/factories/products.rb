@@ -24,7 +24,7 @@ FactoryBot.define do
 
   factory :search_b, class: 'Product' do
     name { 'piyo' }
-    price { 1000 }
+    price { 2000 }
     description { 'サンプルアイテムです' }
     association :store
     association :category
