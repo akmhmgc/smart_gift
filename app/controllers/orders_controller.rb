@@ -7,7 +7,12 @@ class OrdersController < ApplicationController
     @giftcard = Order.where(received: true).find_by!(public_uid: params[:id])
   end
 
-  def giftcard_preview; end
+  def giftcard_preview
+    return unless current_cart.invalid?
+
+    flash[:alert] = '不正なプレビューです。'
+    redirect_to root_path
+  end
 
   def giftcard_edit; end
 
