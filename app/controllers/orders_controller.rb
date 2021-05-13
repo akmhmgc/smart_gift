@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:giftcard_show]
-  before_action :setup_cart_item!, only: %i[add_item update_item delete_item]
+  before_action :setup_cart_item!, only: %i[add_item update_item]
 
   def giftcard_show
     # 購入済みのギフトカードを表示する
@@ -50,6 +50,7 @@ class OrdersController < ApplicationController
 
   # アイテムの追加
   def add_item
+    # 初めて追加する場合
     unless @cart_item
       price = Product.find_by(id: params[:product_id]).price
       @cart_item = current_cart.order_items.build(product_id: params[:product_id], price: price)
@@ -80,6 +81,7 @@ class OrdersController < ApplicationController
 
   # アイテムの削除
   def delete_item
+    @cart_item = OrderItem.find_by(order_id: current_cart.id, product_id: params[:product_id])
     if @cart_item.destroy
       flash[:notice] = 'カート内のギフトが削除されました'
     else
