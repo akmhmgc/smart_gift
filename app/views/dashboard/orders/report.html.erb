@@ -1,13 +1,14 @@
 <main class="max-w-4xl mx-auto relative p-6 bg-white rounded border" id="container">
     <div class="text-center">
-        <%= link_to store_root_path(month:@month.prev_month) do%>
-        <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
+        <%= link_to store_root_path(month:@month.prev_month),class:"inline-block pb-4" do%>
+        <div class="circle h-10 w-10 rounded-full bg-gray-300 text-center leading-10 inline-block hover:bg-gray-400">
             <span class="text-white font-semibold">
-                <</span> </div> <% end %> <span class="text-lg font-semibold text-center p-4">
+                <</span> </div> <% end %> <span class="text-lg font-semibold text-center pb-4">
                     <%= @month.strftime("%Y年%m月") %>のレポート
             </span>
-            <%= link_to store_root_path(month:@month.next_month) do%>
-            <div class="circle h-8 w-8 rounded-full bg-gray-300 text-center leading-8 inline-block hover:bg-gray-400">
+            <%= link_to store_root_path(month:@month.next_month),class:"inline-block p-4"  do%>
+            <div
+                class="circle h-10 w-10 rounded-full bg-gray-300 text-center leading-10 inline-block hover:bg-gray-400">
                 <span class="text-white font-semibold">></span>
             </div>
             <% end %>

@@ -32,6 +32,7 @@ RSpec.describe "Stores", type: :system do
       click_link '店舗として新規会員登録'
       fill_in '店舗名', with: 'テスト商店'
       fill_in 'メールアドレス', with: 'test@test.com'
+      fill_in '店舗紹介文', with: 'hello my store'
       fill_in 'パスワード', with: 'password'
       fill_in '確認用パスワード', with: 'password'
       expect { click_button '新規登録する' }.to change { ActionMailer::Base.deliveries.size }.by(1)
