@@ -6,7 +6,7 @@ RSpec.describe 'Carts', type: :system do
   let(:current_product) { FactoryBot.create(:product, price: 500, name: 'test_product') }
   describe 'カート機能' do
     context 'ユーザーがログインしている時' do
-      before 'ログインして商品ページに移動' do
+      before 'ログインして商品を追加' do
         login_test_user(current_user)
         visit product_path(current_product)
         select '4', from: 'quantity'
@@ -46,6 +46,28 @@ RSpec.describe 'Carts', type: :system do
         sleep 0.5
         expect(page).not_to have_content 'test_product'
         expect(page).to have_content '合計 0円'
+      end
+
+      fit 'カートに追加した商品を購入し、ギフトカードを自分で受け取ると受け取り済みギフトにに追加されていること', js: true do
+        fill_in 'message_box', with: 'message'
+        fill_in 'sender_name', with: 'tarou'
+        click_button 'ギフトカードの作成'
+
+        expect(page).to have_content 'ギフトカードが完成しました'
+        expect(page).to have_content 'message'
+        expect(page).to have_content 'tarouさんからのメッセージ'
+        click_button '決済する'
+
+        expect(page).to have_content 'ギフトカードの購入が完了しました'
+        click_button '自分で受け取る'
+
+        expect(page).to have_content 'ギフトの受け取りに成功しました'
+        expect(page).to have_content 'message'
+        expect(page).to have_content 'tarouさんからのメッセージ'
+        expect(page).to have_content 'test_product'
+        expect(page).to have_content '4個'
+
+        # 注文履歴にも表示される
       end
     end
 
