@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
     else
       flash[:alert] = 'チャージに失敗しました'
     end
-    redirect_back(fallback_location: profiles_url(current_user))
+    redirect_to giftcard_edit_path
   end
 
   def update

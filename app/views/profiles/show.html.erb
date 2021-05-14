@@ -10,14 +10,6 @@
   <% if current_user == @profile.user %>
   <%= link_to'編集', edit_profiles_path(current_user), class:"hover:underline hover:opacity-70"%>
   <% end %>
-  <div class="money text-center">
-    <% if @profile.user == current_user%>
-    <p><%= "ご利用可能金額:#{@profile.money}円" %></p>
-    <div class="charge mt-8">
-      <%= render 'shared/charge_form'%>
-    </div>
-    <% end %>
-  </div>
   <section id="reviews" class="pt-6 mb-10">
     <h2 class="py-2 font-semibold">過去に投稿したレビュー</h2>
     <% if @reviews.empty? %>

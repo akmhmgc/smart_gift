@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   def giftcard_preview
     return unless current_cart.invalid?
 
-    flash[:alert] = '不正なプレビューです。'
+    flash[:alert] = '不正なプレビューです'
     redirect_to root_path
   end
 
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
     flash[:notice] = 'ギフトカードの購入が完了しました'
     redirect_to giftcard_path(current_user.cart)
   rescue StandardError
-    flash[:alert] = '購入時にエラーが発生しました。'
+    flash[:alert] = '購入時にエラーが発生しました'
     redirect_to giftcard_preview_path
   end
 
@@ -39,10 +39,10 @@ class OrdersController < ApplicationController
     cart_params = params.permit(:message, :sender_name)
     current_cart.attributes = cart_params
     if current_cart.save(context: :cart_check)
-      flash[:notice] = 'ギフトカードが完成しました。'
+      flash[:notice] = 'ギフトカードが完成しました'
       redirect_to giftcard_preview_path
     else
-      flash.now[:alert] = 'ギフトカードの作成に失敗しました。'
+      flash.now[:alert] = 'ギフトカードの作成に失敗しました'
       render 'giftcard_edit'
     end
   end
@@ -57,10 +57,10 @@ class OrdersController < ApplicationController
 
     @cart_item.quantity += params[:quantity].to_i
     if  @cart_item.save
-      flash[:notice] = '商品が追加されました。'
+      flash[:notice] = '商品が追加されました'
       redirect_to giftcard_edit_path
     else
-      flash[:alert] = '商品の追加に失敗しました。'
+      flash[:alert] = '商品の追加に失敗しました'
       redirect_to product_url(params[:product_id])
     end
   end

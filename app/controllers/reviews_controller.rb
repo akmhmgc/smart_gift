@@ -19,12 +19,13 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @review.update(review_params)
       flash[:notice] = 'レビューが更新されました'
-      redirect_to profiles_url(@review.user)
+      redirect_to stored_location_for(:user) || profiles_url(@review.user)
     else
       flash.now[:alert] = 'レビューの更新に失敗しました。詳細はメッセージをご確認ください。'
       render 'edit'
@@ -38,7 +39,7 @@ class ReviewsController < ApplicationController
     else
       flash[:alert] = '削除に失敗しました。'
     end
-    redirect_to profiles_url(@review.user)
+    redirect_to stored_location_for(:user) || profiles_url(@review.user)
   end
 
   private

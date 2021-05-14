@@ -48,7 +48,25 @@ RSpec.describe 'Carts', type: :system do
         expect(page).to have_content '合計 0円'
       end
 
-      it 'カートに追加した商品を購入すると所持金が減り注文履歴に表示され、ギフトカードを自分で受け取ると受け取り済みギフトにに追加されていること', js: true do
+      it 'カート内合計が所持金より多い場合、チャージすると購入可能なこと', js: true do
+        fill_in 'quantity', with: '30'
+        click_button '更新'
+        sleep 0.5
+
+        fill_in 'message_box', with: 'message'
+        fill_in 'sender_name', with: 'tarou'
+        click_button 'ギフトカードの作成'
+        expect(page).to have_content 'ギフトカードの作成に失敗しました'
+
+        click_link "10000円"
+        sleep 0.5
+        fill_in 'message_box', with: 'message'
+        fill_in 'sender_name', with: 'tarou'
+        click_button 'ギフトカードの作成'
+        expect(page).to have_content 'ギフトカードが完成しました'
+      end
+
+      it 'カートに追加した商品を購入すると所持金が減り注文履歴に表示され、ギフトカードを自分で受け取ると受け取り済みギフトに追加されていること', js: true do
         fill_in 'message_box', with: 'message'
         fill_in 'sender_name', with: 'tarou'
         click_button 'ギフトカードの作成'
@@ -80,6 +98,38 @@ RSpec.describe 'Carts', type: :system do
       end
     end
 
+    fcontext "チャージ機能" do
+      before do
+        login_test_user(current_user)
+        visit giftcard_edit_path
+      end
+
+      it "ボタンから所持金を10000円チャージ" do
+        click_link "10000円"
+        expect(page).to have_content '利用可能金額：20000円'
+      end
+      it "ボタンから所持金を5000円チャージ" do
+        click_link "5000円"
+        expect(page).to have_content '利用可能金額：15000円'
+      end
+
+      it "ボタンから所持金を1000円チャージ" do
+        click_link "1000円"
+        expect(page).to have_content '利用可能金額：11000円'
+      end
+
+      it "ボックスから所持金をチャージ" do
+        fill_in 'money', with: '14000'
+        click_button 'チャージ'
+        expect(page).to have_content '利用可能金額：24000円'
+      end
+
+      it "不正な金額はチャージ出来ない" do
+        fill_in 'money', with: '-14000'
+        click_button 'チャージ'
+        expect(page).to have_content 'チャージに失敗しました'
+      end
+    end
     context 'ユーザーがログインしていない時' do
       before 'ログインして商品ページに移動' do
         visit product_path(current_product)
