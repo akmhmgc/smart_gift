@@ -60,13 +60,11 @@ RSpec.describe 'Carts', type: :system do
 
         click_link "10000円"
         sleep 0.5
-        fill_in 'message_box', with: 'message'
-        fill_in 'sender_name', with: 'tarou'
         click_button 'ギフトカードの作成'
         expect(page).to have_content 'ギフトカードが完成しました'
       end
 
-      it 'カートに追加した商品を購入すると所持金が減り注文履歴に表示され、ギフトカードを自分で受け取ると受け取り済みギフトに追加されていること', js: true do
+      fit 'カートに追加した商品を購入すると所持金が減り注文履歴に表示され、ギフトカードを自分で受け取ると受け取り済みギフトに追加されていること', js: true do
         fill_in 'message_box', with: 'message'
         fill_in 'sender_name', with: 'tarou'
         click_button 'ギフトカードの作成'
@@ -92,13 +90,12 @@ RSpec.describe 'Carts', type: :system do
         expect(page).to have_content 'test_product'
         expect(page).to have_content '4個'
 
-        click_link 'テスト太郎'
-        sleep 0.5
-        expect(page).to have_content 'ご利用可能金額:8000円'
+        visit giftcard_edit_path
+        expect(page).to have_content '利用可能金額：8000円'
       end
     end
 
-    fcontext "チャージ機能" do
+    context "チャージ機能" do
       before do
         login_test_user(current_user)
         visit giftcard_edit_path

@@ -6,6 +6,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def new
     session.delete('devise.omniauth_data')
+    session.delete(:messages)
     super
   end
   # before_action :configure_sign_in_params, only: [:create]
@@ -26,6 +27,7 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def new_guest
+    session.delete(:messages)
     user = User.guest
     profile = user.profile || user.build_profile
     # profile情報の初期化

@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def giftcard_preview
-    return unless current_cart.invalid?
+    return unless current_cart.invalid?(context: :cart_check)
 
     flash[:alert] = '不正なプレビューです'
     redirect_to root_path
@@ -38,6 +38,7 @@ class OrdersController < ApplicationController
   def create
     cart_params = params.permit(:message, :sender_name)
     current_cart.attributes = cart_params
+    session[:messages] = cart_params
     if current_cart.save(context: :cart_check)
       flash[:notice] = 'ギフトカードが完成しました'
       redirect_to giftcard_preview_path

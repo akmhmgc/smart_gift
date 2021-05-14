@@ -14,9 +14,9 @@ class Order < ApplicationRecord
 
   belongs_to :user
   has_many :order_items, dependent: :destroy, inverse_of: :order
-  validates :order_items, length: { minimum: 1, message: 'を1つ以上選択してください'  }, on: :update
-  validates :sender_name, presence: true, length: { maximum: 20 }, on: :update
-  validates :message, presence: true, length: { maximum: 300 }, on: :update
+  validates :order_items, length: { minimum: 1, message: 'を1つ以上選択してください'  }, on: :cart_check
+  validates :sender_name, presence: true, length: { maximum: 20 }, on: :cart_check
+  validates :message, presence: true, length: { maximum: 300 }, on: :cart_check
   validate :total_cannnot_over_users_money, on: :cart_check
 
   def total_price
