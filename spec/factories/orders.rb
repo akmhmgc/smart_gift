@@ -6,10 +6,11 @@ FactoryBot.define do
     received { true }
   end
 
-  # factory :cart , class: 'Order' do
-  #   association :user
-  #   sender_name { 'test_taro' }
-  #   message { 'hello world' }
-  #   received { false }
-  # end
+  factory :giftcard, class: 'Order' do
+    association :user
+    sender_name { 'test_taro' }
+    message { 'hello world' }
+    received { true }
+    recipient_id { nil }
+  end
 end

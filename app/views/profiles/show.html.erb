@@ -12,7 +12,7 @@
   <% end %>
   <div class="money text-center">
     <% if @profile.user == current_user%>
-    <p><%= "所有ポイント:#{@profile.money}円" %></p>
+    <p><%= "ご利用可能金額:#{@profile.money}円" %></p>
     <div class="charge mt-8">
       <%= render 'shared/charge_form'%>
     </div>
