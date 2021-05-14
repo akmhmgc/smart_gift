@@ -19,12 +19,12 @@
         <%= form_with(url: order_url, method: :post,local: true) do |f| %>
         <div class="mb-4 max-w-md mx-auto">
             <%= f.label :"メッセージ", class:"block text-sm font-bold mb-1"%>
-            <%= f.text_area :message, placeholder: "20文字以内で入力してください。" ,value:current_cart.message, class:"border rounded w-full px-3 h-16",id:"message_box"%>
+            <%= f.text_area :message, placeholder: "300文字以内で入力してください。" ,value:current_cart.message, class:"border rounded w-full px-3 h-16",id:"message_box"%>
         </div>
 
         <div class="mb-4 max-w-md mx-auto">
             <%= f.label :"送り主の名前（ニックネーム）"%>
-            <%= f.text_field :sender_name,placeholder: "300文字以内で入力してください。" , value: current_cart.sender_name, class:"border rounded w-full px-3",id:"sender_name"%>
+            <%= f.text_field :sender_name,placeholder: "20文字以内で入力してください。" , value: current_cart.sender_name, class:"border rounded w-full px-3",id:"sender_name"%>
         </div>
     </div>
     <div id="error_messages">
