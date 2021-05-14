@@ -70,6 +70,7 @@ RSpec.describe 'Carts', type: :system do
         find(".tham-box").click
         sleep 1
         click_link "購入履歴"
+
         expect(page).to have_content 'test_product'
         expect(page).to have_content '4個'
 

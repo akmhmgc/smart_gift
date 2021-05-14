@@ -24,7 +24,7 @@
             <h2 class="font-semibold">売上高</h2>
             <%= column_chart @data %>
         </div>
-        <div class="text-center mt-10">
+        <div class="text-center mt-10 ranking">
             <h2 class="font-semibold">売り上げランキング</h2>
             <table class="table-auto w-full mt-4">
                 <thead>
@@ -67,10 +67,10 @@
                             <%= order.updated_at.strftime("%Y/%m/%d") %><br><span
                                 class="text-gray-500"><%= order.updated_at.strftime("%I:%M%p") %></span></th>
                         <th class="text-xs font-normal border py-2">
-                            <%= link_to order.id, dashboard_order_path(order.id),class:"text-blue-400 hover:text-blue-300 hover:underline" %>
+                            <%= link_to order.id, dashboard_order_path(order.id),class:"text-blue-400 hover:text-blue-300 hover:underline order_link" %>
                         </th>
                         <th class="text-xs font-normal truncate border"><%= order.user.profile.name %></th>
-                        <th class="text-xs font-normal border"><%= "¥#{order.total_price}" %></th>
+                        <th class="text-xs font-normal border"><%= "¥#{@order_totals[order.id]}" %></th>
                     </tr>
                     <% end %>
                 </tbody>

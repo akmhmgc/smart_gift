@@ -23,6 +23,10 @@ class Order < ApplicationRecord
     order_items.sum("order_items.price*quantity")
   end
 
+  def total_price_for_store(store)
+    order_items.joins(:product).where("store_id =?", store.id).sum("order_items.price*quantity")
+  end
+
   private
 
   def total_cannnot_over_users_money
