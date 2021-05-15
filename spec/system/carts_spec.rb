@@ -93,6 +93,20 @@ RSpec.describe 'Carts', type: :system do
         visit giftcard_edit_path
         expect(page).to have_content '利用可能金額：8000円'
       end
+
+      it "商品購入後プレビューページに移動するとエラーが起きる", js: true do
+        fill_in 'message_box', with: 'message'
+        fill_in 'sender_name', with: 'tarou'
+        click_button 'ギフトカードの作成'
+
+        expect(page).to have_content 'ギフトカードが完成しました'
+        expect(page).to have_content 'message'
+        expect(page).to have_content 'tarouさんからのメッセージ'
+        click_button '決済する'
+        visit giftcard_preview_path
+        expect(current_path).to eq root_path
+        expect(page).to have_content '不正なプレビューです'
+      end
     end
 
     context "チャージ機能" do

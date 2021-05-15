@@ -51,7 +51,8 @@ class User < ApplicationRecord
     end
   end
 
-  def pay
+  # カート内アイテムを決済する
+  def pay!
     ActiveRecord::Base.transaction do
       cart.attributes = { received: true }
       cart.save!(context: :cart_check)

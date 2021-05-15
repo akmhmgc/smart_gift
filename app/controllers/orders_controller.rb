@@ -1,17 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:giftcard_show]
-  before_action :setup_cart_item!, only: %i[add_item update_item delete_item]
+  before_action :setup_cart_item, only: %i[add_item update_item delete_item]
+  before_action :cart_validation, only: %i[giftcard_preview payment]
 
   def giftcard_show
     @giftcard = Order.where(received: true).find_by!(public_uid: params[:id])
   end
 
-  def giftcard_preview
-    return unless current_cart.invalid?(context: :cart_check)
-
-    flash[:alert] = '不正なプレビューです'
-    redirect_to root_path
-  end
+  def giftcard_preview; end
 
   def giftcard_edit; end
 
@@ -27,7 +23,7 @@ class OrdersController < ApplicationController
   end
 
   def payment
-    current_user.pay
+    current_user.pay!
     flash[:notice] = 'ギフトカードの購入が完了しました'
     redirect_to giftcard_path(current_user.cart)
   rescue StandardError
@@ -91,7 +87,14 @@ class OrdersController < ApplicationController
 
   private
 
-  def setup_cart_item!
+  def setup_cart_item
     @cart_item = current_cart.order_items.find_by(product_id: params[:product_id])
+  end
+
+  def cart_validation
+    return unless current_cart.invalid?(:cart_check)
+
+    flash[:alert] = '不正なプレビューです'
+    redirect_to root_path
   end
 end
