@@ -9,6 +9,7 @@ class Store < ApplicationRecord
 
   #   notification
   has_many :notifications, dependent: :destroy
+  has_many :order_items, dependent: :nullify
 
   validates :description, length: { maximum: 500 }, presence: true
   validates :storename, length: { maximum: 20 }, presence: true, uniqueness: { case_sensitive: true }

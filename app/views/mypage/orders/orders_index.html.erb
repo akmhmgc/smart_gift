@@ -23,13 +23,13 @@
             <div class="items p-4 bg-white">
                 <% order.order_items.each do |order_item| %>
                 <div class="my-2 pb-2 order_item">
-                    <%= link_to order_item.product , class:"hover:opacity-70 block" do%>
+                    <%= link_to order_item.product || product_path(0), class:"hover:opacity-70 block" do%>
                     <div class="flex w-full justify-between">
                         <div class="img px-4">
-                            <%= image_tag(order_item.product.image.variant(resize_to_fill: [100, 100])) %>
+                            <%= image_tag(order_item.product_image.variant(resize_to_fill: [100, 100])) %>
                         </div>
                         <div class="content px-4">
-                            <p><%= order_item.product.name %></p>
+                            <p><%= order_item.product_name %></p>
                         </div>
                         <div class="content px-4">
                             <p class="text-md font-semibold"><%="#{order_item.price}円" %></p>

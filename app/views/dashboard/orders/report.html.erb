@@ -36,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @products.each_with_index do |product,idx| %>
+                    <% @top_selling_products.each_with_index do |product,idx| %>
                     <tr>
                         <th class="text-xs font-normal border py-2"><%= idx+1 %></th>
                         <th class="text-xs font-normal truncate border">
@@ -69,7 +69,8 @@
                         <th class="text-xs font-normal border py-2">
                             <%= link_to order.id, dashboard_order_path(order.id),class:"text-blue-400 hover:text-blue-300 hover:underline order_link" %>
                         </th>
-                        <th class="text-xs font-normal truncate border"><%= order.user ? order.user.profile.name : "削除されたユーザー" %></th>
+                        <th class="text-xs font-normal truncate border">
+                            <%= order.user ? order.user.profile.name : "削除されたユーザー" %></th>
                         <th class="text-xs font-normal border"><%= "¥#{@order_totals[order.id]}" %></th>
                     </tr>
                     <% end %>

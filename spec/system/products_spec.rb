@@ -66,7 +66,7 @@ RSpec.describe 'Products', type: :system do
         visit edit_dashboard_product_path(current_product)
         click_on "削除する"
         expect{
-          expect(page.accept_confirm).to eq "商品を削除しますか？"
+          expect(page.accept_confirm).to eq "本当に削除しますか？" 
           expect(page).to have_content "削除に成功しました"
           sleep 1
           }. to change(current_store.products, :count).by(-1)

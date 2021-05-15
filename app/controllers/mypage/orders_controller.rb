@@ -6,10 +6,11 @@ class  Mypage::OrdersController < ApplicationController
   end
 
   def orders_index
-    @orders = current_user.orders.with_product_images.page(params[:page]).per(5)
+    @orders = current_user.orders.includes([{ order_items:  { product_image_attachment: :blob } }], [order_items: :product]).page(params[:page]).per(5)
   end
 
   def gifts_index
-    @gifts = current_user.giftcards.with_product_images.page(params[:page]).per(5)
+    @gifts = current_user.giftcards.includes([{ order_items:  { product_image_attachment: :blob } }], [order_items: :product])
+                         .page(params[:page]).reorder(received_at: :desc).per(5)
   end
 end

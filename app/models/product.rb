@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :order_items, dependent: :destroy
+  has_many :order_items, dependent: :nullify
   has_one_attached :image
 
   validates :image, presence: true, content_type: { in: %w[image/jpeg image/gif image/png],

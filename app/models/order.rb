@@ -4,8 +4,7 @@ class Order < ApplicationRecord
   default_scope -> { order(updated_at: :desc) }
   scope :with_product_images, -> { preload(order_items: { product: { image_attachment: :blob } }) }
   scope :belongs_to_store, lambda { |store|
-                             includes([{ order_items: :product },
-                                       { user: :profile }]).where(order_items: { products: { store_id: store.id } })
+                             eager_load([:order_items],[{user: :profile}]).where(order_items: { store_id: store.id })
                            }
 
   def to_param
@@ -24,7 +23,7 @@ class Order < ApplicationRecord
   end
 
   def total_price_for_store(store)
-    order_items.joins(:product).where("store_id =?", store.id).sum("order_items.price*quantity")
+    order_items.where("store_id =?", store.id).sum("order_items.price*quantity")
   end
 
   private

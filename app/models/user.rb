@@ -10,8 +10,6 @@ class User < ApplicationRecord
   has_many :giftcards, class_name: 'Order', foreign_key: "recipient_id"
   validates :username, presence: true, length: { maximum: 20 }
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:facebook]
 

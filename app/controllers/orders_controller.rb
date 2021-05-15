@@ -44,14 +44,13 @@ class OrdersController < ApplicationController
     end
   end
 
-  # アイテムの追加
   def add_item
-    # 初めて追加する場合
     unless @cart_item
-      price = Product.find_by(id: params[:product_id]).price
-      @cart_item = current_cart.order_items.build(product_id: params[:product_id], price: price)
+      product = Product.find_by(id: params[:product_id])
+      @cart_item = current_cart.order_items.build(product_id: params[:product_id],
+                                                  price: product.price, product_name: product.name,
+                                                  product_image: product.image.blob, store_id: product.store.id)
     end
-
     @cart_item.quantity += params[:quantity].to_i
     if  @cart_item.save
       flash[:notice] = '商品が追加されました'
@@ -62,7 +61,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # アイテムの更新
   def update_item
     if @cart_item.update(quantity: params[:quantity].to_i)
       respond_to do |format|

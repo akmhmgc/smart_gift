@@ -164,16 +164,23 @@ order = guest_user.orders.create!(sender_name: "ゲストユーザー",
 
 order.order_items.create!(product_id: product.id,
                             price: product.price,
-                          quantity: 4)
+                          quantity: 4,
+                        product_name: product.name,
+                      store_id: product.store.id,
+                    product_image: product.image.blob)
 
 # user１が購入したギフトを予めゲストユーザーが受け取っておく（1件）
 order = user.orders.create!(sender_name: "けんじろう",
                           message: "よろしくお願いします。")
 
 3.times do |i|
+  product = Product.find(i + 1)
   order.order_items.create!(product_id: i + 1,
   price: Product.find(i + 1).price,
-  quantity: rand(1..5))
+  quantity: rand(1..5),
+  product_name: product.name,
+store_id: product.store.id,
+product_image: product.image.blob)
 end
 guest_user.receive_giftcard?(order)
 
@@ -192,7 +199,10 @@ guest_user.receive_giftcard?(order)
     price: guest_product.price,
     quantity: rand(1..10),
     created_at: time,
-    updated_at: time)
+    updated_at: time,
+    product_name: guest_product.name,
+    store_id: guest_product.store.id,
+  product_image: guest_product.image.blob)
   end
 end
 
