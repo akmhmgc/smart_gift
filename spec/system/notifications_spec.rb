@@ -26,7 +26,7 @@ RSpec.describe 'Notifications', type: :system do
       login_test_store(current_store)
     end
 
-    fit '通知ページにコメントといいねが表示され、通知を確認するとマークが消える' do
+    it '通知ページにコメントといいねが表示され、通知を確認するとマークが消える' do
       expect(page).to have_selector 'span', id: 'notification_mark'
       visit notifications_path
       expect(page).to have_content "テスト太郎さんが サンプルアイテム_1 にいいねしました。"

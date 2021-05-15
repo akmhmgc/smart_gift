@@ -11,11 +11,8 @@ RSpec.describe "StoreReports", type: :system do
   let(:current_user) { FactoryBot.create(:user, email: 'user_test@test.com') }
   let!(:current_profile) { FactoryBot.create(:profile, user_id: current_user.id) }
 
-  before '店舗のログイン' do
-    login_test_store(current_store)
-  end
-
   it "自店舗の商品に関するレポートのみ表示" do
+    login_test_store(current_store)
     expect(page).to have_selector 'p', text: '￥2500'
 
     # 売り上げランキング商品
@@ -33,5 +30,17 @@ RSpec.describe "StoreReports", type: :system do
     expect(page).to have_content '5個'
 
     expect(page).not_to have_content 'other_product'
+  end
+
+  it "購入者アカウントが削除されても注文履歴は残り、「削除されたユーザー」となる" do
+    current_user.destroy
+    login_test_store(current_store)
+    expect(page).to have_selector 'th', text: '¥2500'
+    expect(page).to have_selector 'th', text: '削除されたユーザー'
+
+    find(".order_link").click
+    sleep 0.5
+    expect(page).to have_content 'current_product'
+    expect(page).to have_content '削除されたユーザー'
   end
 end

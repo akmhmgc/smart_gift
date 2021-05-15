@@ -12,7 +12,7 @@ class Order < ApplicationRecord
     public_uid
   end
 
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :order_items, dependent: :destroy, inverse_of: :order
   validates :order_items, length: { minimum: 1, message: 'を1つ以上選択してください'  }, on: :cart_check
   validates :sender_name, presence: true, length: { maximum: 20 }, on: :cart_check

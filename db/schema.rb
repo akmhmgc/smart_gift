@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_043457) do
+ActiveRecord::Schema.define(version: 2021_05_15_052746) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -67,18 +67,17 @@ ActiveRecord::Schema.define(version: 2021_04_26_043457) do
   end
 
   create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id", null: false
     t.bigint "order_id", null: false
     t.integer "price", default: 0, null: false
     t.integer "quantity", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "product_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "sender_name"
     t.text "message"
     t.boolean "received", default: false, null: false
@@ -87,6 +86,7 @@ ActiveRecord::Schema.define(version: 2021_04_26_043457) do
     t.string "public_uid"
     t.integer "recipient_id"
     t.datetime "received_at"
+    t.bigint "user_id"
     t.index ["public_uid"], name: "index_orders_on_public_uid", unique: true
     t.index ["recipient_id", "received"], name: "index_orders_on_recipient_id_and_received"
     t.index ["recipient_id"], name: "index_orders_on_recipient_id"
@@ -175,8 +175,6 @@ ActiveRecord::Schema.define(version: 2021_04_26_043457) do
   add_foreign_key "likes", "products"
   add_foreign_key "likes", "users"
   add_foreign_key "order_items", "orders"
-  add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "stores"
   add_foreign_key "profiles", "users"

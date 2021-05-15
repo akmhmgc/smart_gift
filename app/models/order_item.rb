@@ -1,5 +1,5 @@
 class OrderItem < ApplicationRecord
-  belongs_to :product
+  belongs_to :product, optional: true
   belongs_to :order
 
   scope :belongs_to_store, lambda { |store|

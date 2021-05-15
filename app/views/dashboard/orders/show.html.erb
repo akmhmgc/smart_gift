@@ -15,7 +15,7 @@
                         </div>
                         <div class="ml-6">
                             <p class="text-xs">購入者</p>
-                            <p><%=@order.user.profile.name %></p>
+                            <p><%=@order.user ? @order.user.profile.name : "削除されたユーザー" %></p>
                         </div>
                     </div>
                 </div>
