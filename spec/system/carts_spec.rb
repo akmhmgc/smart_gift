@@ -64,7 +64,7 @@ RSpec.describe 'Carts', type: :system do
         expect(page).to have_content 'ギフトカードが完成しました'
       end
 
-      fit 'カートに追加した商品を購入すると所持金が減り注文履歴に表示され、ギフトカードを自分で受け取ると受け取り済みギフトに追加されていること', js: true do
+      it 'カートに追加した商品を購入すると所持金が減り注文履歴に表示され、ギフトカードを自分で受け取ると受け取り済みギフトに追加されていること', js: true do
         fill_in 'message_box', with: 'message'
         fill_in 'sender_name', with: 'tarou'
         click_button 'ギフトカードの作成'
@@ -106,6 +106,43 @@ RSpec.describe 'Carts', type: :system do
         visit giftcard_preview_path
         expect(current_path).to eq root_path
         expect(page).to have_content '不正なプレビューです'
+      end
+
+      it "プレビュー作成時にエラーが発生してもギフトカード用のメッセージは保存されること", js: true do
+        fill_in 'quantity', with: '30'
+        click_button '更新'
+        sleep 0.5
+
+        fill_in 'message_box', with: 'message'
+        fill_in 'sender_name', with: 'tarou'
+        click_button 'ギフトカードの作成'
+        expect(page).to have_content 'ギフトカードの作成に失敗しました'
+
+        visit giftcard_edit_path
+        expect(page).to have_field('message', with: 'message')
+        expect(page).to have_field('sender_name', with: 'tarou')
+      end
+
+      fit "ギフトカード用のメッセージが不正な値だとボタンを押せないこと", js: true do
+        fill_in 'message_box', with: ''
+        fill_in 'sender_name', with: 'tarou'
+        expect(page).to have_button('ギフトカードの作成', disabled: true)
+
+        fill_in 'message_box', with: 'message'
+        fill_in 'sender_name', with: ''
+        expect(page).to have_button('ギフトカードの作成', disabled: true)
+
+        fill_in 'message_box', with: 'm' * 301
+        fill_in 'sender_name', with: 'tarou'
+        expect(page).to have_button('ギフトカードの作成', disabled: true)
+
+        fill_in 'message_box', with: 'message'
+        fill_in 'sender_name', with: 't' * 21
+        expect(page).to have_button('ギフトカードの作成', disabled: true)
+
+        fill_in 'message_box', with: 'message'
+        fill_in 'sender_name', with: 'taroyu'
+        expect(page).to have_button('ギフトカードの作成', disabled: false)
       end
     end
 

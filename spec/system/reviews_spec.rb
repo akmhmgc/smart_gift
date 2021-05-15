@@ -19,6 +19,30 @@ RSpec.describe 'Reviews', type: :system do
         expect(page).to have_selector('input', id: 'review_title')
       end
 
+      it '不正なタイトル、本文だと投稿ボタンが押せないこと', js: true do
+        select '★★★★★', from: 'review[stars]'
+
+        fill_in 'review_title', with: ''
+        fill_in 'review_body', with: 'review_body'
+        expect(page).to have_button('投稿', disabled: true)
+
+        fill_in 'review_title', with: 'review_title'
+        fill_in 'review_body', with: ''
+        expect(page).to have_button('投稿', disabled: true)
+
+        fill_in 'review_title', with: 'review_title'
+        fill_in 'review_body', with: 'b' * 141
+        expect(page).to have_button('投稿', disabled: true)
+
+        fill_in 'review_title', with: 't' * 31
+        fill_in 'review_body', with: 'body'
+        expect(page).to have_button('投稿', disabled: true)
+
+        fill_in 'review_title', with: 'review_title'
+        fill_in 'review_body', with: 'review_body'
+        expect(page).to have_button('投稿', disabled: false)
+      end
+
       it 'レビューを投稿できること', js: true do
         fill_in 'review_title', with: 'review_title'
         fill_in 'review_body', with: 'review_body'
@@ -34,7 +58,7 @@ RSpec.describe 'Reviews', type: :system do
       it 'レビューを投稿すると評価の平均が変わること', js: true do
         user = create(:user, email: 'other_user_test@test.com')
         create(:profile, user_id: user.id)
-        create(:review, product_id: current_product.id, stars: 3, user_id:user.id)
+        create(:review, product_id: current_product.id, stars: 3, user_id: user.id)
         fill_in 'review_title', with: 'review_title'
         fill_in 'review_body', with: 'review_body'
         select '★★★★★', from: 'review[stars]'
@@ -51,7 +75,7 @@ RSpec.describe 'Reviews', type: :system do
       before 'レビュー投稿' do
         user = create(:user, email: 'other_user_test@test.com')
         create(:profile, user_id: user.id)
-        create(:review, product_id: current_product.id, stars: 3, user_id:user.id)
+        create(:review, product_id: current_product.id, stars: 3, user_id: user.id)
         fill_in 'review_title', with: 'review_title'
         fill_in 'review_body', with: 'review_body'
         click_button '投稿'
