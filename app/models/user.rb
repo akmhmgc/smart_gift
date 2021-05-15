@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_one :profile, dependent: :destroy
 
-  has_one :cart,  -> { where received: false }, class_name: 'Order', inverse_of: :user
+  has_one :cart,  -> { where received: false }, class_name: 'Order', inverse_of: :user, dependent: :destroy
   has_many :orders,  -> { where received: true }, class_name: 'Order', inverse_of: :user
   has_many :giftcards, class_name: 'Order', foreign_key: "recipient_id"
   validates :username, presence: true, length: { maximum: 20 }
