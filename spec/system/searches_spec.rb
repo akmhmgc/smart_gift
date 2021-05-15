@@ -59,7 +59,7 @@ RSpec.describe 'Searches', type: :system do
       expect(product[1]).to have_content "hoge"
     end
 
-    fdescribe "レビュー関連" do
+    describe "レビュー関連" do
       before do
         create_list(:review, 5, product_id: search_a.id, stars: 5)
         create_list(:review, 2, product_id: search_b.id, stars: 2)

@@ -28,7 +28,7 @@ RSpec.describe "StoreReports", type: :system do
 
     find(".order_link").click
     sleep 0.5
-    expect(current_path).to eq dashboard_order_path(order_item_1)
+    expect(current_path).to eq dashboard_order_path(giftcard.id)
     expect(page).to have_content 'current_product'
     expect(page).to have_content '5個'
 

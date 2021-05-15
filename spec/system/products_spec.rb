@@ -48,7 +48,7 @@ RSpec.describe 'Products', type: :system do
     end
 
     context '現在の店舗=商品の店舗' do
-      fit '商品の編集ができる' do
+      it '商品の編集ができる' do
         visit edit_dashboard_product_path(current_product)
         fill_in 'product_name', with: 'テスト商品2'
         fill_in 'product_price', with: 999

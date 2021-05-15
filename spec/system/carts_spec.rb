@@ -123,7 +123,7 @@ RSpec.describe 'Carts', type: :system do
         expect(page).to have_field('sender_name', with: 'tarou')
       end
 
-      fit "ギフトカード用のメッセージが不正な値だとボタンを押せないこと", js: true do
+      it "ギフトカード用のメッセージが不正な値だとボタンを押せないこと", js: true do
         fill_in 'message_box', with: ''
         fill_in 'sender_name', with: 'tarou'
         expect(page).to have_button('ギフトカードの作成', disabled: true)
