@@ -42,7 +42,6 @@ gem 'whenever', require: false
 gem "chartkick"
 gem 'groupdate'
 gem "aws-sdk-s3", require: false
-gem 'dotenv-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
