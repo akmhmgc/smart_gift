@@ -1,0 +1,1 @@
+web: smart_gift
