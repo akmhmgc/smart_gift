@@ -42,6 +42,7 @@ gem 'whenever', require: false
 gem "chartkick"
 gem 'groupdate'
 gem "aws-sdk-s3", require: false
+gem 'faker'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -51,7 +52,6 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rspec-rails'
   gem 'rack-mini-profiler', require: false
 end
