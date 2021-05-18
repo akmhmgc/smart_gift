@@ -1,7 +1,11 @@
-<p>Hello <%= @email %>!</p>
+<p>※このメールは自動送信メールです。</p>
+
+<p><%= @email %> 様</p>
+
+<p>smart giftのご利用ありがとうございます。</p>
 
 <% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
+  <p>ご登録のメールアドレスが<%= @resource.unconfirmed_email %>に変更されたことをお知らせします。</p>
 <% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
+  <p>ご登録のメールアドレスが<%= @resource.email %>に変更されたことをお知らせします。</p>
 <% end %>

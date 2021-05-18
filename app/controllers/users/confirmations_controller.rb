@@ -16,7 +16,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # protected
 
   # The path used after resending confirmation instructions.
-  # def after_resending_confirmation_instructions_path_for(resource_name)Î
+  # def after_resending_confirmation_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
 
