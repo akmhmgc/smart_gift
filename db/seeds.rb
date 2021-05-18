@@ -20,7 +20,7 @@ sweets_store = Store.create!(storename: '花鳥風月堂',
                       description: "創業明治33年、和菓子から洋菓子まで手掛ける老舗です。",
                       password: 'foobar',
                       confirmed_at: Time.zone.now)
-
+sweets_store.image.attach(io: File.open('./app/assets/images/sweets_store-min.jpeg'), filename: 'store1.jpg')
 product = sweets_store.products.build(name: "いちごのタルト ホール",
   price: 2300,
   category_id: Category.find_by(name: "ケーキ").id,
@@ -60,7 +60,7 @@ product = sweets_store.products.build(name: "花鳥風月堂のぷりん 4個入
   price: 920,
   category_id: Category.find_by(name: "プリン").id,
   description: '静岡の牧場で絞った生乳を24時間以内に加工して作った、鮮度の高い牛乳を使用したプリンです。')
-product.image.attach(io: File.open('./app/assets/images/pudding-min.jpeg'), filename: 'pudding_min.jpeg')
+product.image.attach(io: File.open('./app/assets/images/pudding.jpeg'), filename: 'pudding_min.jpeg')
 product.save!
 
 foods_store = Store.create!(storename: '南方フルーツパーラー',
@@ -68,6 +68,8 @@ foods_store = Store.create!(storename: '南方フルーツパーラー',
   description: "オンライン店舗では、独自契約農家との直接取引でしか流通しないフルーツを取り扱っております。",
   password: 'foobar',
   confirmed_at: Time.zone.now)
+foods_store.image.attach(io: File.open('./app/assets/images/minamikata.jpeg'), filename: 'store1.jpg')
+
 
 product = foods_store.products.build(name: "マスクメロン　箱入り",
   price: 9800,

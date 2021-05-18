@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @reviews = @product.reviews.eager_load(user: { profile: { image_attachment: :blob } }).page(params[:page]).per(5)
-    @new_review = current_user&.reviews&.build
+    @new_review = current_user.reviews.build if current_user
     @other_products = Product.eager_load(:store, image_attachment: :blob).where("store_id = ? and NOT(products.id= ?)", @product.store.id, @product.id).limit(5)
   end
 end
