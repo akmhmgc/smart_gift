@@ -9,17 +9,26 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql-data:/var/lib/mysql
-  web:
+  web: &web
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/myapp
+      - .:/smart_gift
     ports:
       - "3000:3000"
     depends_on:
       - db
     stdin_open: true
     tty: true
+  webpack:
+    <<: *web
+    command: "bin/webpack-dev-server"
+    ports:
+      - "3035:3035"
+    depends_on:
+      - web
+    tty: false
+    stdin_open: false
 volumes:
   mysql-data:
     driver: local
