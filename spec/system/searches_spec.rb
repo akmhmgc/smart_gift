@@ -64,7 +64,7 @@ RSpec.describe 'Searches', type: :system do
         create_list(:review, 5, product_id: search_a.id, stars: 5)
         create_list(:review, 2, product_id: search_b.id, stars: 2)
       end
-      it 'レビューの多い潤' do
+      it 'レビューの多い順' do
         select 'レビューの多い順', from: 'q[sorts]'
         product = all('.product')
         expect(product[0]).to have_content "hoge"

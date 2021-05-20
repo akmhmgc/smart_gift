@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :username, presence: true, length: { maximum: 20 }
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:facebook]
+         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:facebook, :twitter]
 
   def like(product)
     products << product

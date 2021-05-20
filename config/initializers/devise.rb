@@ -273,7 +273,9 @@ Devise.setup do |config|
                   Rails.application.credentials.facebook[:facebook_api_secret],
                   scope: 'email',
                   info_fields: 'email,name'
-
+  config.omniauth :twitter,
+                  Rails.application.credentials.twitter[:twitter_api_key],
+                  Rails.application.credentials.twitter[:twitter_api_secret]
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.

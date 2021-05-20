@@ -18,8 +18,11 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - chrome
     stdin_open: true
     tty: true
+    environment:
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
   webpack:
     <<: *web
     command: "bin/webpack-dev-server"
@@ -29,6 +32,10 @@ services:
       - web
     tty: false
     stdin_open: false
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - 4444:4444
 volumes:
   mysql-data:
     driver: local
