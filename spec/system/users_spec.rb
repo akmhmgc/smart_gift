@@ -13,7 +13,7 @@ RSpec.describe 'Users', type: :system do
       body[/http[^"]+/]
     end
 
-    fit 'パスワードが正しく２回入力されていないとエラーになる', js: true do
+    it 'パスワードが正しく２回入力されていないとエラーになる' do
       visit root_path
       expect(page).to have_http_status :ok
 
