@@ -105,10 +105,46 @@ RSpec.describe 'Users', type: :system do
       click_link "ログアウト"
       sleep 0.5
       click_link "ログイン"
+      sleep 1
       click_link "Facebook"
       sleep 0.5
       expect(current_path).to eq root_path
       expect(page).to have_content 'Facebook アカウントによる認証に成功しました。'
+    end
+  end
+
+  fdescribe "Twitterでのログインができること", js: true do
+    before do
+      OmniAuth.config.mock_auth[:twitter] = nil
+      Rails.application.env_config['omniauth.auth'] = twitter_mock
+      visit root_path
+      click_link "ログイン"
+      sleep 0.5
+      click_link "Twitter"
+      sleep 0.5
+      fill_in 'ユーザーネーム(ニックネーム)', with: 'test_user'
+      fill_in 'パスワード', with: 'foobar'
+      fill_in '確認用パスワード', with: 'foobar'
+    end
+
+    it "新規サインアップするとユーザーが増える" do
+      expect  do
+        click_button '新規登録する'
+      end.to change(User, :count).by(1)
+    end
+
+    it "一度サインアップした後だとログインしてトップページに移動" do
+      click_button '新規登録する'
+      find(".tham-box").click
+      sleep 1
+      click_link "ログアウト"
+      sleep 0.5
+      click_link "ログイン"
+      sleep 1
+      click_link "Twitter"
+      sleep 0.5
+      expect(current_path).to eq root_path
+      expect(page).to have_content 'Twitter アカウントによる認証に成功しました。'
     end
   end
 end

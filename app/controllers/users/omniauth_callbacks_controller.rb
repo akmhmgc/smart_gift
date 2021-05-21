@@ -22,10 +22,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           username: data['info']['name']
         }
       end
-      redirect_to new_user_registration_url
+      redirect_to new_user_registration_url and return
     end
   end
-  
 
   def failure
     redirect_to root_path
@@ -39,12 +38,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       if (data = request.env['omniauth.auth'])
         session['devise.omniauth_data'] = {
-            email: data['info']['email'],
-            provider: data['provider'],
-            uid: data['uid']
+          email: data['info']['email'],
+          provider: data['provider'],
+          uid: data['uid']
         }
       end
-      redirect_to new_user_registration_url
+      redirect_to new_user_registration_url and return
     end
   end
 end
