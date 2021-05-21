@@ -43,7 +43,7 @@ RSpec.describe 'Reviews', type: :system do
         expect(page).to have_button('投稿', disabled: false)
       end
 
-      fit 'レビューを投稿できること', js: true do
+      it 'レビューを投稿できること', js: true do
         fill_in 'review_title', with: 'review_title'
         fill_in 'review_body', with: 'review_body'
         select '★★★★★', from: 'review[stars]'
