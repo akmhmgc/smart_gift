@@ -95,6 +95,6 @@ production:
   # Cache manifest.json for performance
   cache_manifest: true
 
-dev_server:
+  dev_server:
     host: webpack
     hmr: true
