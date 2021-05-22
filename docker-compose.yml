@@ -23,6 +23,7 @@ services:
     tty: true
     environment:
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
+      WEBPACKER_DEV_SERVER_HOST: webpack
   webpack:
     <<: *web
     command: "bin/webpack-dev-server"
