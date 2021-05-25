@@ -39,12 +39,6 @@ Rails.application.routes.draw do
       resources :orders, only: %i[show]
     end
   end
-
-  # controller :orders do
-  #   scope module: :dashboard do
-  #     get "test", action: :test
-  #   end
-  # end
   
 
   resource :order, only: %i[create]
