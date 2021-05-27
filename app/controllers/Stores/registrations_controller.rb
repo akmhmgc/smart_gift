@@ -7,10 +7,6 @@ class Stores::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
   before_action :ensure_normal_store, only: %i[update destroy]
 
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
 
   # POST /resource
   # def create
