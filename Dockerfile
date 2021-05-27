@@ -2,8 +2,7 @@ FROM ruby:2.6.6
 ENV LANG C.UTF-8
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-apt-get install nodejs
+RUN apt-get install -y nodejs npm && npm install n -g && n 14.15.5
 
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -15,6 +14,7 @@ WORKDIR /sample-app
 
 ADD Gemfile /sample-app/Gemfile
 ADD Gemfile.lock /sample-app/Gemfile.lock
+ADD Gemfile /sample-app/Gemfile
 
 RUN gem install bundler:2.1.4
 RUN bundle install
