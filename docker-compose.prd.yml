@@ -1,0 +1,44 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_product
+    env_file:
+      - ./environments/db.env
+    # command: bash -c "bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails db:seed && bin/webpack --verbose && bundle exec puma -C config/puma.rb"
+    command: bash -c "RAILS_ENV=production bundle exec rails assets:precompile && bundle exec puma -C config/puma.rb"
+    volumes:
+      - .:/sample-app
+      - public-data:/sample-app/public
+      - tmp-data:/sample-app/tmp
+      - log-data:/sample-app/log
+    depends_on:
+      - db
+    environment:
+      RAILS_ENV: production
+      DATABASE_NAME: sample_app_production
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: password
+      DATABASE_HOST: db
+  db:
+    image: mysql:5.7.32
+    env_file:
+      - ./environments/db.env
+    volumes:
+      - db-data:/var/lib/mysql
+  nginx:
+    build:
+      context: containers/nginx
+    volumes:
+      - public-data:/sample-app/public
+      - tmp-data:/sample-app/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - web
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
