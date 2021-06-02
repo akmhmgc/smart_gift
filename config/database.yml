@@ -12,11 +12,11 @@ default: &default
 
 development:
   <<: *default
-  database: sample_app_development
+  database: smart_gift_development
 
 test:
   <<: *default
-  database: sample_app_test
+  database: smart_gift_test
 
 production:
   <<: *default
