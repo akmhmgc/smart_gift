@@ -29,7 +29,7 @@ VOLUME /smart_gift/tmp
 RUN yarn install --check-files
 
 # image作成時に実行するとタイムアウトする
-# RUN SECRET_KEY_BASE=placeholder bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE=placeholder bundle exec rails assets:precompile
 
-RUN SECRET_KEY_BASE=placeholder WEBPACKER_PRECOMPILE=false bundle exec rails assets:precompile
-RUN bin/webpack
+# RUN SECRET_KEY_BASE=placeholder WEBPACKER_PRECOMPILE=false bundle exec rails assets:precompile
+# RUN bin/webpack
