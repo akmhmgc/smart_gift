@@ -7,10 +7,10 @@ services:
       - ./environments/db.env
     command: bundle exec puma -C config/puma.rb
     volumes:
-      - .:/sample-app
-      - public-data:/sample-app/public
-      - tmp-data:/sample-app/tmp
-      - log-data:/sample-app/log
+      - .:/smart_gift
+      - public-data:/smart_gift/public
+      - tmp-data:/smart_gift/tmp
+      - log-data:/smart_gift/log
     depends_on:
       - db
   db:
@@ -23,8 +23,8 @@ services:
     build:
       context: containers/nginx
     volumes:
-      - public-data:/sample-app/public
-      - tmp-data:/sample-app/tmp
+      - public-data:/smart_gift/public
+      - tmp-data:/smart_gift/tmp
     ports:
       - 80:80
     depends_on:

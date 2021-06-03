@@ -1,7 +1,7 @@
 version: 2
 services:
   app:
-    image: 400639973590.dkr.ecr.ap-northeast-1.amazonaws.com/sample-app-rails:latest
+    image: 400639973590.dkr.ecr.ap-northeast-1.amazonaws.com/smart_gift_rails:latest
     mem_limit: 268435456
     # command: bash -c "bin/webpack && bundle exec puma -C config/puma.rb"
     # assets:clobber
@@ -17,7 +17,7 @@ services:
       TZ: Japan
       WEBPACKER_PRECOMPILE: 'false'
       NODE_OPTIONS: "--max_old_space_size=1536"
-    working_dir: /sample-app
+    working_dir: /smart_gift
     logging:
       driver: awslogs
       options:
@@ -25,7 +25,7 @@ services:
         awslogs-group: sample-app-production/app
         awslogs-stream-prefix: sample-app-production
   nginx:
-    image: 400639973590.dkr.ecr.ap-northeast-1.amazonaws.com/sample-app-nginx:latest
+    image: 400639973590.dkr.ecr.ap-northeast-1.amazonaws.com/smart_gift_nginx:latest
     mem_limit: 268435456
     ports:
       - 80:80
@@ -33,7 +33,7 @@ services:
       - app
     volumes_from:
       - app
-    working_dir: /sample-app
+    working_dir: /smart_gift
     logging:
       driver: awslogs
       options:

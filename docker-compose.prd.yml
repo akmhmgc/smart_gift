@@ -9,10 +9,10 @@ services:
     # command: bash -c "bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails db:seed && bin/webpack --verbose && bundle exec puma -C config/puma.rb"
     command: bash -c "WEBPACKER_PRECOMPILE=false bundle exec rails assets:precompile && RAILS_ENV=production bin/webpack && bundle exec puma -C config/puma.rb"
     volumes:
-      - .:/sample-app
-      - public-data:/sample-app/public
-      - tmp-data:/sample-app/tmp
-      - log-data:/sample-app/log
+      - .:/smart_gift
+      - public-data:/smart_gift/public
+      - tmp-data:/smart_gift/tmp
+      - log-data:/smart_gift/log
     depends_on:
       - db
     environment:
@@ -31,8 +31,8 @@ services:
     build:
       context: containers/nginx
     volumes:
-      - public-data:/sample-app/public
-      - tmp-data:/sample-app/tmp
+      - public-data:/smart_gift/public
+      - tmp-data:/smart_gift/tmp
     ports:
       - 80:80
     depends_on:

@@ -10,20 +10,21 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
 apt-get update && apt-get install -y yarn
 
-RUN mkdir /sample-app
-WORKDIR /sample-app
+RUN mkdir /smart_gift
+WORKDIR /smart_gift
 
-ADD Gemfile /sample-app/Gemfile
-ADD Gemfile.lock /sample-app/Gemfile.lock
+ADD Gemfile /smart_gift/Gemfile
+ADD Gemfile.lock /smart_gift/Gemfile.lock
 
 RUN gem install bundler:2.1.4
+RUN bundle lock --add-platform mingw, mswin, x64_mingw, jruby
 RUN bundle install
 
-ADD . /sample-app
+ADD . /smart_gift
 
 RUN mkdir -p tmp/sockets
-VOLUME /sample-app/public
-VOLUME /sample-app/tmp
+VOLUME /smart_gift/public
+VOLUME /smart_gift/tmp
 
 RUN yarn install --check-files
 
