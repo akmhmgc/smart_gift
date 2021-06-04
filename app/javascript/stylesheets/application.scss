@@ -2,44 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/*============
-.toggle_btn
-=============*/
-.toggle_btn {
-  display: inline-block;
-  position: fixed;
-  right: 30px;
-  width: 30px;
-  height: 30px;
-  transition: all .5s;
-  cursor: pointer;
-  z-index: 3;
-}
-
-.toggle_btn span {
-  display: block;
-  position: absolute;
-  left: 0;
-  width: 30px;
-  height: 2px;
-  background-color: #333;
-  border-radius: 4px;
-  transition: all .5s;
-}
-
-.toggle_btn span:nth-child(1) {
-  top: 4px;
-}
-
-.toggle_btn span:nth-child(2) {
-  top: 14px;
-}
-
-.toggle_btn span:nth-child(3) {
-  bottom: 4px;
-}
-
-
 //   nav-bar
 .sidebar {
   display: block;
