@@ -15,21 +15,11 @@ WORKDIR /smart_gift
 
 ADD Gemfile /smart_gift/Gemfile
 ADD Gemfile.lock /smart_gift/Gemfile.lock
+ADD Gemfile /smart_gift/Gemfile
 
 RUN gem install bundler:2.1.4
-RUN bundle lock --add-platform mingw, mswin, x64_mingw, jruby
 RUN bundle install
 
 ADD . /smart_gift
 
 RUN mkdir -p tmp/sockets
-VOLUME /smart_gift/public
-VOLUME /smart_gift/tmp
-
-RUN yarn install --check-files
-
-# image作成時に実行するとタイムアウトする
-RUN SECRET_KEY_BASE=placeholder bundle exec rails assets:precompile
-
-# RUN SECRET_KEY_BASE=placeholder WEBPACKER_PRECOMPILE=false bundle exec rails assets:precompile
-# RUN bin/webpack

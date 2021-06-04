@@ -1,36 +1,44 @@
 version: '3'
 services:
-  web:
-    build:
-      context: .
-    env_file:
-      - ./environments/db.env
-    command: bundle exec puma -C config/puma.rb
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - '3306:3306'
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+  web: &web
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/smart_gift
-      - public-data:/smart_gift/public
-      - tmp-data:/smart_gift/tmp
-      - log-data:/smart_gift/log
+    ports:
+      - "3000:3000"
     depends_on:
       - db
-  db:
-    image: mysql:5.7.32
-    env_file:
-      - ./environments/db.env
-    volumes:
-      - db-data:/var/lib/mysql
-  nginx:
-    build:
-      context: containers/nginx
-    volumes:
-      - public-data:/smart_gift/public
-      - tmp-data:/smart_gift/tmp
+      - chrome
+    stdin_open: true
+    tty: true
+    environment:
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
+      WEBPACKER_DEV_SERVER_HOST: webpack
+  webpack:
+    <<: *web
+    command: "bin/webpack-dev-server"
     ports:
-      - 80:80
+      - "3035:3035"
     depends_on:
       - web
+    tty: false
+    stdin_open: false
+  chrome:
+    image: selenium/standalone-chrome:latest
+    shm_size: 256m
+    ports:
+      - 4444:4444
 volumes:
-  public-data:
-  tmp-data:
-  log-data:
-  db-data:
+  mysql-data:
+    driver: local
+    
