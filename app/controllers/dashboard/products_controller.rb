@@ -3,6 +3,7 @@ class Dashboard::ProductsController < ApplicationController
   before_action :authenticate_store!
   before_action :set_categories, only: %i[new create edit update]
   before_action :correct_store, only: %i[edit update destroy]
+  before_action :ensure_normal_store, only: %i[destroy create new]
 
   def index
     # 自店舗アイテム一覧
@@ -68,5 +69,9 @@ class Dashboard::ProductsController < ApplicationController
 
     flash[:alert] = '無効なURLです'
     redirect_back(fallback_location: dashboard_products_path)
+  end
+
+  def ensure_normal_store
+    redirect_to dashboard_products_path, alert: 'ゲストストアの商品の削除・作成は出来ません。' if current_store.email == 'guest_store@example.com'
   end
 end

@@ -136,6 +136,12 @@ guest_user = User.create!(
 guest_user.create_profile(name: guest_user.username)
 guest_user.profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
 
+
+
+
+
+
+
 # ゲストストア作成
 guest_store = Store.create!(
   storename: 'ゲストストア',
@@ -152,7 +158,7 @@ product = guest_store.products.build(name: "おいしいチョコバー",
   description: 'おいしいチョコバーです。')
 product.image.attach(io: File.open('./app/assets/images/chocolate_1-min.jpeg'), filename: 'store_2_product.jpeg')
 product.save!
-
+sleep 1
 product = guest_store.products.build(name: "いちごのチョコレート",
   price: 560,
   category_id: Category.find_by(name: "チョコレート").id,
