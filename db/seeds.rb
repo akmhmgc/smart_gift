@@ -197,14 +197,14 @@ guest_user.receive_giftcard?(order)
   received: true)
 
   guest_store.products.each do |guest_product|
-    guest_order.order_items.create!(product_id: guest_product.id,
+    item = guest_order.order_items.create!(product_id: guest_product.id,
     price: guest_product.price,
     quantity: rand(1..10),
     created_at: time,
-    updated_at: time,
     product_name: guest_product.name,
     store_id: guest_product.store.id,
-  product_image: guest_product.image.blob)
+    product_image: guest_product.image.blob)
+  item.update(updated_at: time)
   end
 end
 

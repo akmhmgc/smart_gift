@@ -9,7 +9,7 @@ class Dashboard::OrdersController < ApplicationController
   def report
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     order_items = current_store.order_items.where(updated_at: @month.all_month)
-    @data = order_items.group_by_day(:created_at).sum("order_items.price*quantity")
+    @data = order_items.group_by_day(:updated_at).sum("order_items.price*quantity")
     @total = order_items.sum("order_items.price*quantity")
 
     @rank_hash = order_items.where.not(product_id: nil).group(:product_id).order("sum(quantity) desc").limit(5).sum(:quantity)
