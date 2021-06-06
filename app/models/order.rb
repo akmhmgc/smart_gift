@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   default_scope -> { order(updated_at: :desc) }
   scope :with_product_images, -> { preload(order_items: { product: { image_attachment: :blob } }) }
   scope :belongs_to_store, lambda { |store|
-                             eager_load([:order_items],[{user: :profile}]).where(order_items: { store_id: store.id })
+                             eager_load([:order_items], [{ user: :profile }]).where(order_items: { store_id: store.id })
                            }
 
   def to_param

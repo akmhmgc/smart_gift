@@ -1,4 +1,4 @@
-not# frozen_string_literal: true
+! # frozen_string_literal: true
 
 class Stores::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:

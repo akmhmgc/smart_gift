@@ -14,7 +14,7 @@ class Dashboard::OrdersController < ApplicationController
 
     @rank_hash = order_items.where.not(product_id: nil).group(:product_id).order("sum(quantity) desc").limit(5).sum(:quantity)
     product_ids = @rank_hash.keys
-    @top_selling_products = Product.where(id:product_ids)
+    @top_selling_products = Product.where(id: product_ids)
 
     @orders = Order.belongs_to_store(current_store).where(updated_at: @month.all_month).page(params[:page]).per(20)
     @order_totals = @orders.joins(:order_items).where("store_id =?",

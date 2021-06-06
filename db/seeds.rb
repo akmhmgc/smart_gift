@@ -70,7 +70,6 @@ foods_store = Store.create!(storename: '南方フルーツパーラー',
   confirmed_at: Time.zone.now)
 foods_store.image.attach(io: File.open('./app/assets/images/minamikata.jpeg'), filename: 'store1.jpg')
 
-
 product = foods_store.products.build(name: "マスクメロン　箱入り",
   price: 9800,
   category_id: Category.find_by(name: "フルーツ").id,
@@ -135,12 +134,6 @@ guest_user = User.create!(
 )
 guest_user.create_profile(name: guest_user.username)
 guest_user.profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
-
-
-
-
-
-
 
 # ゲストストア作成
 guest_store = Store.create!(
@@ -210,7 +203,7 @@ guest_user.receive_giftcard?(order)
     product_name: guest_product.name,
     store_id: guest_product.store.id,
     product_image: guest_product.image.blob)
-  item.update(updated_at: time)
+    item.update(updated_at: time)
   end
 end
 
