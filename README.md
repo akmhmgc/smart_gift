@@ -71,7 +71,7 @@
 - 実務ではSQL文の深い理解が求められるであろうことを見据え、ORMにのみに頼らず生成されるSQL文の理解に努めました。
   - [Active Recordのメソッドと実行されるSQL一覧](https://zenn.dev/akhmgc/articles/037777478e8d1b)
 - 商品カートとカート内アイテム、注文と注文内容、ギフトカードとギフトカードに共通する部分が多いため、重複を避けて出来る限り少ないテーブルで処理できるよう努めました。
-- AcctveRecord::Relationやpreload, eager_loadを使いSQLの発行回数を出来るだけ抑えようと努めました。
+- ActiveRecord::Relationやpreload, eager_loadを使いSQLの発行回数を出来るだけ抑えようと努めました。
   - [N+1問題の正しい解決方法](https://zenn.dev/akhmgc/articles/105022e598bb7a)
   - [AcctveRecord::Relationを利用してSQL発行回数を抑える方法]([https://link](https://zenn.dev/akhmgc/articles/765af1daf95820))
 - Rspecを使い100以上のテストを行いました。
