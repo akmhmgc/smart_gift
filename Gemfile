@@ -53,6 +53,10 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rack-mini-profiler', require: false
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
 end
 
 group :development do
@@ -75,6 +79,10 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'database_cleaner-active_record'
   gem 'webdrivers', require: !ENV['SELENIUM_DRIVER_URL']
+end
+
+group :production, :staging do
+  gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
