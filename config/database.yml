@@ -47,8 +47,12 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
 production:
-  <<: *default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
   database: smart_gift_production
-  username: smart_gift
-  password: <%= ENV['SMART_GIFT_DATABASE_PASSWORD'] %>
+  username: root
+  password: password
+  socket: /var/lib/mysql/mysql.sock
