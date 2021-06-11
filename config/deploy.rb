@@ -4,7 +4,7 @@ lock '3.4.0'
 set :application, "my_app_name"
 set :repo_url, "git@github.com:akmhmgc/smart_gift.git"
 
-set :branch, 'master'
+set :branch, ' ec2#1'
 
 set :deploy_to, '/var/www/rails/smartgift'
 
