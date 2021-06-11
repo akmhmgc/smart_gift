@@ -6,7 +6,7 @@ set :repo_url, "git@github.com:akmhmgc/smart_gift.git"
 
 set :branch, 'master'
 
-set :deploy_to, '/var/www/smartgift'
+set :deploy_to, '/var/www/rails/smartgift'
 
 set :linked_files, fetch(:linked_files, []).push('config/master.key')
 

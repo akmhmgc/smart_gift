@@ -12,6 +12,7 @@ AllCops:
     - "node_modules/**/*"
     - "tmp/**/*"
     - "lib/**/*"
+    - "config/unicorn/*"
   DisplayCopNames: true
   TargetRubyVersion: 2.6
 
