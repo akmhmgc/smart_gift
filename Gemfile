@@ -53,7 +53,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rack-mini-profiler', require: false
-  gem 'capistrano'
+  gem 'capistrano', '3.4.0'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
