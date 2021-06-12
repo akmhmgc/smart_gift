@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock '3.4.0'
 
-set :application, "my_app_name"
+set :application, "smart_gift"
 set :repo_url, "git@github.com:akmhmgc/smart_gift.git"
 
 set :branch, ' ec2#1'
