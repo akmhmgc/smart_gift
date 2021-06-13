@@ -10,8 +10,7 @@
 また、販売店舗は月次売り上げなど売り上げに関するレポートを見ることが可能です。
 ## URL
 
-[Smart Gift](https://smart-app-0522.herokuapp.com/)
-
+[Smart Gift](https://smartgift.com)
 ## ポートフォリオを作った理由
 
 前職では取り扱う商品の多くが賞味期限が短いため、お客様からは 
@@ -35,8 +34,8 @@
 - Rubocop
 - Docker/docker-compose
 - heroku
-- AWS (S3)
-
+- AWS (EC2, VPC, Route53, ALB, ACM, S3)
+- Capistrano
 ## ER図
 
 ![ER](https://user-images.githubusercontent.com/38002468/119248177-5d6acb80-bbca-11eb-8eeb-430082f8bc3c.jpeg)
@@ -76,5 +75,4 @@
   - [AcctveRecord::Relationを利用してSQL発行回数を抑える方法]([https://link](https://zenn.dev/akhmgc/articles/765af1daf95820))
 - Rspecを使い100以上のテストを行いました。
 ## 今後追加する予定の技術
-- AWS (EC2, RDS for MySQL, VPC, Route53, ALB, ACM)
 - CircleCI (CI/CD)
