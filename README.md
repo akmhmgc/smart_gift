@@ -74,5 +74,6 @@
   - [N+1問題の正しい解決方法](https://zenn.dev/akhmgc/articles/105022e598bb7a)
   - [AcctveRecord::Relationを利用してSQL発行回数を抑える方法]([https://link](https://zenn.dev/akhmgc/articles/765af1daf95820))
 - Rspecを使い100以上のテストを行いました。
+- チームでの開発を見据え、Issue管理やプルリクエストを活用しました。
 ## 今後追加する予定の技術
 - CircleCI (CI/CD)
