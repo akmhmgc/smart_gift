@@ -118,7 +118,7 @@ RSpec.describe 'Users', type: :system do
     before do
       OmniAuth.config.mock_auth[:twitter] = nil
       Rails.application.env_config['omniauth.auth'] = twitter_mock
-      click_link 'root_path'
+      click_link 'てっっちゃん'
       sleep 2
       click_link "ログイン"
       sleep 1
