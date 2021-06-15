@@ -47,7 +47,6 @@ Capybara.register_driver :remote_chrome do |app|
 end
 
 RSpec.configure do |config|
-  config.include Capybara::DSL
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include FactoryBot::Syntax::Methods
 
