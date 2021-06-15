@@ -82,6 +82,7 @@ RSpec.describe 'Users', type: :system do
     before do
       OmniAuth.config.mock_auth[:facebook] = nil
       Rails.application.env_config['omniauth.auth'] = facebook_mock
+      puts root_path
       click_link 'root_path'
       sleep 2
       click_link "ログイン"
