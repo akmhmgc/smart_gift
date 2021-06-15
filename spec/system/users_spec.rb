@@ -83,7 +83,7 @@ RSpec.describe 'Users', type: :system do
       visit root_path
     end
 
-    it "visitは使えない" , js: true do
+    it "visitは使えない", js: true do
       visit root_path
     end
   end
