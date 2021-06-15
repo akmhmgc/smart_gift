@@ -6,11 +6,11 @@ RSpec.describe "StoreReports", type: :system do
   let(:current_product) { FactoryBot.create(:product, price: 500, name: 'current_product', store_id: current_store.id) }
   let(:other_product) { FactoryBot.create(:product, price: 100, name: 'other_product') }
 
-  let!(:order_item_1) do
+  let!(:order_item1) do
     create(:order_item, order_id: giftcard.id, product_id: current_product.id, quantity: 5, price: current_product.price, store_id: current_store.id,
                         product_name: current_product.name)
   end
-  let!(:order_item_2) { create(:order_item, order_id: giftcard.id, product_id: other_product.id, quantity: 10, price: other_product.price) }
+  let!(:order_item2) { create(:order_item, order_id: giftcard.id, product_id: other_product.id, quantity: 10, price: other_product.price) }
   let(:current_user) { FactoryBot.create(:user, email: 'user_test@test.com') }
   let!(:current_profile) { FactoryBot.create(:profile, user_id: current_user.id) }
 

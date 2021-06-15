@@ -6,12 +6,12 @@ RSpec.describe "ProductChanges", type: :system do
   let(:current_product) { FactoryBot.create(:product, price: 500, name: 'current_product', store_id: current_store.id) }
   let(:other_product) { FactoryBot.create(:product, price: 100, name: 'other_product') }
 
-  let!(:order_item_1) do
+  let!(:order_item1) do
     create(:order_item, order_id: giftcard.id, product_id: current_product.id,
                         quantity: 5, price: current_product.price, product_name: current_product.name,
                         store_id: current_product.store.id, product_image: current_product.image.blob)
   end
-  let!(:order_item_2) do
+  let!(:order_item2) do
     create(:order_item, order_id: giftcard.id, product_id: other_product.id,
                         quantity: 10, price: other_product.price,
                         product_name: other_product.name, store_id: other_product.store.id, product_image: other_product.image.blob)
