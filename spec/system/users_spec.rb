@@ -82,9 +82,13 @@ RSpec.describe 'Users', type: :system do
     it "visitが使えるかどうか" do
       visit root_path
     end
+
+    it "visitは使えない" , js: true do
+      visit root_path
+    end
   end
 
-  fdescribe "Facebookでのログインができること", js: true do
+  describe "Facebookでのログインができること", js: true do
     before do
       OmniAuth.config.mock_auth[:facebook] = nil
       Rails.application.env_config['omniauth.auth'] = facebook_mock
@@ -119,7 +123,7 @@ RSpec.describe 'Users', type: :system do
     end
   end
 
-  fdescribe "Twitterでのログインができること", js: true do
+  describe "Twitterでのログインができること", js: true do
     before do
       OmniAuth.config.mock_auth[:twitter] = nil
       Rails.application.env_config['omniauth.auth'] = twitter_mock
