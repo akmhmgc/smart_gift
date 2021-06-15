@@ -79,6 +79,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'database_cleaner-active_record'
   gem 'webdrivers', require: !ENV['SELENIUM_DRIVER_URL']
+  gem "rspec_junit_formatter"
 end
 
 group :production, :staging do
