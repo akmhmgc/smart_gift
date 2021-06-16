@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.fdescribe User, type: :model do
+RSpec.describe User, type: :model do
   it '有効なユーザーモデル作成' do
     user = FactoryBot.build(:user)
     expect(user).to be_valid
@@ -54,7 +54,7 @@ RSpec.fdescribe User, type: :model do
       let(:target) { :profile }
       it { expect(association.macro).to eq :has_one }
       it { expect(association.class_name).to eq 'Profile' }
-      it 'Userが削除されたらProfileも削除されること' do
+      fit 'Userが削除されたらProfileも削除されること' do
         create(:profile, user_id:user.id)
         expect { user.destroy }.to change(Profile, :count).by(-1)
       end

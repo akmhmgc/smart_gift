@@ -51,7 +51,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails.git', tag: 'v4.0.0.beta3'
   gem 'rack-mini-profiler', require: false
   gem 'capistrano', '3.4.0'
   gem 'capistrano-bundler'
@@ -79,6 +79,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'database_cleaner-active_record'
   gem 'webdrivers', require: !ENV['SELENIUM_DRIVER_URL']
+  gem "rspec_junit_formatter"
 end
 
 group :production, :staging do

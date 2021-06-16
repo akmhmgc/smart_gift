@@ -17,9 +17,9 @@
     </div>
     <div class="w-4/5 mx-auto flex items-center justify-between">
         <% if current_store %>
-        <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),store_root_path, class: "inline-block"%>
+        <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),store_root_path, class: "inline-block", id:"root_path"%>
         <% else %>
-        <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),root_path, class: "inline-block"%>
+        <%= link_to image_tag("logo.png", alt: "Rails logo",class: "object-cover h-14 w-36"),root_path, class: "inline-block", id:"root_path"%>
         <% end %>
         <ul class="flex text-gray-500">
             <% if store_signed_in?%>
