@@ -31,7 +31,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 Capybara.register_driver :remote_chrome do |app|
-  url = ENV['SELENIUM_DRIVER_URL']
+  url = ENV.fetch("SELENIUM_DRIVER_URL", "http://chrome:4444/wd/hub")
   caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
     'goog:chromeOptions' => {
       'args' => [
