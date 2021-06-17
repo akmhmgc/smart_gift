@@ -20,8 +20,6 @@ set :output, "log/cron.log"
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 3.minutes do # 1.minute 1.day 1.week 1.month 1.year is also supported
-  rake "guest_user_reset:profile_1_name_change"
+every 3.minutes do
+  rake "test_scheduler"
 end
-
-# Learn more: http://github.com/javan/whenever
