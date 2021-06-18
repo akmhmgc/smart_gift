@@ -13,6 +13,25 @@ class Stores::SessionsController < Devise::SessionsController
   def new_guest
     store = Store.guest
     store.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'store.png')
+
+    # 商品の初期化
+    notifications = store.notifications
+    notifications.update_all(checked: false)
+    item1 = store.products.order(:created_at).first
+    item2 = store.products.order(:created_at).second
+    item1.image.attach(io: File.open('./app/assets/images/chocolate_1-min.jpeg'), filename: 'store_2_product.jpeg')
+    item1.update(name: "おいしいチョコバー",
+                 price: 450,
+                 category_id: Category.find_by(name: "チョコレート").id,
+                 description: 'おいしいチョコバーです。')
+
+    sleep 0.5
+    item2.image.attach(io: File.open('./app/assets/images/chocolate_2-min.jpeg'), filename: 'store_2_product.jpeg')
+    item2.update(name: "いちごのチョコレート",
+                 price: 560,
+                 category_id: Category.find_by(name: "チョコレート").id,
+                 description: 'いちごのチョコレートです。')
+
     sign_in store
     flash[:notice] = "ゲストストアとしてログインしました"
     redirect_to store_root_path

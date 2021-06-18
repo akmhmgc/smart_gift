@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
       let(:target) { :profile }
       it { expect(association.macro).to eq :has_one }
       it { expect(association.class_name).to eq 'Profile' }
-      fit 'Userが削除されたらProfileも削除されること' do
+      it 'Userが削除されたらProfileも削除されること' do
         create(:profile, user_id:user.id)
         expect { user.destroy }.to change(Profile, :count).by(-1)
       end
