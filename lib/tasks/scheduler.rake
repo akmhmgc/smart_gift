@@ -25,5 +25,5 @@ task :reset_guestdata => :environment do
     price: 560,
     category_id: Category.find_by(name: "チョコレート").id,
     description: 'いちごのチョコレートです。')
-   puts "ended!"
+   puts "reseted guest infos"
 end
