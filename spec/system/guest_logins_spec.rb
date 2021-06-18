@@ -28,23 +28,4 @@ RSpec.fdescribe "GuestLogins", type: :system do
       expect(page).to have_content 'レビューはまだ投稿されていません'
     end
   end
-
-  # describe "ゲストストアとしてログイン", js: true do
-  #   it "ゲストストアとして商品編集後に再度ゲストストアとしてログインすると商品と通知はリセットされている" do
-  #   end
-  # end
-
-  # it "一度サインアップした後だとログインしてトップページに移動" do
-  #   click_button '新規登録する'
-  #   find(".tham-box").click
-  #   sleep 1
-  #   click_link "ログアウト"
-  #   sleep 0.5
-  #   click_link "ログイン"
-  #   sleep 1
-  #   click_link "Twitter"
-  #   sleep 0.5
-  #   expect(current_path).to eq root_path
-  #   expect(page).to have_content 'Twitter アカウントによる認証に成功しました。'
-  # end
 end
