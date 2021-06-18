@@ -12,6 +12,6 @@ set :output, "log/cron.log"
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 1.minute do
-  rake "test_scheduler"
+every 10.minutes do
+  rake "reset_guestdata"
 end
