@@ -19,7 +19,7 @@ task :reset_guestdata => :environment do
     category_id: Category.find_by(name: "チョコレート").id,
     description: 'おいしいチョコバーです。')
 
-   sleep 1
+   sleep 0.5
    item_2.image.attach(io: File.open('./app/assets/images/chocolate_2-min.jpeg'), filename: 'store_2_product.jpeg')
    item_2.update(name: "いちごのチョコレート",
     price: 560,
