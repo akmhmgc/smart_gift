@@ -40,6 +40,9 @@
 
 ![ER](https://user-images.githubusercontent.com/38002468/119248177-5d6acb80-bbca-11eb-8eeb-430082f8bc3c.jpeg)
 ※ devise,ancestoryなどのgemで追加されたカラム,created_at,updated_atなどのデフォルトのカラムなどは除外しております。
+
+## インフラ構成
+![インフラ図](https://user-images.githubusercontent.com/38002468/122630647-443d3800-d100-11eb-80e9-ee443c8b7138.jpeg)
 ## 機能一覧
 ### ユーザー・店舗共通
 - ログイン・登録機能（Devise gem）
