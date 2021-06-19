@@ -33,7 +33,7 @@
 - Git, GitHub
 - Rubocop
 - Docker/docker-compose
-- heroku
+- circleCI
 - AWS (EC2, VPC, Route53, ALB, ACM, S3)
 - Capistrano
 ## ER図
@@ -42,7 +42,8 @@
 ※ devise,ancestoryなどのgemで追加されたカラム,created_at,updated_atなどのデフォルトのカラムなどは除外しております。
 
 ## インフラ構成
-![インフラ図](https://user-images.githubusercontent.com/38002468/122630647-443d3800-d100-11eb-80e9-ee443c8b7138.jpeg)
+<img src="https://user-images.githubusercontent.com/38002468/122630647-443d3800-d100-11eb-80e9-ee443c8b7138.jpeg" width="600px">
+
 ## 機能一覧
 ### ユーザー・店舗共通
 - ログイン・登録機能（Devise gem）
@@ -77,6 +78,4 @@
   - [N+1問題の正しい解決方法](https://zenn.dev/akhmgc/articles/105022e598bb7a)
   - [AcctveRecord::Relationを利用してSQL発行回数を抑える方法]([https://link](https://zenn.dev/akhmgc/articles/765af1daf95820))
 - Rspecを使い100以上のテストを行いました。
-- チームでの開発を見据え、Issue管理やプルリクエストを活用しました。
-## 今後追加する予定の技術
-- CircleCI (CI/CD)
+- Issueを立ててプルリクエストを活用した擬似チーム開発を行いました。
