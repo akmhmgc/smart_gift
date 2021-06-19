@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.fdescribe User, type: :model do
+RSpec.describe User, type: :model do
   it '有効なユーザーモデル作成' do
     user = FactoryBot.build(:user)
     expect(user).to be_valid

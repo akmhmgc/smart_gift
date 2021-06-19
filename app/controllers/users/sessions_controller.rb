@@ -36,6 +36,9 @@ class Users::SessionsController < Devise::SessionsController
     profile.image.attach(io: File.open('./app/assets/images/user_default.png'), filename: 'user.png')
     profile.save!
 
+    # reviewを削除する
+    user.reviews.destroy_all
+
     sign_in user
     flash[:notice] = "ゲストユーザーとしてログインしました"
     redirect_to stored_location_for(:user) || root_url

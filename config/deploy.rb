@@ -18,6 +18,8 @@ set :rbenv_ruby, '2.6.6'
 
 set :log_level, :debug
 
+set :whenever_roles, -> { :app }
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do

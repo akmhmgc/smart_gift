@@ -55,8 +55,6 @@ RSpec.describe 'Users', type: :system do
 
   describe '店舗がログインしている場合' do
     it 'ユーザーがログアウトしないと店舗はログイン出来ない' do
-      # 店舗のログイン
-      visit root_path
       click_link '店舗としてログイン'
       fill_in 'メールアドレス', with: current_store.email
       fill_in 'パスワード', with: 'foobar'
@@ -80,12 +78,14 @@ RSpec.describe 'Users', type: :system do
     end
   end
 
-  describe "Faceebookでのログインができること", js: true do
+  describe "Facebookでのログインができること", js: true do
     before do
       OmniAuth.config.mock_auth[:facebook] = nil
       Rails.application.env_config['omniauth.auth'] = facebook_mock
       visit root_path
+      sleep 2
       click_link "ログイン"
+      sleep 1
       click_link "Facebook"
       sleep 0.5
       fill_in 'パスワード', with: 'foobar'
@@ -113,13 +113,14 @@ RSpec.describe 'Users', type: :system do
     end
   end
 
-  fdescribe "Twitterでのログインができること", js: true do
+  describe "Twitterでのログインができること", js: true do
     before do
       OmniAuth.config.mock_auth[:twitter] = nil
       Rails.application.env_config['omniauth.auth'] = twitter_mock
       visit root_path
+      sleep 2
       click_link "ログイン"
-      sleep 0.5
+      sleep 1
       click_link "Twitter"
       sleep 0.5
       fill_in 'ユーザーネーム(ニックネーム)', with: 'test_user'
