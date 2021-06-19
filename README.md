@@ -1,7 +1,6 @@
 # Smart Gift
 
-![root](https://user-images.githubusercontent.com/38002468/119248570-031f3a00-bbcd-11eb-82a7-50adc0e2c0ec.png)
-
+![iPad and iPhone on white table](https://user-images.githubusercontent.com/38002468/122631760-f5e06700-d108-11eb-8d0a-27637afac3b1.jpeg)
 ## 概要
 独学したRuby on Railsのアウトプットとして作成しました。
 <br>
