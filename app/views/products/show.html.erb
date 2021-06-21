@@ -33,7 +33,7 @@
         <article class="mt-4">
             <h2 class="font-semibold">この店舗の他の商品</h2>
             <div class="flex flex-wrap -mx-1 lg:-mx-4">
-                <% @other_products.each.with_index(1) do |product| %>
+                <% @other_products_top5.each.with_index(1) do |product| %>
                 <div class="my-1 px-1 w-1/3 md:w-1/4 lg:my-4 lg:px-1 lg:w-1/5">
                     <article class="overflow-hidden relative">
                         <%= link_to product , class:"hover:opacity-70 inline-block" do%>
@@ -71,11 +71,11 @@
                 </div>
             </div>
         </section>
-        <% if @new_review %>
+        <% if @blank_review_for_post %>
         <section class="form py-4 w-full max-w-sm mx-auto">
             <h2 class="title mb-2">レビュー投稿</h2>
             <div id="errors">
-                <%= render 'shared/error_messages' , resource: @new_review %>
+                <%= render 'shared/error_messages' , resource: @blank_review_for_post %>
             </div>
             <%= render 'shared/review_form' %>
         </section>
