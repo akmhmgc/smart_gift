@@ -1,28 +1,28 @@
 <main class="max-w-4xl mx-auto relative p-6 bg-white rounded border" id="container">
     <div class="text-center">
-        <%= link_to store_root_path(month:@month.prev_month),class:"inline-block pb-4" do%>
+        <%= link_to store_root_path(month:@day_included_in_monthly_report.prev_month),class:"inline-block pb-4" do%>
         <div class="circle h-10 w-10 rounded-full bg-gray-300 text-center leading-10 inline-block hover:bg-gray-400">
             <span class="text-white font-semibold">
                 <</span> </div> <% end %> <span class="text-lg font-semibold text-center pb-4">
-                    <%= @month.strftime("%Y年%m月") %>のレポート
+                    <%= @day_included_in_monthly_report.strftime("%Y年%m月") %>のレポート
             </span>
-            <%= link_to store_root_path(month:@month.next_month),class:"inline-block p-4"  do%>
+            <%= link_to store_root_path(month:@day_included_in_monthly_report.next_month),class:"inline-block p-4"  do%>
             <div
                 class="circle h-10 w-10 rounded-full bg-gray-300 text-center leading-10 inline-block hover:bg-gray-400">
                 <span class="text-white font-semibold">></span>
             </div>
             <% end %>
         </div>
-        <% if @data.empty? %>
+        <% if @sales_by_day.empty? %>
         <p class="text-xs text-center mt-6">データは存在しません</p>
         <% else %>
         <div class="sales_total flex justify-between bg-red-300 rounded py-4 px-4 my-4">
             <p class="text-lg text-white">総額</p>
-            <p class="text-lg text-white">￥<%= @total %> </p>
+            <p class="text-lg text-white">￥<%= @monthly_sales %> </p>
         </div>
         <div class="text-center mt-6">
             <h2 class="font-semibold">売上高</h2>
-            <%= column_chart @data %>
+            <%= column_chart @sales_by_day %>
         </div>
         <div class="text-center mt-10 ranking">
             <h2 class="font-semibold">売り上げランキング</h2>
@@ -71,7 +71,7 @@
                         </th>
                         <th class="text-xs font-normal truncate border">
                             <%= order.user ? order.user.profile.name : "削除されたユーザー" %></th>
-                        <th class="text-xs font-normal border"><%= "¥#{@order_totals[order.id]}" %></th>
+                        <th class="text-xs font-normal border"><%= "¥#{@order_id_and_total_sales_hash[order.id]}" %></th>
                     </tr>
                     <% end %>
                 </tbody>
