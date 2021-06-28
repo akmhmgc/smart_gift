@@ -60,6 +60,7 @@ Rails.application.routes.draw do
 
   # 店舗用root pathの作成
   get 'dashboard/report', to: 'dashboard/orders#report', as: "store_root"
+  get 'dashboard/report_pdf', to: 'dashboard/orders#report_pdf'
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
