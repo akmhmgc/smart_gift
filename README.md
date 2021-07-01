@@ -55,10 +55,12 @@
 - レビュー投稿時のクライアントサイドでのバリデーション機能
 - 商品に対するいいね登録・解除機能（Ajaxによる非同期通信）
 - 商品の検索機能
+<br>
+
 ![購入画面_3](https://user-images.githubusercontent.com/38002468/119248897-35319b80-bbcf-11eb-8c6f-e95af4ba05bd.gif)
 
 ### 店舗側
-- 売り上げ月次データをグラフ化して表示する機能（Chartkick gem）
+- 売り上げをグラフ化して表示する機能（Chartkick gem）
 - ユーザーのレビュー、いいねに対する通知機能
 ![レポート画面](https://user-images.githubusercontent.com/38002468/119248541-ca7f6080-bbcc-11eb-8316-90089ede3cfd.png)
 - 売れ筋商品の表示機能
