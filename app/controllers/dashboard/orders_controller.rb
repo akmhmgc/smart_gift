@@ -1,6 +1,6 @@
 class Dashboard::OrdersController < ApplicationController
   before_action :authenticate_store!
-  before_action :set_report_data, only: [:report]
+  before_action :set_report_data, only: [:report, :report_pdf]
   def show
     @order = Order.find(params[:id])
     @total = @order.total_price_for_store(current_store)
@@ -15,6 +15,7 @@ class Dashboard::OrdersController < ApplicationController
       format.pdf do
         render pdf: 'report_pdf',
                encoding: 'UTF-8',
+               layout: 'pdf',
                template: 'dashboard/orders/report_pdf',
                show_as_html: params[:debug].present?
       end
