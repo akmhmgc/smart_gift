@@ -1,30 +1,12 @@
 class Dashboard::OrdersController < ApplicationController
   before_action :authenticate_store!
-  before_action :set_report_data, only: [:report, :report_pdf]
   def show
     @order = Order.find(params[:id])
     @total = @order.total_price_for_store(current_store)
     @order_items = @order.order_items.eager_load([:product], [{ product_image_attachment: :blob }]).where("order_items.store_id = ?", current_store.id)
   end
 
-  def report; end
-
-  def report_pdf
-    respond_to do |format|
-      format.html { redirect_to dashboard_report_pdf_path(format: :pdf, debug: 1) }
-      format.pdf do
-        render pdf: 'report_pdf',
-               encoding: 'UTF-8',
-               layout: 'pdf',
-               template: 'dashboard/orders/report_pdf',
-               show_as_html: params[:debug].present?
-      end
-    end
-  end
-
-  private
-
-  def set_report_data
+  def report
     @month = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     order_items = current_store.order_items.where(updated_at: @month.all_month)
     @data = order_items.group_by_day(:updated_at).sum("order_items.price*quantity")
