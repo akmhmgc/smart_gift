@@ -16,7 +16,8 @@
                         </div>
                     </div>
                     <div class="ml-6">
-                        <%= link_to "ギフトページ", giftcard_path(order) ,class:"text-blue-400 hover:text-blue-300 hover:underline text-sm"%>
+                        <%= link_to "ギフトページ", giftcard_path(order) ,class:"text-blue-400 hover:text-blue-300 hover:underline text-sm mr-3"%>
+                        <%= link_to "領収書",mypage_order_pdf_url(order_id:order.id, format: :pdf) ,class:"text-blue-400 hover:text-blue-300 hover:underline text-sm"%>
                     </div>
                 </div>
             </div>

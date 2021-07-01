@@ -1,8 +1,18 @@
 class  Mypage::OrdersController < ApplicationController
   before_action :authenticate_user!
-  def orders_show
-    @order = Order.find_by!(user_id: current_user.id, id: params[:id], received: true)
-    @order_items = @order.order_items
+  def order_show
+    @id = params[:order_id]
+    @params = params
+    respond_to do |format|
+      format.html { redirect_to mypage_order_pdf_path(format: :pdf, debug: 1, order_id: @id) }
+      format.pdf do
+        render pdf: 'report_pdf',
+               encoding: 'UTF-8',
+               layout: 'pdf',
+               template: 'mypage/orders/order_show',
+               show_as_html: params[:debug].present?
+      end
+    end
   end
 
   def orders_index

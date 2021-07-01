@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 
   namespace :mypage do
     get 'order_histories' => 'orders#orders_index'
-    get 'order_histories/:id' => 'orders#orders_show' , as: 'order_history'
+    get 'order_show' => 'orders#order_show', as: 'order_pdf'
     get 'gifts' => 'orders#gifts_index'
   end
 
