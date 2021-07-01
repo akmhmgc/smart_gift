@@ -1,57 +1,57 @@
-main {
+main.pdf {
     text-align: center;
-}
 
-.content {
-    width: 80%;
-    margin: 0 auto;
+    .content {
+        width: 80%;
+        margin: 0 auto;
 
-    h3 {
-        color: orange;
-    }
-
-    .outline {
-        margin-bottom: 5px;
-        text-align: left;
-
-        p {
-            font-size: small;
-            margin: 0;
-        }
-    }
-
-    table {
-        .total {
-            text-align: right;
+        h3 {
+            color: orange;
         }
 
-        .item {
-            margin: 5px 0;
+        .outline {
+            margin-bottom: 5px;
+            text-align: left;
+
+            p {
+                font-size: small;
+                margin: 0;
+            }
         }
 
-        td {
-            padding: 15px 5px;
+        table {
+            .total {
+                text-align: right;
+            }
+
+            .item {
+                margin: 5px 0;
+            }
+
+            td {
+                padding: 15px 5px;
+            }
+
+            td.title {
+                text-align: center;
+                padding: 5px 0;
+                font-weight: bold;
+            }
+
+            margin: 10px 0;
+            border-collapse: collapse;
+            width: 100%;
+            text-align: left;
+
+            p {
+                font-size: small;
+                margin: 0;
+            }
         }
 
-        td.title {
-            text-align: center;
-            padding: 5px 0;
-            font-weight: bold;
+        table th,
+        table td {
+            border: solid 2px black;
         }
-
-        margin: 10px 0;
-        border-collapse: collapse;
-        width: 100%;
-        text-align: left;
-
-        p {
-            font-size: small;
-            margin: 0;
-        }
-    }
-
-    table th,
-    table td {
-        border: solid 2px black;
     }
 }
