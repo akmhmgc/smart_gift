@@ -41,6 +41,7 @@ ja:
       default: "%Y/%m/%d"
       long: "%Y年%m月%d日"
       short: "%m/%d"
+      file: "%Y-%m-%d"
     month_names:
     - 
     - 1月

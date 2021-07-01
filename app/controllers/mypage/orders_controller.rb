@@ -5,11 +5,20 @@ class  Mypage::OrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to mypage_order_pdf_path(format: :pdf, debug: 1, order_id: params[:order_id]) }
       format.pdf do
-        render pdf: "order_#{@order.id}",
-               encoding: 'UTF-8',
-               layout: 'pdf',
-               template: 'mypage/orders/order_show',
-               show_as_html: params[:debug].present?
+        if params[:debug].present?
+          render pdf: "order_#{@order.id}",
+                 encoding: 'UTF-8',
+                 layout: 'pdf',
+                 template: 'mypage/orders/order_show',
+                 show_as_html: true
+        else
+          filename = "order_#{@order.id}-#{l Date.current , format: :file}.pdf"
+          pdf = render_to_string pdf: filename,
+                                 template: 'mypage/orders/order_show',
+                                 encoding: 'UTF-8',
+                                 layout: 'pdf'
+          send_data(pdf, filename: filename)
+        end
       end
     end
   end
