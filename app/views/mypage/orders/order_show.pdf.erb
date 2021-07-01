@@ -1,0 +1,45 @@
+<main>
+    <div class="content">
+        <h3><%= "注文番号#{@order.id}の領収書" %></h3>
+        <div class="outline">
+            <p><%= "発行日: #{l Date.current , format: :long}"%></p>
+            <p><%= "注文日: #{l @order.updated_at , format: :long}"%></p>
+            <p><%= "注文番号: #{@order.id}"%></p>
+            <p><%= "請求額: ¥#{@order.total_price.to_s(:delimited)}"%></p>
+        </div>
+        <table>
+            <tr>
+                <td class="title">注文情報</td>
+            </tr>
+            <tr>
+                <td>
+                    <p><%= "注文商品"%></p>
+                    <% @order.order_items.eager_load(:store).each do |order_item| %>
+                    <div class="item">
+                        <p><%= "#{order_item.quantity}点 #{order_item.product_name} ¥#{order_item.price.to_s(:delimited)}" %>
+                        </p>
+                        <p><%= "販売: #{order_item.store.storename}" %></p>
+                    </div>
+                    <% end %>
+                    <p class="total">
+                    <%= "合計: ¥#{@order.total_price.to_s(:delimited)}" %>
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="title">支払い情報</td>
+            </tr>
+            <tr>
+                <td>
+                    <p><%= "請求先:#{@order.user.username}"%></p>
+                    <p class="total">
+                    <%= "御請求額: ¥#{@order.total_price.to_s(:delimited)}" %>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</main>

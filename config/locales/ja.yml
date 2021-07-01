@@ -39,8 +39,9 @@ ja:
     - 土曜日
     formats:
       default: "%Y/%m/%d"
-      long: "%Y年%m月%d日(%a)"
+      long: "%Y年%m月%d日"
       short: "%m/%d"
+      file: "%Y-%m-%d"
     month_names:
     - 
     - 1月
@@ -201,6 +202,6 @@ ja:
     am: 午前
     formats:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
-      long: "%Y/%m/%d %H:%M"
+      long: "%Y年%m月%d日"
       short: "%m/%d %H:%M"
     pm: 午後

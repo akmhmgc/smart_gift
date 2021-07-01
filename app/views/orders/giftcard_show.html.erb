@@ -6,7 +6,7 @@
             <p class="text-sm p-4 bg-gray-100 mt-2 rounded"><%= @giftcard.message %></p>
         </div>
         <h2 class="font-semibold p-4">ギフトが届いています</h2>
-        <% @giftcard.order_items.each do |item| %>
+        <% @giftcard.order_items.eager_load(:store, {product_image_attachment: :blob}).each do |item| %>
         <div class="flex items-center mb-2 border rounded overflow-hidden">
             <div class="img mr-6">
                 <%= image_tag(item.product_image.variant(resize_to_fill: [100, 100]), class: "") %>
