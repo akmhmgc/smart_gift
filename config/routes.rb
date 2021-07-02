@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   namespace :dashboard do
     resources :products
     controller :orders do
+      get 'sales_history'
       resources :orders, only: %i[show]
     end
   end

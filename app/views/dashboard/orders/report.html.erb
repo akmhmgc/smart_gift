@@ -13,16 +13,16 @@
             </div>
             <% end %>
         </div>
-        <% if @data.empty? %>
+        <% if @sales_by_day.empty? %>
         <p class="text-xs text-center mt-6">データは存在しません</p>
         <% else %>
         <div class="sales_total flex justify-between bg-red-300 rounded py-4 px-4 my-4">
             <p class="text-lg text-white">総額</p>
-            <p class="text-lg text-white">￥<%= @total %> </p>
+            <p class="text-lg text-white">￥<%= @monthly_total %> </p>
         </div>
         <div class="text-center mt-6">
             <h2 class="font-semibold">売上高</h2>
-            <%= column_chart @data %>
+            <%= column_chart @sales_by_day %>
         </div>
         <div class="text-center mt-10 ranking">
             <h2 class="font-semibold">売り上げランキング</h2>
@@ -36,14 +36,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @top_selling_products.each_with_index do |product,idx| %>
+                    <% @product_ranked.each.with_index(1) do |product, index| %>
                     <tr>
-                        <th class="text-xs font-normal border py-2"><%= idx+1 %></th>
+                        <th class="text-xs font-normal border py-2"><%= index %></th>
                         <th class="text-xs font-normal truncate border">
-                            <%= link_to product.name, product,class:"text-blue-400 hover:text-blue-300 hover:underline" %>
+                            <%= link_to product.name, product_url(product.id) ,class:"text-blue-400 hover:text-blue-300 hover:underline" %>
                         </th>
                         <th class="text-xs font-normal border"><%= product.price %></th>
-                        <th class="text-xs font-normal border"><%= @rank_hash[product.id] %></th>
+                        <th class="text-xs font-normal border"><%= product.sum_quantity %></th>
                     </tr>
                     <% end %>
                 </tbody>
@@ -51,17 +51,21 @@
         </div>
         <div class="text-center mt-10">
             <h2 class="font-semibold mb-2">販売履歴一覧</h2>
+            <div class="text-right">
+                <%= link_to "CSV出力" , dashboard_sales_history_url(month:@month,format: :csv) ,class:"text-sm
+                    bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded"%>
+            </div>
             <table class="table-auto w-full mt-4">
                 <thead>
                     <tr class="bg-red-300 text-white">
                         <th class="text-xs border p-2 font-normal">購入日</th>
                         <th class="text-xs border p-2 font-normal">注文id</th>
                         <th class="text-xs border font-normal">購入者</th>
-                        <th class="text-xs border font-normal">合計注文金額</th>
+                        <th class="text-xs border font-normal">注文合計金額</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% @orders.each do |order| %>
+                    <% @order_totals.each do |order| %>
                     <tr>
                         <th class="text-xs font-normal truncate border">
                             <%= order.updated_at.strftime("%Y/%m/%d") %><br><span
@@ -70,15 +74,15 @@
                             <%= link_to order.id, dashboard_order_path(order.id),class:"text-blue-400 hover:text-blue-300 hover:underline order_link" %>
                         </th>
                         <th class="text-xs font-normal truncate border">
-                            <%= order.user ? order.user.profile.name : "削除されたユーザー" %></th>
-                        <th class="text-xs font-normal border"><%= "¥#{@order_totals[order.id]}" %></th>
+                            <%= order.name || "削除されたユーザー" %></th>
+                        <th class="text-xs font-normal border"><%= "¥#{order.sum_total}" %></th>
                     </tr>
                     <% end %>
                 </tbody>
             </table>
             <div class="text-center my-6">
-                <div class="mb-3"><%= paginate @orders %></div>
-                <div><%= page_entries_info @orders%></div>
+                <div class="mb-3"><%= paginate @order_totals %></div>
+                <div><%= page_entries_info @order_totals%></div>
             </div>
         </div>
         <% end %>
