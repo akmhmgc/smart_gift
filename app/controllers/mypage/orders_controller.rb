@@ -12,7 +12,7 @@ class  Mypage::OrdersController < ApplicationController
                  template: 'mypage/orders/order_show',
                  show_as_html: true
         else
-          filename = "order_#{@order.id}-#{l Date.current , format: :file}.pdf"
+          filename = "order_#{@order.id}-#{l Date.current, format: :file}.pdf"
           pdf = render_to_string pdf: filename,
                                  template: 'mypage/orders/order_show',
                                  encoding: 'UTF-8',
