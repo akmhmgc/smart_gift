@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :profile do
     name { 'テスト太郎' }
     money { 10_000 }
-    image { Rack::Test::UploadedFile.new(Rails.root.join('spec/factories/images/user_default.png')) }
+    image { FactoryHelpers.upload_file('spec/factories/images/user_default.png', 'image/png', true) }
     association :user
   end
 end

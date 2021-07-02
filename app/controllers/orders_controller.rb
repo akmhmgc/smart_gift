@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
   def payment
     current_user.pay!
     flash[:notice] = 'ギフトカードの購入が完了しました'
+    session.delete(:messages)
     redirect_to giftcard_path(current_user.cart)
   rescue StandardError
     flash[:alert] = '購入時にエラーが発生しました'

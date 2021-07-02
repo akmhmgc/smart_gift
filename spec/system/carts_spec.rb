@@ -94,18 +94,29 @@ RSpec.describe 'Carts', type: :system do
         expect(page).to have_content '利用可能金額：8000円'
       end
 
-      it "商品購入後プレビューページに移動するとエラーが起きる", js: true do
-        fill_in 'message_box', with: 'message'
-        fill_in 'sender_name', with: 'tarou'
-        click_button 'ギフトカードの作成'
+      context '商品購入後' do
+        before do
+          fill_in 'message_box', with: 'message'
+          fill_in 'sender_name', with: 'tarou'
+          click_button 'ギフトカードの作成'
 
-        expect(page).to have_content 'ギフトカードが完成しました'
-        expect(page).to have_content 'message'
-        expect(page).to have_content 'tarouさんからのメッセージ'
-        click_button '決済する'
-        visit giftcard_preview_path
-        expect(current_path).to eq root_path
-        expect(page).to have_content '不正なプレビューです'
+          expect(page).to have_content 'ギフトカードが完成しました'
+          expect(page).to have_content 'message'
+          expect(page).to have_content 'tarouさんからのメッセージ'
+          click_button '決済する'
+        end
+        it "プレビューページに移動するとエラーが起きる", js: true do
+          visit giftcard_preview_path
+          expect(current_path).to eq root_path
+          expect(page).to have_content '不正なプレビューです'
+        end
+
+        fit "カートを確認するとメッセージと商品が空になっている", js: true do
+          visit giftcard_edit_path
+          expect(page).to have_content '合計 0円'
+          expect(page).not_to have_field('message', with: 'message')
+          expect(page).not_to have_field('sender_name', with: 'tarou')
+        end
       end
 
       it "プレビュー作成時にエラーが発生してもギフトカード用のメッセージは保存されること", js: true do
