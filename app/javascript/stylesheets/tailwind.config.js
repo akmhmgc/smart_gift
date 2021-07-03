@@ -6,7 +6,7 @@ module.exports = {
       './app/helpers/**/*.rb'
     ],
     options: {
-      safelist: ['a', 'open', 'facebook_btn','twitter_btn','button','textarea','pagination','gap','current'],
+      safelist: ['a', 'open', 'facebook_btn','twitter_btn','button','textarea','pagination','gap','current','fade'],
       keyframes: true,
       fontFace: true,
     },
