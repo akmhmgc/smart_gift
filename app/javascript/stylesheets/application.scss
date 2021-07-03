@@ -160,24 +160,6 @@
   }
 }
 
-// flash 
-.fade{
-  animation-name: fadeOut;
-  animation-timing-function: ease-in;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-delay: 2s;
-}
-
-@keyframes fadeOut {
-
-  0% {opacity: 1} 
-
-  100% {opacity: 0} 
-
-}
-
-
 .signup_btn {
   @apply text-white text-sm font-bold py-2 px-4 rounded;
 }
